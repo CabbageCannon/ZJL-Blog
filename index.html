@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZJL 的个人网站</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+  <!-- 导航部分 -->
+  <div class="banner">
+    <div class="logo">ZJL</div>
+    <div class="nav">
+      <ul>
+        <li><a href="javascript:;" name="home">首页</a></li>
+        <li><a href="javascript:;" name="life">生活</a></li>
+        <li><a href="javascript:;" name="music">音乐</a></li>
+        <li><a href="javascript:;" name="study">学习</a></li>
+      </ul>
+    </div>
+    <div class="user">
+      <img src="./assets/upload/touxiang.jpg" alt="">
+      <div class="name">
+        卷心菜投手
+      </div>
+    </div>
+  </div>
+
+  <div class="indexContent">
+    <!-- 首页部分 -->
+    <div class="section" id="home"></div>
+
+    <!-- 生活部分 -->
+    <div class="section" id="life"></div>
+
+    <!-- 音乐部分 -->
+    <div class="section" id="music">
+      <!-- 左侧导航栏 -->
+      <div class="leftBanner">
+        <!-- 上传按钮 -->
+        <div class="but addNewSongs">
+          <span class="icon"></span>
+          <span class="text">上传</span>
+        </div>
+        <div class="but editSongs">
+          <span class="icon"></span>
+          <span class="text">编辑</span>
+        </div>
+        <div class="but feedback">
+          <span class="icon"></span>
+          <span class="text">反馈</span>
+        </div>
+      </div>
+
+      <div class="musicMain">
+        <!-- 歌曲标题区域 -->
+        <div class="musicHeader">
+          <h2>我的音乐收藏</h2>
+          <p>记录最近喜欢的歌曲,也练习前端中的数据渲染、交互与持久化</p>
+        </div>
+
+        <!-- 歌曲卡片部分 -->
+        <div class="cards">
+          <!-- <article class="card edit-mode selected" data-id="">
+          <div class="cardCover" style="background-image: url();">
+          </div>
+          <div class="cardInfo">
+            <h3 class="cardName"></h3>
+            <a href="" class="cardLink">去听</a>
+          </div>
+        </article> -->
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- 学习部分 -->
+    <div class="section" id="study"></div>
+  </div>
+
+  <!-- 上传音乐的弹出框 -->
+  <!-- 遮罩层 -->
+  <div class="modalMask"></div>
+  <div class="addMusicModal">
+    <div class="title">
+      <h2>上传内容</h2>
+      <button class="closeButton">关闭</button>
+    </div>
+    <div class="content">
+      <div class="songName input">
+        <span>名字</span>
+        <input type="text">
+      </div>
+      <div class="songPic input">
+        <span>图片</span>
+        <input type="text">
+      </div>
+      <div class="songHttp input">
+        <span>跳转地址</span>
+        <input type="text">
+      </div>
+    </div>
+    <button class="commitButton">提交</button>
+  </div>
+
+  <!-- 音乐卡片编辑框 -->
+  <div class="musicCardActions">
+    <ul>
+      <li>
+        <div class="deleteButton">删除</div>
+      </li>
+      <li>
+        <div class="moveToFirstButton">移到最前</div>
+      </li>
+      <li>
+        <div class="moveToLastButton">移到最后</div>
+      </li>
+    </ul>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>

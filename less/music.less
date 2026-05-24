@@ -1,0 +1,295 @@
+// out:false
+
+// 音乐区域
+#music {
+  display: flex;
+  background-color: @pageBg;
+
+  // 左侧导航栏
+  .leftBanner {
+    box-sizing: border-box;
+    background-color: #fff;
+    height: 100%;
+    width: 120px;
+    padding: 32px 16px;
+    border-right: 1px solid @borderSoft;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .but {
+      display: flex;
+      flex-direction: column;
+      // 控制子元素在交叉轴上的对齐方式，这里对应的是横轴
+      align-items: center;
+      // 控制子元素在主轴上的对齐方式，这里对应的是竖轴
+      justify-content: center;
+      gap: 10px;
+      width: 88px;
+      height: 76px;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      color: @textMuted;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+
+      &:hover {
+        color: @primaryColor;
+        background: rgba(79, 109, 245, .08);
+        transform: translateY(-2px);
+      }
+
+      &.active {
+        color: @primaryColor;
+        background: rgba(79, 109, 245, .12);
+      }
+
+      .icon {
+        display: block;
+        width: 24px;
+        height: 24px;
+        background: url("../imgs/icons/icon1.webp") no-repeat center;
+        background-size: contain;
+      }
+
+      .text {
+        font-size: 14px;
+        // line-height设置成当前字体大小的1倍
+        line-height: 1;
+      }
+    }
+  }
+
+  .musicMain {
+    flex: 1;
+    // flex布局中右侧如果有宽度压力，min-width: 0可以避免它被内容撑爆
+    min-width: 0;
+    padding: 32px 40px 40px;
+
+    // 歌曲区域标题部分
+    .musicHeader {
+      margin-bottom: 28px;
+
+      h2 {
+        margin-bottom: 8px;
+        color: @textMain;
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      p {
+        color: @textMuted;
+        font-size: 15px;
+      }
+    }
+
+    // 核心内容栏
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      align-content: flex-start;
+      // height: 300px;
+
+      .card {
+        box-sizing: border-box;
+        display: block;
+        overflow: hidden;
+        width: 220px;
+        height: 300px;
+        border-radius: 10px;
+        background-color: #fff;
+        border: 1px solid rgba(20, 24, 40, .08);
+        cursor: pointer;
+        box-shadow: 0 14px 35px rgba(20, 24, 40, .12);
+        transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+
+        &:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 22px 45px rgba(20, 24, 40, .18);
+          border-color: rgba(80, 120, 255, .35);
+        }
+
+        .cardCover {
+          height: 210px;
+          background: no-repeat;
+          background-position: center;
+          background-size: cover;
+        }
+
+        .cardInfo {
+          display: flex;
+          height: 90px;
+          text-align: center;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          padding: 0 16px;
+
+          .cardName {
+            flex: 1;
+            overflow: hidden;
+            color: #202436;
+            font-size: 18px;
+            font-weight: 700;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+
+          .cardLink {
+            flex: none;
+            padding: 8px 12px;
+            border-radius: 999px;
+            color: #fff;
+            font-size: 14px;
+            background: #4f6df5;
+            transition: background .2s ease;
+
+            &:hover {
+              background: #3652d9;
+            }
+          }
+        }
+
+        &.edit-mode {
+          opacity: .62;
+        }
+
+        &.selected {
+          opacity: 1;
+          border-color: #4f6df5;
+          box-shadow: 0 0 0 4px rgba(79, 109, 245, .18),
+            0 18px 45px rgba(20, 24, 40, .18);
+        }
+      }
+
+      .musicMessage {
+        width: 100%;
+        padding: 72px 0;
+        color: @textMuted;
+        font-size: 18px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+// 音乐卡片编辑框
+.musicCardActions {
+  box-sizing: border-box;
+  position: fixed;
+  right: -180px;
+  top: 140px;
+  width: 160px;
+  padding: 12px;
+  border-radius: 16px 0 0 16px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(20, 24, 40, .14);
+  transition: right .3s ease;
+
+  &.disabled{
+    opacity: .5;
+
+    div{
+      cursor: not-allowed;
+    }
+  }
+
+  ul {
+    li {
+      margin-bottom: 8px;
+
+      &:last-of-type {
+        border-bottom: 0;
+      }
+
+      div{
+        height: 42px;
+        line-height: 42px;
+        border-radius: 10px;
+        color: @textMain;
+        text-align: center;
+        cursor: pointer;
+        transition: background .2s ease,color .2s ease;
+
+        &:hover{
+          color: @primaryColor;
+          background: rgba(79, 100, 245, .08);
+        }
+      }
+    }
+  }
+}
+
+// 响应式布局
+@media(max-width:768px){
+  // 左侧导航栏与卡片区域切换成上下排列
+  #music{
+    flex-direction: column;
+
+    .leftBanner{
+      width: 100%;
+      height: auto;
+      padding: 12px 16px;
+      border-right: 0;
+      border-bottom: 1px solid @borderSoft;
+      flex-direction: row;
+      justify-content: center;
+      gap: 12px;
+
+      .but{
+        width: 88px;
+        height: 64px;
+        margin-bottom: 0;
+        gap: 8px;
+      }
+    }
+
+    .musicMain{
+      padding: 24px 16px 32px;
+
+      .musicHeader{
+        margin-bottom: 20px;
+
+        h2{
+          font-size: 24px;
+        }
+
+        p{
+          line-height: 1.6;
+        }
+      }
+
+      .cards{
+        gap: 18px;
+        flex-direction: column;
+        align-content: center;
+
+        .card{
+          width: 60%;
+          height: auto;
+
+          .cardCover{
+            height: auto;
+            // 宽高比例
+            aspect-ratio: 1/1;
+          }
+
+          .cardInfo{
+            height: 72px;
+          }
+        }
+      }
+    }
+  }
+
+  .musicCardActions{
+    top:auto;
+    right: 16px;
+    bottom: -180px;
+    width: calc(100%-32px);
+    border-radius: 16px;
+    transition: bottom .3s ease;
+  }
+}

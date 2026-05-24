@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "炸弹爱",
+    "cover": "http://p1.music.126.net/razwufN2bH4Ng0Hrrx3Hfg==/109951172030981268.jpg",
+    "link": "https://music.163.com/"
+  },
+  {
+    "id": 2,
+    "name": "boys2",
+    "cover": "http://imge.kugou.com/stdmusic/20260208/20260208185410158849.jpg",
+    "link": "https://www.kugou.com/"
+  },
+  {
+    "id": 3,
+    "name": "兔牙",
+    "cover": "https://img9.doubanio.com/view/subject/m/public/s35333625.jpg",
+    "link": "https://music.163.com/"
+  },
+  {
+    "id": 4,
+    "name": "手足",
+    "cover": "https://img9.doubanio.com/view/subject/m/public/s34950726.jpg",
+    "link": "https://music.163.com/"
+  }
+]

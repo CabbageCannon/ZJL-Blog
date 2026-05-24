@@ -1,0 +1,429 @@
+.glassFrame {
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.8) 0%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.8) 100%);
+  box-shadow: inset 2px -2px 1px -1px rgba(255, 255, 255, 0.9), inset -2px 2px 1px -1px rgba(255, 255, 255, 0.9), inset 6px -6px 1px -6px rgba(255, 255, 255, 0.55), inset -6px 6px 1px -6px rgba(255, 255, 255, 0.55), inset 0 0 2px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 9999px;
+  border: 1px double rgba(51, 51, 51, 0.08);
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+.banner {
+  box-sizing: border-box;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  width: 100%;
+  line-height: 100px;
+  font-size: 30px;
+  padding: 0 50px;
+  border-radius: 25%;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.8) 0%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.8) 100%);
+  box-shadow: inset 2px -2px 1px -1px rgba(255, 255, 255, 0.9), inset -2px 2px 1px -1px rgba(255, 255, 255, 0.9), inset 6px -6px 1px -6px rgba(255, 255, 255, 0.55), inset -6px 6px 1px -6px rgba(255, 255, 255, 0.55), inset 0 0 2px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 9999px;
+  border: 1px double rgba(51, 51, 51, 0.08);
+}
+.banner .nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.banner .nav ul {
+  display: flex;
+}
+.banner .nav ul li {
+  margin: 0 10px;
+}
+.banner .user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.banner .user img {
+  height: 60px;
+  width: 60px;
+  margin-right: 10px;
+  border-radius: 30px;
+}
+.indexContent {
+  padding-top: 100px;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+.indexContent .section {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.indexContent #home {
+  background-color: green;
+}
+.indexContent #life {
+  background-color: yellow;
+}
+.indexContent #study {
+  background-color: gold;
+}
+@media (max-width: 768px) {
+  .banner {
+    height: 72px;
+    line-height: 72px;
+    padding: 0 16px;
+    font-size: 20px;
+    border-radius: 0;
+  }
+  .banner .logo {
+    flex: none;
+  }
+  .banner .nav {
+    position: static;
+    transform: none;
+  }
+  .banner .nav ul li {
+    margin: 0 6px;
+  }
+  .banner .user .name {
+    display: none;
+  }
+  .banner .user img {
+    width: 42px;
+    height: 42px;
+    margin-right: 0;
+  }
+  .indexContent {
+    padding-top: 72px;
+    overflow-y: auto;
+  }
+}
+#music {
+  display: flex;
+  background-color: #f6f7fb;
+}
+#music .leftBanner {
+  box-sizing: border-box;
+  background-color: #fff;
+  height: 100%;
+  width: 120px;
+  padding: 32px 16px;
+  border-right: 1px solid rgba(20, 24, 40, 0.08);
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#music .leftBanner .but {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 88px;
+  height: 76px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+#music .leftBanner .but:hover {
+  color: #4f6df5;
+  background: rgba(79, 109, 245, 0.08);
+  transform: translateY(-2px);
+}
+#music .leftBanner .but.active {
+  color: #4f6df5;
+  background: rgba(79, 109, 245, 0.12);
+}
+#music .leftBanner .but .icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url("../imgs/icons/icon1.webp") no-repeat center;
+  background-size: contain;
+}
+#music .leftBanner .but .text {
+  font-size: 14px;
+  line-height: 1;
+}
+#music .musicMain {
+  flex: 1;
+  min-width: 0;
+  padding: 32px 40px 40px;
+}
+#music .musicMain .musicHeader {
+  margin-bottom: 28px;
+}
+#music .musicMain .musicHeader h2 {
+  margin-bottom: 8px;
+  color: #202436;
+  font-size: 28px;
+  font-weight: 700;
+}
+#music .musicMain .musicHeader p {
+  color: #6b7280;
+  font-size: 15px;
+}
+#music .musicMain .cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  align-content: flex-start;
+}
+#music .musicMain .cards .card {
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  width: 220px;
+  height: 300px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  cursor: pointer;
+  box-shadow: 0 14px 35px rgba(20, 24, 40, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+#music .musicMain .cards .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 45px rgba(20, 24, 40, 0.18);
+  border-color: rgba(80, 120, 255, 0.35);
+}
+#music .musicMain .cards .card .cardCover {
+  height: 210px;
+  background: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+#music .musicMain .cards .card .cardInfo {
+  display: flex;
+  height: 90px;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 16px;
+}
+#music .musicMain .cards .card .cardInfo .cardName {
+  flex: 1;
+  overflow: hidden;
+  color: #202436;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#music .musicMain .cards .card .cardInfo .cardLink {
+  flex: none;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 14px;
+  background: #4f6df5;
+  transition: background 0.2s ease;
+}
+#music .musicMain .cards .card .cardInfo .cardLink:hover {
+  background: #3652d9;
+}
+#music .musicMain .cards .card.edit-mode {
+  opacity: 0.62;
+}
+#music .musicMain .cards .card.selected {
+  opacity: 1;
+  border-color: #4f6df5;
+  box-shadow: 0 0 0 4px rgba(79, 109, 245, 0.18), 0 18px 45px rgba(20, 24, 40, 0.18);
+}
+#music .musicMain .cards .musicMessage {
+  width: 100%;
+  padding: 72px 0;
+  color: #6b7280;
+  font-size: 18px;
+  text-align: center;
+}
+.musicCardActions {
+  box-sizing: border-box;
+  position: fixed;
+  right: -180px;
+  top: 140px;
+  width: 160px;
+  padding: 12px;
+  border-radius: 16px 0 0 16px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(20, 24, 40, 0.14);
+  transition: right 0.3s ease;
+}
+.musicCardActions.disabled {
+  opacity: 0.5;
+}
+.musicCardActions.disabled div {
+  cursor: not-allowed;
+}
+.musicCardActions ul li {
+  margin-bottom: 8px;
+}
+.musicCardActions ul li:last-of-type {
+  border-bottom: 0;
+}
+.musicCardActions ul li div {
+  height: 42px;
+  line-height: 42px;
+  border-radius: 10px;
+  color: #202436;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.musicCardActions ul li div:hover {
+  color: #4f6df5;
+  background: rgba(79, 100, 245, 0.08);
+}
+@media (max-width: 768px) {
+  #music {
+    flex-direction: column;
+  }
+  #music .leftBanner {
+    width: 100%;
+    height: auto;
+    padding: 12px 16px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(20, 24, 40, 0.08);
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+  }
+  #music .leftBanner .but {
+    width: 88px;
+    height: 64px;
+    margin-bottom: 0;
+    gap: 8px;
+  }
+  #music .musicMain {
+    padding: 24px 16px 32px;
+  }
+  #music .musicMain .musicHeader {
+    margin-bottom: 20px;
+  }
+  #music .musicMain .musicHeader h2 {
+    font-size: 24px;
+  }
+  #music .musicMain .musicHeader p {
+    line-height: 1.6;
+  }
+  #music .musicMain .cards {
+    gap: 18px;
+    flex-direction: column;
+    align-content: center;
+  }
+  #music .musicMain .cards .card {
+    width: 60%;
+    height: auto;
+  }
+  #music .musicMain .cards .card .cardCover {
+    height: auto;
+    aspect-ratio: 1/1;
+  }
+  #music .musicMain .cards .card .cardInfo {
+    height: 72px;
+  }
+  .musicCardActions {
+    top: auto;
+    right: 16px;
+    bottom: -180px;
+    width: calc(100%-32px);
+    border-radius: 16px;
+    transition: bottom 0.3s ease;
+  }
+}
+.modalMask {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+}
+.addMusicModal {
+  display: none;
+  box-sizing: border-box;
+  width: 460px;
+  padding: 24px;
+  background-color: #fff;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 18px;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
+}
+.addMusicModal .title {
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.addMusicModal .title h2 {
+  color: #202436;
+  font-size: 22px;
+  font-weight: 700;
+}
+.addMusicModal .title button {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  color: #6b7280;
+  background: #f1f3f8;
+  cursor: pointer;
+}
+.addMusicModal .title button:hover {
+  background: #e6eaf3;
+}
+.addMusicModal .content .input {
+  margin-bottom: 18px;
+}
+.addMusicModal .content .input span {
+  display: block;
+  margin-bottom: 8px;
+  color: #4b5563;
+  font-size: 14px;
+}
+.addMusicModal .content .input input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #d8deea;
+  border-radius: 10px;
+  background: #fff;
+  outline: none;
+}
+.addMusicModal .content .input input:focus {
+  border-color: #4f6df5;
+  box-shadow: 0 0 0 3px rgba(79, 109, 245, 0.14);
+}
+.addMusicModal .commitButton {
+  display: block;
+  width: 100%;
+  height: 44px;
+  margin-top: 8px;
+  border: 0;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 16px;
+  background: #4f6df5;
+  cursor: pointer;
+}
+.addMusicModal .commitButton:hover {
+  background: #3652d9;
+}
+@media (max-width: 768px) {
+  .addMusicModal {
+    width: calc(100%-32px);
+    padding: 20px;
+  }
+  .addMusicModal .title h2 {
+    font-size: 20px;
+  }
+}

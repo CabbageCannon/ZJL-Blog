@@ -1,0 +1,44 @@
+// out:false
+
+@primaryColor: #4f6df5;
+@primaryHover: #3652d9;
+@textMain: #202436;
+@textMuted: #6b7280;
+@pageBg: #f6f7fb;
+@cardBg: #fff;
+@borderSoft: rgba(20, 24, 40, .08);
+@shadowCard: 0 14px 35px rgba(20, 24, 40, .12);
+@shadowCardHover: 0 22px 45px rgba(20, 24, 40, .18);
+
+// 玻璃边框
+.glassFrame{
+  // 背景渐变
+  background: linear-gradient(
+    45deg,
+    rgba(255,255,255,0.8) 0%,
+    transparent 25%,
+    transparent 75%,
+    rgba(255,255,255,0.8) 100%
+  );
+
+  // 阴影
+  box-shadow: // 右上和左下的白色高光
+              inset 2px -2px 1px -1px rgba(255, 255, 255, 0.9),
+              inset -2px 2px 1px -1px rgba(255, 255, 255, 0.9),
+
+              // 白色细节，提升玻璃质感
+              inset 6px -6px 1px -6px rgba(255, 255, 255, 0.55),
+              inset -6px 6px 1px -6px rgba(255, 255, 255, 0.55),
+
+              // 内部暗边
+              inset 0 0 2px rgba(0, 0, 0, 0.8),
+
+              // 外部阴影
+              0 4px 8px rgba(0, 0, 0, 0.2);
+  
+  // 圆角
+  border-radius: 9999px;
+
+  // 边框线
+  border: 1px double rgba(51, 51, 51, 0.08);
+}
