@@ -19,15 +19,29 @@ export function renderMusicList(state) {
   }
 
   // 渲染编辑状态
-  renderMusicAction(editButton,musicCardActions,state);
+  renderMusicAction(editButton, musicCardActions, state);
 
   // 窗口大小变化时重新渲染编辑框，只绑定一次
-  if(!renderMusicList.hasResizeListener){
-    window.addEventListener("resize",()=>{
-      renderMusicAction(editButton,musicCardActions,state);
+  if (!renderMusicList.hasResizeListener) {
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      // 先禁止全局动画
+      document.body.classList.add("is-resizing");
+
+      // 重新渲染编辑框
+      renderMusicAction(editButton, musicCardActions, state);
+
+      // 设置定时器，防止渲染还未完成就移除is-resizing类
+      // 重置定时器
+      clearTimeout(resizeTimer);
+      resizeTimer=null;
+
+      resizeTimer = setTimeout(() => {
+        document.body.classList.remove("is-resizing");
+      },120);
     })
 
-    renderMusicList.hasResizeListener=true;
+    renderMusicList.hasResizeListener = true;
   }
 }
 
@@ -97,7 +111,8 @@ function isMobileView() {
 
 // 渲染编辑框和编辑按钮
 function renderMusicAction(editButton, musicCardActions, state) {
-  const editButtonText=editButton.querySelector('.text');
+  const editButtonText = editButton.querySelector('.text');
+  // 更改左侧选项栏中编辑按钮信息
   if (state.isEditMode) {
     editButtonText.textContent = "取消";
     editButton.classList.add('active');

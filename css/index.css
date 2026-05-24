@@ -48,6 +48,7 @@ body {
   border-radius: 30px;
 }
 .indexContent {
+  box-sizing: border-box;
   padding-top: 100px;
   height: 100%;
   display: flex;
@@ -334,6 +335,9 @@ body {
     border-radius: 16px;
     transition: bottom 0.3s ease;
   }
+}
+body.is-resizing .musicCardActions {
+  transition: none !important;
 }
 .modalMask {
   display: none;

@@ -293,3 +293,10 @@
     transition: bottom .3s ease;
   }
 }
+
+// 全局禁用过渡状态(页面大小改变时)
+body.is-resizing{
+  .musicCardActions{
+    transition: none !important;
+  }
+}

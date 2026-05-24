@@ -8,7 +8,7 @@ export function bindEvents() {
   editSongsModal();
 }
 
-// 添加音乐功能
+// 用户添加音乐功能
 function addSongsModal() {
   const addButton = document.querySelector(".addNewSongs");
   const modal = document.querySelector(".addMusicModal");
