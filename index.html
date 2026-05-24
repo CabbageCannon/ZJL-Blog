@@ -29,42 +29,86 @@
     </div>
   </div>
 
+  <!-- 核心内容区域 -->
   <div class="indexContent">
     <!-- 首页部分 -->
-    <div class="section" id="home"></div>
+    <div class="section" id="home">
+      <section class="homeWrap">
+        <section class="homeHero">
+          <p class="eyebrow">WELCOME</p>
+          <h1>ZJL 的个人空间</h1>
+          <p class="subTitle">记录生活、沉淀学习，也把喜欢的音乐收藏起来</p>
+        </section>
+
+        <!-- 进入各板块的快捷入口 -->
+        <section class="homeQuickLinks">
+          <h2>快捷入口</h2>
+          <div class="quickGrid">
+            <article class="quickCard" data-target="life">
+              <h3>生活</h3>
+              <p>看看最近的日常与片段。</p>
+            </article>
+            <article class="quickCard" data-target="music">
+              <h3>音乐</h3>
+              <p>进入音乐收藏，管理歌单卡片。</p>
+            </article>
+            <article class="quickCard" data-target="study">
+              <h3>学习</h3>
+              <p>整理知识点与练习记录。</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 自我介绍 -->
+        <section class="homeAbout">
+          <h2>关于我</h2>
+          <p>前端学习者，喜欢把想法做成可交互页面，也在持续打磨工程化能力。</p>
+        </section>
+
+        <section class="homeUpdates">
+          <h2>近期动态</h2>
+          <ul>
+            <li>完成音乐模块编辑模式的交互优化。</li>
+            <li>正在升级首页与导航的视觉和结构。</li>
+            <li>下一步计划补齐移动端细节与可访问性。</li>
+          </ul>
+        </section>
+      </section>
+    </div>
 
     <!-- 生活部分 -->
     <div class="section" id="life"></div>
 
     <!-- 音乐部分 -->
     <div class="section" id="music">
-      <!-- 左侧导航栏 -->
-      <div class="leftBanner">
-        <!-- 上传按钮 -->
-        <div class="but addNewSongs">
-          <span class="icon"></span>
-          <span class="text">上传</span>
-        </div>
-        <div class="but editSongs">
-          <span class="icon"></span>
-          <span class="text">编辑</span>
-        </div>
-        <div class="but feedback">
-          <span class="icon"></span>
-          <span class="text">反馈</span>
-        </div>
-      </div>
-
-      <div class="musicMain">
-        <!-- 歌曲标题区域 -->
-        <div class="musicHeader">
-          <h2>我的音乐收藏</h2>
-          <p>记录最近喜欢的歌曲,也练习前端中的数据渲染、交互与持久化</p>
+      <div class="musicWrap">
+        <!-- 左侧导航栏 -->
+        <div class="leftBanner">
+          <!-- 上传按钮 -->
+          <div class="but addNewSongs">
+            <span class="icon"></span>
+            <span class="text">上传</span>
+          </div>
+          <div class="but editSongs">
+            <span class="icon"></span>
+            <span class="text">编辑</span>
+          </div>
+          <div class="but feedback">
+            <span class="icon"></span>
+            <span class="text">反馈</span>
+          </div>
         </div>
 
-        <!-- 歌曲卡片部分 -->
-        <div class="cards">
-          <!-- <article class="card edit-mode selected" data-id="">
+        <div class="musicMain">
+          <!-- 歌曲标题区域 -->
+          <div class="musicHeader">
+            <h2>我的音乐收藏</h2>
+            <p>记录最近喜欢的歌曲,也练习前端中的数据渲染、交互与持久化</p>
+          </div>
+
+          <!-- 歌曲卡片部分 -->
+          <div class="cards">
+            <!-- <article class="card edit-mode selected" data-id="">
           <div class="cardCover" style="background-image: url();">
           </div>
           <div class="cardInfo">
@@ -72,10 +116,9 @@
             <a href="" class="cardLink">去听</a>
           </div>
         </article> -->
+          </div>
         </div>
       </div>
-
-
     </div>
 
     <!-- 学习部分 -->

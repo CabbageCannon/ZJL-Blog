@@ -10,21 +10,26 @@ body {
 .banner {
   box-sizing: border-box;
   position: fixed;
+  z-index: 100;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   height: 100px;
   width: 100%;
-  line-height: 100px;
   font-size: 30px;
-  padding: 0 50px;
-  border-radius: 25%;
+  padding: 0 40px;
 
   .glassFrame;
 
+  // 导航栏中logo区域
   .logo {
-    // background-color: red;
+    flex: none;
+    color: @textMain;
+    font-weight: 700;
+    letter-spacing: 0;
   }
 
+  // 导航栏中核心区域
   .nav {
     position: absolute;
     left: 50%;
@@ -33,9 +38,31 @@ body {
     // background-color: green;
     ul {
       display: flex;
+      align-items: center;
+      gap: 10px;
 
-      li {
-        margin: 0 10px;
+      a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        padding: 0 16px;
+        border-radius: 999px;
+        color: @textMuted;
+        font-size: 16px;
+        font-weight: 600;
+        transition: color .2s ease, background .2s ease, box-shadow .2s ease;
+
+        &:hover {
+          color: @primaryColor;
+          background-color: rgba(79, 100, 245, .08);
+        }
+
+        &.is-active {
+          color: @primaryColor;
+          background: rgba(79, 100, 245, .12);
+          box-shadow: 0 0 0 1px rgba(79, 109, 245, .2) inset;
+        }
       }
     }
   }
@@ -44,13 +71,21 @@ body {
     // background-color: yellow;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
+    color: @textMain;
+    font-size: 16px;
 
     img {
-      height: 60px;
-      width: 60px;
-      margin-right: 10px;
-      border-radius: 30px;
+      height: 48px;
+      width: 48px;
+      border-radius: 999px;
+      // object-fit设置为cover使得图片铺满容器，并且保持比例，不会因为容器是圆形的而变形
+      object-fit: cover;
+    }
+
+    .name {
+      line-height: 1;
+      font-weight: 600;
     }
   }
 }
@@ -64,14 +99,126 @@ body {
   overflow: hidden;
 
   .section {
-    display: block;
+    display: none;
     height: 100%;
     width: 100%;
   }
 
   // 首页区域
   #home {
-    background-color: green;
+    // 背景光晕效果
+    background:
+      radial-gradient(circle at 12% 10%, rgba(79, 109, 245, .12), transparent 35%),
+      radial-gradient(circle at 88% 90%, rgba(59, 130, 246, .1), transparent 35%),
+      @pageBg;
+    // y轴方向超出时自动出现滚动轴
+    overflow-y: auto;
+    display: block;
+    
+    .homeWrap{
+      box-sizing: border-box;
+      width: min(1120px,100%);
+      margin:0 auto;
+      padding: 32px 40px 40px;
+      display: grid;
+      gap: 20px;
+    }
+
+    .homeHero,
+    .homeQuickLinks,
+    .homeAbout,
+    .homeUpdates{
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid @borderSoft;
+      box-shadow: 0 10px 30px rgba(20, 24, 40, .08);
+      padding: 24px;
+    }
+
+    // 首页标题区域
+    .homeHero{
+      h1{
+        color: @textMain;
+        font-size: 36px;
+        line-height: 1.2;
+        margin: 8px 0 10px;
+      }
+
+      .eyebrow{
+        color: @primaryColor;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .subTitle{
+        color: @textMuted;
+        font-size: 13px;
+        font-weight: 700;
+      }
+    }
+
+    // 快捷入口区域
+    .homeQuickLinks{
+      h2{
+        color: @textMain;
+        font-size: 22px;
+        margin-bottom: 14px;
+      }
+
+      .quickGrid{
+        display: grid;
+        grid-template-columns: repeat(3,minmax(0,1fr));
+        gap: 14px;
+      }
+
+      .quickCard{
+        border-radius: 10px;
+        border: 1px solid @borderSoft;
+        background: #fff;
+        padding: 16px;
+        cursor: pointer;
+        transition: transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+
+        h3{
+          color: @textMain;
+          font-size: 18px;
+          margin-bottom: 8px;
+        }
+
+        p{
+          color: @textMuted;
+          font-size: 14px;
+          line-height: 1.5;
+        }
+
+        &:hover{
+          transform: (translateY(-2px));
+          border-color: rgba(79, 109, 245, .32);
+          box-shadow: 0 8px 20px rgba(79, 109, 245, .14);
+        }
+      }
+    }
+
+    // 自我介绍区域以及近期动态区域
+    .homeAbout,
+    .homeUpdates{
+      h2{
+        color: @textMain;
+        font-size: 22px;
+        margin-bottom: 12px;
+      }
+
+      p,li{
+        color: @textMuted;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+    }
+    
+    .homeUpdates ul{
+      display: grid;
+      gap: 8px;
+    }
   }
 
   // 生活区域
@@ -85,48 +232,69 @@ body {
 }
 
 // 响应式布局
-@media (max-width:768px){
+@media (max-width:768px) {
+
   // banner区域
-  .banner{
+  .banner {
     height: 72px;
-    line-height: 72px;
     padding: 0 16px;
     font-size: 20px;
     border-radius: 0;
 
-    .logo{
+    .logo {
       flex: none;
     }
 
-    .nav{
+    .nav {
       // position设置为static:元素属于普通文档流(默认)
       position: static;
       transform: none;
 
-      ul{
-        li{
-          margin: 0 6px;
-        }
+      ul {
+        gap: 6px;
+      }
+
+      a{
+        height: 34px;
+        padding: 0 10px;
+        font-size: 14px;
       }
     }
 
-    .user{
+    .user {
       // 用户名可先隐藏，只保留头像
-      .name{
+      .name {
         display: none;
       }
 
-      img{
-        width: 42px;
-        height: 42px;
-        margin-right: 0;
+      img {
+        width: 40px;
+        height: 40px;
       }
     }
   }
 
   // content区域
-  .indexContent{
+  .indexContent {
     padding-top: 72px;
     overflow-y: auto;
+
+    #home{
+      .homeWrap{
+        padding: 16px;
+      }
+
+      .homeHero h1{
+        font-size: 16px;
+      }
+
+      .homeHero h1{
+        font-size: 28px;
+      }
+
+      .homeQuickLinks .quickGrid{
+        grid-template-columns: 1fr;
+      }
+    }
   }
 }

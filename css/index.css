@@ -12,18 +12,24 @@ body {
 .banner {
   box-sizing: border-box;
   position: fixed;
+  z-index: 100;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   height: 100px;
   width: 100%;
-  line-height: 100px;
   font-size: 30px;
-  padding: 0 50px;
-  border-radius: 25%;
+  padding: 0 40px;
   background: linear-gradient(45deg, rgba(255, 255, 255, 0.8) 0%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.8) 100%);
   box-shadow: inset 2px -2px 1px -1px rgba(255, 255, 255, 0.9), inset -2px 2px 1px -1px rgba(255, 255, 255, 0.9), inset 6px -6px 1px -6px rgba(255, 255, 255, 0.55), inset -6px 6px 1px -6px rgba(255, 255, 255, 0.55), inset 0 0 2px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 9999px;
   border: 1px double rgba(51, 51, 51, 0.08);
+}
+.banner .logo {
+  flex: none;
+  color: #202436;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 .banner .nav {
   position: absolute;
@@ -32,20 +38,46 @@ body {
 }
 .banner .nav ul {
   display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.banner .nav ul li {
-  margin: 0 10px;
+.banner .nav ul a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  color: #6b7280;
+  font-size: 16px;
+  font-weight: 600;
+  transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.banner .nav ul a:hover {
+  color: #4f6df5;
+  background-color: rgba(79, 100, 245, 0.08);
+}
+.banner .nav ul a.is-active {
+  color: #4f6df5;
+  background: rgba(79, 100, 245, 0.12);
+  box-shadow: 0 0 0 1px rgba(79, 109, 245, 0.2) inset;
 }
 .banner .user {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
+  color: #202436;
+  font-size: 16px;
 }
 .banner .user img {
-  height: 60px;
-  width: 60px;
-  margin-right: 10px;
-  border-radius: 30px;
+  height: 48px;
+  width: 48px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+.banner .user .name {
+  line-height: 1;
+  font-weight: 600;
 }
 .indexContent {
   box-sizing: border-box;
@@ -55,12 +87,99 @@ body {
   overflow: hidden;
 }
 .indexContent .section {
-  display: block;
+  display: none;
   height: 100%;
   width: 100%;
 }
 .indexContent #home {
-  background-color: green;
+  background: radial-gradient(circle at 12% 10%, rgba(79, 109, 245, 0.12), transparent 35%), radial-gradient(circle at 88% 90%, rgba(59, 130, 246, 0.1), transparent 35%), #f6f7fb;
+  overflow-y: auto;
+  display: block;
+}
+.indexContent #home .homeWrap {
+  box-sizing: border-box;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 32px 40px 40px;
+  display: grid;
+  gap: 20px;
+}
+.indexContent #home .homeHero,
+.indexContent #home .homeQuickLinks,
+.indexContent #home .homeAbout,
+.indexContent #home .homeUpdates {
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  box-shadow: 0 10px 30px rgba(20, 24, 40, 0.08);
+  padding: 24px;
+}
+.indexContent #home .homeHero h1 {
+  color: #202436;
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 8px 0 10px;
+}
+.indexContent #home .homeHero .eyebrow {
+  color: #4f6df5;
+  font-size: 13px;
+  font-weight: 700;
+}
+.indexContent #home .homeHero .subTitle {
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 700;
+}
+.indexContent #home .homeQuickLinks h2 {
+  color: #202436;
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+.indexContent #home .homeQuickLinks .quickGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.indexContent #home .homeQuickLinks .quickCard {
+  border-radius: 10px;
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  background: #fff;
+  padding: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.indexContent #home .homeQuickLinks .quickCard h3 {
+  color: #202436;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.indexContent #home .homeQuickLinks .quickCard p {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.indexContent #home .homeQuickLinks .quickCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(79, 109, 245, 0.32);
+  box-shadow: 0 8px 20px rgba(79, 109, 245, 0.14);
+}
+.indexContent #home .homeAbout h2,
+.indexContent #home .homeUpdates h2 {
+  color: #202436;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+.indexContent #home .homeAbout p,
+.indexContent #home .homeUpdates p,
+.indexContent #home .homeAbout li,
+.indexContent #home .homeUpdates li {
+  color: #6b7280;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.indexContent #home .homeUpdates ul {
+  display: grid;
+  gap: 8px;
 }
 .indexContent #life {
   background-color: yellow;
@@ -71,7 +190,6 @@ body {
 @media (max-width: 768px) {
   .banner {
     height: 72px;
-    line-height: 72px;
     padding: 0 16px;
     font-size: 20px;
     border-radius: 0;
@@ -83,27 +201,45 @@ body {
     position: static;
     transform: none;
   }
-  .banner .nav ul li {
-    margin: 0 6px;
+  .banner .nav ul {
+    gap: 6px;
+  }
+  .banner .nav a {
+    height: 34px;
+    padding: 0 10px;
+    font-size: 14px;
   }
   .banner .user .name {
     display: none;
   }
   .banner .user img {
-    width: 42px;
-    height: 42px;
-    margin-right: 0;
+    width: 40px;
+    height: 40px;
   }
   .indexContent {
     padding-top: 72px;
     overflow-y: auto;
   }
+  .indexContent #home .homeWrap {
+    padding: 16px;
+  }
+  .indexContent #home .homeHero h1 {
+    font-size: 16px;
+  }
+  .indexContent #home .homeHero h1 {
+    font-size: 28px;
+  }
+  .indexContent #home .homeQuickLinks .quickGrid {
+    grid-template-columns: 1fr;
+  }
 }
-#music {
+#music .musicWrap {
   display: flex;
+  height: auto;
+  width: 100%;
   background-color: #f6f7fb;
 }
-#music .leftBanner {
+#music .musicWrap .leftBanner {
   box-sizing: border-box;
   background-color: #fff;
   height: 100%;
@@ -115,7 +251,7 @@ body {
   flex-direction: column;
   align-items: center;
 }
-#music .leftBanner .but {
+#music .musicWrap .leftBanner .but {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -129,51 +265,51 @@ body {
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
-#music .leftBanner .but:hover {
+#music .musicWrap .leftBanner .but:hover {
   color: #4f6df5;
   background: rgba(79, 109, 245, 0.08);
   transform: translateY(-2px);
 }
-#music .leftBanner .but.active {
+#music .musicWrap .leftBanner .but.active {
   color: #4f6df5;
   background: rgba(79, 109, 245, 0.12);
 }
-#music .leftBanner .but .icon {
+#music .musicWrap .leftBanner .but .icon {
   display: block;
   width: 24px;
   height: 24px;
   background: url("../imgs/icons/icon1.webp") no-repeat center;
   background-size: contain;
 }
-#music .leftBanner .but .text {
+#music .musicWrap .leftBanner .but .text {
   font-size: 14px;
   line-height: 1;
 }
-#music .musicMain {
+#music .musicWrap .musicMain {
   flex: 1;
   min-width: 0;
   padding: 32px 40px 40px;
 }
-#music .musicMain .musicHeader {
+#music .musicWrap .musicMain .musicHeader {
   margin-bottom: 28px;
 }
-#music .musicMain .musicHeader h2 {
+#music .musicWrap .musicMain .musicHeader h2 {
   margin-bottom: 8px;
   color: #202436;
   font-size: 28px;
   font-weight: 700;
 }
-#music .musicMain .musicHeader p {
+#music .musicWrap .musicMain .musicHeader p {
   color: #6b7280;
   font-size: 15px;
 }
-#music .musicMain .cards {
+#music .musicWrap .musicMain .cards {
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
   align-content: flex-start;
 }
-#music .musicMain .cards .card {
+#music .musicWrap .musicMain .cards .card {
   box-sizing: border-box;
   display: block;
   overflow: hidden;
@@ -186,18 +322,18 @@ body {
   box-shadow: 0 14px 35px rgba(20, 24, 40, 0.12);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
-#music .musicMain .cards .card:hover {
+#music .musicWrap .musicMain .cards .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 22px 45px rgba(20, 24, 40, 0.18);
   border-color: rgba(80, 120, 255, 0.35);
 }
-#music .musicMain .cards .card .cardCover {
+#music .musicWrap .musicMain .cards .card .cardCover {
   height: 210px;
   background: no-repeat;
   background-position: center;
   background-size: cover;
 }
-#music .musicMain .cards .card .cardInfo {
+#music .musicWrap .musicMain .cards .card .cardInfo {
   display: flex;
   height: 90px;
   text-align: center;
@@ -206,7 +342,7 @@ body {
   gap: 16px;
   padding: 0 16px;
 }
-#music .musicMain .cards .card .cardInfo .cardName {
+#music .musicWrap .musicMain .cards .card .cardInfo .cardName {
   flex: 1;
   overflow: hidden;
   color: #202436;
@@ -215,7 +351,7 @@ body {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-#music .musicMain .cards .card .cardInfo .cardLink {
+#music .musicWrap .musicMain .cards .card .cardInfo .cardLink {
   flex: none;
   padding: 8px 12px;
   border-radius: 999px;
@@ -224,18 +360,18 @@ body {
   background: #4f6df5;
   transition: background 0.2s ease;
 }
-#music .musicMain .cards .card .cardInfo .cardLink:hover {
+#music .musicWrap .musicMain .cards .card .cardInfo .cardLink:hover {
   background: #3652d9;
 }
-#music .musicMain .cards .card.edit-mode {
+#music .musicWrap .musicMain .cards .card.edit-mode {
   opacity: 0.62;
 }
-#music .musicMain .cards .card.selected {
+#music .musicWrap .musicMain .cards .card.selected {
   opacity: 1;
   border-color: #4f6df5;
   box-shadow: 0 0 0 4px rgba(79, 109, 245, 0.18), 0 18px 45px rgba(20, 24, 40, 0.18);
 }
-#music .musicMain .cards .musicMessage {
+#music .musicWrap .musicMain .cards .musicMessage {
   width: 100%;
   padding: 72px 0;
   color: #6b7280;
