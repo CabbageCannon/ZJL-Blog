@@ -77,12 +77,52 @@
     </div>
 
     <!-- 生活部分 -->
-    <div class="section" id="life"></div>
+    <div class="section" id="life">
+      <!-- 左侧操作栏 -->
+      <div class="leftBanner">
+        <div class="but addNewDiary">
+          <span class="icon"></span>
+          <span class="text">上传</span>
+        </div>
+      </div>
+
+      <!-- 内容 -->
+      <div class="lifeWrap">
+        <!-- 标题 -->
+        <section class="lifeTitle">
+          <h2>我的生活分享</h1>
+            <p>分享最近的生活</p>
+        </section>
+
+        <!-- 日记列表 -->
+        <div class="lifeList">
+          <!-- 日记卡片 -->
+          <section class="lifeCard">
+            <!-- 卡片标题 -->
+            <section class="lifeCardTitle">
+              <div class="time">2026年5月25日</div>
+              <div class="mood">🥰</div>
+            </section>
+
+            <!-- 卡片内容 -->
+            <section class="lifeCardContent">
+              <div class="pic"><img src="./assets/upload/life/lifeCardTest.jpg" alt=""></div>
+              <section class="text">
+                <h2>前端已死</h2>
+                <p>
+                  “前端已死”其实更像是一种情绪化表达，而不是真正意义上的行业消亡。互联网不会停止发展，只要还有网站、App、管理系统、交互产品存在，前端开发就依然会有需求。真正发生变化的，其实是行业门槛正在迅速提高。以前只会切图、改样式、写几个页面，也许就能找到一份工作，但现在企业更希望开发者不仅会写页面，还要理解工程化、组件化、性能优化，甚至要接触
+                  AI、跨端、服务端渲染等更复杂的内容。</p>
+              </section>
+            </section>
+          </section>
+        </div>
+      </div>
+    </div>
 
     <!-- 音乐部分 -->
     <div class="section" id="music">
       <div class="musicWrap">
-        <!-- 左侧导航栏 -->
+        <!-- 左侧操作栏 -->
         <div class="leftBanner">
           <!-- 上传按钮 -->
           <div class="but addNewSongs">
@@ -125,9 +165,11 @@
     <div class="section" id="study"></div>
   </div>
 
-  <!-- 上传音乐的弹出框 -->
   <!-- 遮罩层 -->
   <div class="modalMask"></div>
+
+  <!-- 音乐区域弹出框 -->
+  <!-- 上传音乐的弹出框 -->
   <div class="addMusicModal">
     <div class="title">
       <h2>上传内容</h2>
@@ -163,6 +205,39 @@
         <div class="moveToLastButton">移到最后</div>
       </li>
     </ul>
+  </div>
+
+  <!-- 生活区域弹出框 -->
+  <div class="addLifeModal">
+    <div class="title">
+      <h2>发布日记</h2>
+      <button class="closeLifeModalButton">关闭</button>
+    </div>
+
+    <div class="content">
+      <div class="input">
+        <span class="inputTitle">标题</span>
+        <input class="lifeTitleInput" type="text" maxlength="40" placeholder="今天想记录什么？">
+      </div>
+      <div class="input">
+        <span class="inputTitle">心情</span>
+        <div class="moodInput">
+          <label><input type="radio" name="mood" value="开心"><span>🥰</span></label>
+          <label><input type="radio" name="mood" value="难过"><span>😭</span></label>
+          <label><input type="radio" name="mood" value="困"><span>😴</span></label>
+        </div>
+      </div>
+      <div class="input">
+        <span class="inputTitle">内容</span>
+        <textarea class="lifeContentInput" rows="6" maxlength="1000" placeholder="写点文字，图片可选"></textarea>
+      </div>
+      <div class="input">
+        <span class="inputTitle">图片</span>
+        <input class="lifeImageInput" type="file" accept="image/*">
+      </div>
+    </div>
+
+    <button class="commitLifeButton">发布</button>
   </div>
 
   <script type="module" src="./js/main.js"></script>

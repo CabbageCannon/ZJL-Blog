@@ -1,0 +1,306 @@
+// out:false
+
+// 生活区域
+#life {
+  // 背景光晕效果
+  background:
+    radial-gradient(circle at 12% 10%, rgba(79, 109, 245, .12), transparent 35%),
+    radial-gradient(circle at 88% 90%, rgba(59, 130, 246, .1), transparent 35%),
+    @pageBg;
+  // y轴方向超出时自动出现滚动轴
+  overflow-y: auto;
+  // 开始时不显示
+  display: none;
+  position: relative;
+  padding-top: 30px;
+
+  .leftBanner {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    box-sizing: border-box;
+    background-color: #fff;
+    height: auto;
+    width: 120px;
+    padding: 32px 16px;
+    border: 1px solid @borderSoft;
+    border-radius: 0 20px 20px 0;
+    border-left: none;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    .but {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 88px;
+      height: 76px;
+      border-radius: 14px;
+      color: @textMuted;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+
+      &:hover {
+        color: @primaryColor;
+        background: rgba(79, 109, 245, .08);
+        transform: translateY(-2px);
+      }
+
+      &.active {
+        color: @primaryColor;
+        background: rgba(79, 109, 245, .12);
+      }
+
+      .icon {
+        display: block;
+        width: 24px;
+        height: 24px;
+        background: url("../imgs/icons/icon1.webp") no-repeat center;
+        background-size: contain;
+      }
+
+      .text {
+        font-size: 14px;
+        // line-height设置成当前字体大小的1倍
+        line-height: 1;
+      }
+    }
+  }
+
+  // 内容区
+  .lifeWrap {
+    box-sizing: border-box;
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    padding: 32px 40px 40px;
+    display: block;
+    border: 1px solid @borderSoft;
+    background-color: #fff;
+    border-radius: 20px;
+
+    // 标题区
+    .lifeTitle {
+      margin-bottom: 28px;
+
+      h2 {
+        margin-bottom: 8px;
+        color: @textMain;
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      p {
+        color: @textMuted;
+        font-size: 15px;
+      }
+    }
+
+    // 日记列表区
+    .lifeList {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      transition: transform .2s ease, box-shadow .2s ease, border .2s ease;
+
+      .lifeCard {
+        border: 1px solid @borderSoft;
+        border-radius: 20px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+        // 日记标题
+        .lifeCardTitle {
+          display: flex;
+          align-items: center;
+          padding: 0 20px;
+          gap: 20px;
+
+          .time {
+            color: #7b8191;
+            font-size: 14px;
+            letter-spacing: .5px;
+          }
+
+          .mood {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 192, 203, .18);
+
+            font-size: 20px;
+
+            box-shadow:
+              0 4px 12px rgba(20, 24, 40, .08);
+          }
+        }
+
+        // 日记核心内容
+        .lifeCardContent {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+
+          // 图片区域
+          .pic {
+            max-height: 400px;
+            overflow: hidden;
+            border-radius: 20px;
+
+            img {
+              width: 100%;
+              height: auto;
+              display: block;
+            }
+          }
+
+          // 卡片文字区域
+          .text {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            padding: 2px 4px;
+
+            h2 {
+              width: 100%;
+              color: #202436;
+              font-size: 22px;
+              font-weight: 700;
+              line-height: 1.35;
+              letter-spacing: .5px;
+            }
+
+            p {
+              color: #666f85;
+              font-size: 15px;
+              line-height: 1.8;
+              letter-spacing: .2px;
+              display: -webkit-box;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+            }
+          }
+        }
+
+        &:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 22px 45px rgba(20, 24, 40, .18);
+          border-color: rgba(80, 120, 255, .35);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+// 上传日记弹出框
+.addLifeModal {
+  // 默认隐藏
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, calc(100% - 32px));
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  z-index: 9999;
+  box-shadow: 0 20px 50px rgba(20, 24, 40, .25);
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    margin-bottom: 12px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+
+    .input {
+      display: block;
+      width: 100%;
+
+      .inputTitle {
+        display: block;
+        margin-bottom: 12px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid @borderSoft;
+        border-radius: 10px;
+        padding: 10px 12px;
+      }
+
+      .moodInput {
+        display: flex;
+        gap: 10px;
+
+        // 表情区域
+        span {
+          width: 48px;
+          height: 48px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          border-radius: 14px;
+
+          background: #f4f6fb;
+
+          cursor: pointer;
+
+          transition: background .2s ease, box-shadow .2s ease;
+        }
+
+        input {
+          display: none;
+        }
+
+        input:checked+span {
+          background:
+            rgba(79, 109, 245, .12);
+
+          box-shadow:
+            0 0 0 2px rgba(79, 109, 245, .25);
+        }
+      }
+    }
+  }
+
+  .commitLifeButton {
+    width: 100%;
+    height: 42px;
+    border: 0;
+    border-radius: 10px;
+    background: @primaryColor;
+    color: #fff;
+    cursor: pointer;
+  }
+}

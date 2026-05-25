@@ -91,99 +91,6 @@ body {
   height: 100%;
   width: 100%;
 }
-.indexContent #home {
-  background: radial-gradient(circle at 12% 10%, rgba(79, 109, 245, 0.12), transparent 35%), radial-gradient(circle at 88% 90%, rgba(59, 130, 246, 0.1), transparent 35%), #f6f7fb;
-  overflow-y: auto;
-  display: block;
-}
-.indexContent #home .homeWrap {
-  box-sizing: border-box;
-  width: min(1120px, 100%);
-  margin: 0 auto;
-  padding: 32px 40px 40px;
-  display: grid;
-  gap: 20px;
-}
-.indexContent #home .homeHero,
-.indexContent #home .homeQuickLinks,
-.indexContent #home .homeAbout,
-.indexContent #home .homeUpdates {
-  border-radius: 12px;
-  background: #fff;
-  border: 1px solid rgba(20, 24, 40, 0.08);
-  box-shadow: 0 10px 30px rgba(20, 24, 40, 0.08);
-  padding: 24px;
-}
-.indexContent #home .homeHero h1 {
-  color: #202436;
-  font-size: 36px;
-  line-height: 1.2;
-  margin: 8px 0 10px;
-}
-.indexContent #home .homeHero .eyebrow {
-  color: #4f6df5;
-  font-size: 13px;
-  font-weight: 700;
-}
-.indexContent #home .homeHero .subTitle {
-  color: #6b7280;
-  font-size: 13px;
-  font-weight: 700;
-}
-.indexContent #home .homeQuickLinks h2 {
-  color: #202436;
-  font-size: 22px;
-  margin-bottom: 14px;
-}
-.indexContent #home .homeQuickLinks .quickGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-}
-.indexContent #home .homeQuickLinks .quickCard {
-  border-radius: 10px;
-  border: 1px solid rgba(20, 24, 40, 0.08);
-  background: #fff;
-  padding: 16px;
-  cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.indexContent #home .homeQuickLinks .quickCard h3 {
-  color: #202436;
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-.indexContent #home .homeQuickLinks .quickCard p {
-  color: #6b7280;
-  font-size: 14px;
-  line-height: 1.5;
-}
-.indexContent #home .homeQuickLinks .quickCard:hover {
-  transform: translateY(-2px);
-  border-color: rgba(79, 109, 245, 0.32);
-  box-shadow: 0 8px 20px rgba(79, 109, 245, 0.14);
-}
-.indexContent #home .homeAbout h2,
-.indexContent #home .homeUpdates h2 {
-  color: #202436;
-  font-size: 22px;
-  margin-bottom: 12px;
-}
-.indexContent #home .homeAbout p,
-.indexContent #home .homeUpdates p,
-.indexContent #home .homeAbout li,
-.indexContent #home .homeUpdates li {
-  color: #6b7280;
-  font-size: 15px;
-  line-height: 1.7;
-}
-.indexContent #home .homeUpdates ul {
-  display: grid;
-  gap: 8px;
-}
-.indexContent #life {
-  background-color: yellow;
-}
 .indexContent #study {
   background-color: gold;
 }
@@ -415,74 +322,6 @@ body {
   color: #4f6df5;
   background: rgba(79, 100, 245, 0.08);
 }
-@media (max-width: 768px) {
-  #music .musicWrap {
-    flex-direction: column;
-  }
-  #music .musicWrap .leftBanner {
-    width: 100%;
-    height: auto;
-    padding: 12px 16px;
-    border-right: 0;
-    border-bottom: 1px solid rgba(20, 24, 40, 0.08);
-    flex-direction: row;
-    justify-content: center;
-    gap: 12px;
-  }
-  #music .musicWrap .leftBanner .but {
-    width: 88px;
-    height: 64px;
-    margin-bottom: 0;
-    gap: 8px;
-  }
-  #music .musicWrap .musicMain {
-    padding: 24px 16px 32px;
-  }
-  #music .musicWrap .musicMain .musicHeader {
-    margin-bottom: 20px;
-  }
-  #music .musicWrap .musicMain .musicHeader h2 {
-    font-size: 24px;
-  }
-  #music .musicWrap .musicMain .musicHeader p {
-    line-height: 1.6;
-  }
-  #music .musicWrap .musicMain .cards {
-    gap: 18px;
-    flex-direction: column;
-    align-content: center;
-  }
-  #music .musicWrap .musicMain .cards .card {
-    width: 60%;
-    height: auto;
-  }
-  #music .musicWrap .musicMain .cards .card .cardCover {
-    height: auto;
-    aspect-ratio: 1/1;
-  }
-  #music .musicWrap .musicMain .cards .card .cardInfo {
-    height: 72px;
-  }
-  .musicCardActions {
-    top: auto;
-    right: 16px;
-    bottom: -180px;
-    width: calc(100%-32px);
-    border-radius: 16px;
-    transition: bottom 0.3s ease;
-  }
-}
-body.is-resizing .musicCardActions {
-  transition: none !important;
-}
-.modalMask {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  background: rgba(15, 23, 42, 0.45);
-  backdrop-filter: blur(4px);
-}
 .addMusicModal {
   display: none;
   box-sizing: border-box;
@@ -559,6 +398,61 @@ body.is-resizing .musicCardActions {
   background: #3652d9;
 }
 @media (max-width: 768px) {
+  #music .musicWrap {
+    flex-direction: column;
+  }
+  #music .musicWrap .leftBanner {
+    width: 100%;
+    height: auto;
+    padding: 12px 16px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(20, 24, 40, 0.08);
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+  }
+  #music .musicWrap .leftBanner .but {
+    width: 88px;
+    height: 64px;
+    margin-bottom: 0;
+    gap: 8px;
+  }
+  #music .musicWrap .musicMain {
+    padding: 24px 16px 32px;
+  }
+  #music .musicWrap .musicMain .musicHeader {
+    margin-bottom: 20px;
+  }
+  #music .musicWrap .musicMain .musicHeader h2 {
+    font-size: 24px;
+  }
+  #music .musicWrap .musicMain .musicHeader p {
+    line-height: 1.6;
+  }
+  #music .musicWrap .musicMain .cards {
+    gap: 18px;
+    flex-direction: column;
+    align-content: center;
+  }
+  #music .musicWrap .musicMain .cards .card {
+    width: 60%;
+    height: auto;
+  }
+  #music .musicWrap .musicMain .cards .card .cardCover {
+    height: auto;
+    aspect-ratio: 1/1;
+  }
+  #music .musicWrap .musicMain .cards .card .cardInfo {
+    height: 72px;
+  }
+  .musicCardActions {
+    top: auto;
+    right: 16px;
+    bottom: -180px;
+    width: calc(100%-32px);
+    border-radius: 16px;
+    transition: bottom 0.3s ease;
+  }
   .addMusicModal {
     width: calc(100%-32px);
     padding: 20px;
@@ -566,4 +460,344 @@ body.is-resizing .musicCardActions {
   .addMusicModal .title h2 {
     font-size: 20px;
   }
+}
+body.is-resizing .musicCardActions {
+  transition: none !important;
+}
+.modalMask {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+}
+#life {
+  background: radial-gradient(circle at 12% 10%, rgba(79, 109, 245, 0.12), transparent 35%), radial-gradient(circle at 88% 90%, rgba(59, 130, 246, 0.1), transparent 35%), #f6f7fb;
+  overflow-y: auto;
+  display: none;
+  position: relative;
+  padding-top: 30px;
+}
+#life .leftBanner {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  box-sizing: border-box;
+  background-color: #fff;
+  height: auto;
+  width: 120px;
+  padding: 32px 16px;
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  border-radius: 0 20px 20px 0;
+  border-left: none;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+#life .leftBanner .but {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 88px;
+  height: 76px;
+  border-radius: 14px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+#life .leftBanner .but:hover {
+  color: #4f6df5;
+  background: rgba(79, 109, 245, 0.08);
+  transform: translateY(-2px);
+}
+#life .leftBanner .but.active {
+  color: #4f6df5;
+  background: rgba(79, 109, 245, 0.12);
+}
+#life .leftBanner .but .icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url("../imgs/icons/icon1.webp") no-repeat center;
+  background-size: contain;
+}
+#life .leftBanner .but .text {
+  font-size: 14px;
+  line-height: 1;
+}
+#life .lifeWrap {
+  box-sizing: border-box;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 32px 40px 40px;
+  display: block;
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  background-color: #fff;
+  border-radius: 20px;
+}
+#life .lifeWrap .lifeTitle {
+  margin-bottom: 28px;
+}
+#life .lifeWrap .lifeTitle h2 {
+  margin-bottom: 8px;
+  color: #202436;
+  font-size: 28px;
+  font-weight: 700;
+}
+#life .lifeWrap .lifeTitle p {
+  color: #6b7280;
+  font-size: 15px;
+}
+#life .lifeWrap .lifeList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+}
+#life .lifeWrap .lifeList .lifeCard {
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+#life .lifeWrap .lifeList .lifeCard .lifeCardTitle {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 20px;
+}
+#life .lifeWrap .lifeList .lifeCard .lifeCardTitle .time {
+  color: #7b8191;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+#life .lifeWrap .lifeList .lifeCard .lifeCardTitle .mood {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 192, 203, 0.18);
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(20, 24, 40, 0.08);
+}
+#life .lifeWrap .lifeList .lifeCard .lifeCardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+#life .lifeWrap .lifeList .lifeCard .lifeCardContent .pic {
+  max-height: 400px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+#life .lifeWrap .lifeList .lifeCard .lifeCardContent .pic img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+#life .lifeWrap .lifeList .lifeCard .lifeCardContent .text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding: 2px 4px;
+}
+#life .lifeWrap .lifeList .lifeCard .lifeCardContent .text h2 {
+  width: 100%;
+  color: #202436;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.5px;
+}
+#life .lifeWrap .lifeList .lifeCard .lifeCardContent .text p {
+  color: #666f85;
+  font-size: 15px;
+  line-height: 1.8;
+  letter-spacing: 0.2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+#life .lifeWrap .lifeList .lifeCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 45px rgba(20, 24, 40, 0.18);
+  border-color: rgba(80, 120, 255, 0.35);
+  cursor: pointer;
+}
+.addLifeModal {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, calc(100% - 32px));
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  z-index: 9999;
+  box-shadow: 0 20px 50px rgba(20, 24, 40, 0.25);
+}
+.addLifeModal .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  margin-bottom: 12px;
+}
+.addLifeModal .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+}
+.addLifeModal .content .input {
+  display: block;
+  width: 100%;
+}
+.addLifeModal .content .input .inputTitle {
+  display: block;
+  margin-bottom: 12px;
+}
+.addLifeModal .content .input input,
+.addLifeModal .content .input textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.addLifeModal .content .input .moodInput {
+  display: flex;
+  gap: 10px;
+}
+.addLifeModal .content .input .moodInput span {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #f4f6fb;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.addLifeModal .content .input .moodInput input {
+  display: none;
+}
+.addLifeModal .content .input .moodInput input:checked + span {
+  background: rgba(79, 109, 245, 0.12);
+  box-shadow: 0 0 0 2px rgba(79, 109, 245, 0.25);
+}
+.addLifeModal .commitLifeButton {
+  width: 100%;
+  height: 42px;
+  border: 0;
+  border-radius: 10px;
+  background: #4f6df5;
+  color: #fff;
+  cursor: pointer;
+}
+#home {
+  background: radial-gradient(circle at 12% 10%, rgba(79, 109, 245, 0.12), transparent 35%), radial-gradient(circle at 88% 90%, rgba(59, 130, 246, 0.1), transparent 35%), #f6f7fb;
+  overflow-y: auto;
+  display: block;
+}
+#home .homeWrap {
+  box-sizing: border-box;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 32px 40px 40px;
+  display: grid;
+  gap: 20px;
+}
+#home .homeHero,
+#home .homeQuickLinks,
+#home .homeAbout,
+#home .homeUpdates {
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  box-shadow: 0 10px 30px rgba(20, 24, 40, 0.08);
+  padding: 24px;
+}
+#home .homeHero h1 {
+  color: #202436;
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 8px 0 10px;
+}
+#home .homeHero .eyebrow {
+  color: #4f6df5;
+  font-size: 13px;
+  font-weight: 700;
+}
+#home .homeHero .subTitle {
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 700;
+}
+#home .homeQuickLinks h2 {
+  color: #202436;
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+#home .homeQuickLinks .quickGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+#home .homeQuickLinks .quickCard {
+  border-radius: 10px;
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  background: #fff;
+  padding: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+#home .homeQuickLinks .quickCard h3 {
+  color: #202436;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+#home .homeQuickLinks .quickCard p {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+}
+#home .homeQuickLinks .quickCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(79, 109, 245, 0.32);
+  box-shadow: 0 8px 20px rgba(79, 109, 245, 0.14);
+}
+#home .homeAbout h2,
+#home .homeUpdates h2 {
+  color: #202436;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+#home .homeAbout p,
+#home .homeUpdates p,
+#home .homeAbout li,
+#home .homeUpdates li {
+  color: #6b7280;
+  font-size: 15px;
+  line-height: 1.7;
+}
+#home .homeUpdates ul {
+  display: grid;
+  gap: 8px;
 }

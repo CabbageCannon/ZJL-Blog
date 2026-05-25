@@ -3,7 +3,6 @@ const navLinks=Array.from(document.querySelectorAll(".banner .nav a"));
 
 // 展示指定板块
 export function showSection(sectionId) {
-  console.log(sectionId);
   const targetSection = sections.find(section => section.id === sectionId);
   if (!targetSection) return;
 
