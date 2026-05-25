@@ -1,6 +1,7 @@
 import { state } from "./state.js";
 import { renderMusicList } from "./render.js";
 import { saveMusicList } from "./storage.js";
+import { showModalMask,closeModalMask } from "../utils/showModalMask.js";
 
 // 绑定音乐模块事件
 export function bindEvents() {
@@ -15,25 +16,15 @@ function addSongsModal() {
   const closeButton = document.querySelector(".closeButton");
   const commitButton = modal.querySelector(".commitButton");
   const inputs = modal.querySelectorAll("input");
-  const mask = document.querySelector(".modalMask");
 
   // 打开弹窗
   addButton.addEventListener('click', () => {
-    mask.style.display = "block";
-    modal.style.display = "block";
+    showModalMask(modal);
   })
 
-  // 关闭弹窗
-  // 1.点击关闭按钮
+  // 点击关闭按钮关闭弹窗
   closeButton.addEventListener('click', () => {
-    mask.style.display = "none";
-    modal.style.display = "none";
-  })
-
-  // 2.点击遮罩层
-  mask.addEventListener('click',()=>{
-    mask.style.display="none";
-    modal.style.display="none";
+    closeModalMask();
   })
 
   // 上传表单内容
