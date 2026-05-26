@@ -1,12 +1,8 @@
-import { formatDate } from "../utils/formatDate";
-
-export function render(state){
-  // 渲染lifeList
-  renderLifeList(state.diaryList);
-}
+import { formatDate } from "../utils/formatDate.js";
+import { resolveImageUrl } from "./api.js";
 
 // 渲染lifeList
-function renderLifeList(diaryList){
+export function renderLifeList(diaryList){
   const lifeList=document.querySelector('#life .lifeList');
   diaryList.forEach(cardInfo=>{
     lifeList.appendChild(createLifeCard(cardInfo));
@@ -16,7 +12,7 @@ function renderLifeList(diaryList){
 // 创建卡片
 function createLifeCard(cardInfo){
   // 获取数据
-  const {id,mood,title,content,image,createdAt}=cardInfo;
+  const {id,mood,createdAt,title,content,imageUrl}=cardInfo;
   // 卡片
   const card=document.createElement('section');
   // 卡片标题部分
@@ -32,7 +28,7 @@ function createLifeCard(cardInfo){
   const cardContentTextP=document.createElement('p');
 
   // 配置卡片标题
-  cardTitle.className="lifeCard";
+  cardTitle.className="lifeCardTitle";
   cardTitleTime.className="time";
   cardTitleTime.textContent=getDay(createdAt);
   cardTitleMood.className="mood";
@@ -41,7 +37,7 @@ function createLifeCard(cardInfo){
   cardTitle.appendChild(cardTitleMood);
 
   // 配置卡片内容
-  cardContentPicImg.src=image;
+  cardContentPicImg.src=resolveImageUrl(imageUrl);
   cardContentPic.className="pic";
   cardContentPic.appendChild(cardContentPicImg);
   cardContentTextH2.textContent=title;
@@ -49,11 +45,12 @@ function createLifeCard(cardInfo){
   cardContentText.className="text";
   cardContentText.appendChild(cardContentTextH2);
   cardContentText.appendChild(cardContentTextP);
+  cardContent.className="lifeCardContent";
   cardContent.appendChild(cardContentPic);
   cardContent.appendChild(cardContentText);
 
   // 配置最终卡片
-  card.className('lifeCard');
+  card.className="lifeCard";
   card.appendChild(cardTitle);
   card.appendChild(cardContent);
 

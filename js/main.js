@@ -8,6 +8,6 @@ initHome();
 // 初始化音乐板块
 initMusic();
 // 初始化生活板块
-initLife();
+await initLife();
 // 初始化导航栏
 initNav();

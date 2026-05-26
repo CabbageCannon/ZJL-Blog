@@ -26,6 +26,7 @@ const storage=multer.diskStorage({
 });
 
 // 创建上传文件中间件
+// multer是专门处理上传表单formData的中间件
 const upload=multer({
   storage,
   limits:{fileSize:2 * 1024 *1024},

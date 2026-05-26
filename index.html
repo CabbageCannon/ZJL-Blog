@@ -108,10 +108,12 @@
             <section class="lifeCardContent">
               <div class="pic"><img src="./assets/upload/life/lifeCardTest.jpg" alt=""></div>
               <section class="text">
-                <h2>前端已死</h2>
+                <h2>今日工作</h2>
                 <p>
-                  “前端已死”其实更像是一种情绪化表达，而不是真正意义上的行业消亡。互联网不会停止发展，只要还有网站、App、管理系统、交互产品存在，前端开发就依然会有需求。真正发生变化的，其实是行业门槛正在迅速提高。以前只会切图、改样式、写几个页面，也许就能找到一份工作，但现在企业更希望开发者不仅会写页面，还要理解工程化、组件化、性能优化，甚至要接触
-                  AI、跨端、服务端渲染等更复杂的内容。</p>
+                  今天主要完成了这个网站的生活板块的页面，以及完善了一下弹出框中遮罩层的逻辑，将
+                遮罩层设置为通用的遮罩层，在写生活板块日记区域的时候，发现将照片存在localStorage
+                完全不显示，毕竟它只能存5MB左右，于是开始考虑接入后端和数据库，后端使用express框
+                架，数据库使用SQLite，明天继续完善基本的后端逻辑</p>
               </section>
             </section>
           </section>
@@ -222,9 +224,9 @@
       <div class="input">
         <span class="inputTitle">心情</span>
         <div class="moodInput">
-          <label><input type="radio" name="mood" value="开心"><span>🥰</span></label>
-          <label><input type="radio" name="mood" value="难过"><span>😭</span></label>
-          <label><input type="radio" name="mood" value="困"><span>😴</span></label>
+          <label><input type="radio" name="mood" value="🥰"><span>🥰</span></label>
+          <label><input type="radio" name="mood" value="😭"><span>😭</span></label>
+          <label><input type="radio" name="mood" value="😴"><span>😴</span></label>
         </div>
       </div>
       <div class="input">
