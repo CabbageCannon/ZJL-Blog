@@ -102,19 +102,21 @@
 
     // 日记列表区
     .lifeList {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      transition: transform .2s ease, box-shadow .2s ease, border .2s ease;
-
+      column-count: 3;
+      column-gap: 10px;
+      
       .lifeCard {
         border: 1px solid @borderSoft;
         border-radius: 20px;
         padding: 20px;
+        margin-bottom: 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 20px;
+        // 避免一张卡片拆成上下两部分分到不同列里
+        break-inside: avoid;
+        transition: transform .2s ease, box-shadow .2s ease, border .2s ease;
 
         // 日记标题
         .lifeCardTitle {

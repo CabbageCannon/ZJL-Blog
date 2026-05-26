@@ -554,19 +554,20 @@ body.is-resizing .musicCardActions {
   font-size: 15px;
 }
 #life .lifeWrap .lifeList {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+  column-count: 3;
+  column-gap: 10px;
 }
 #life .lifeWrap .lifeList .lifeCard {
   border: 1px solid rgba(20, 24, 40, 0.08);
   border-radius: 20px;
   padding: 20px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  break-inside: avoid;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
 }
 #life .lifeWrap .lifeList .lifeCard .lifeCardTitle {
   display: flex;
