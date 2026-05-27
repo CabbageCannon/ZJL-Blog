@@ -6,6 +6,6 @@ export function formatDate(dateStr){
   if(Number.isNaN(d.getTime()))return date;
   date.year=d.getFullYear();
   date.month=d.getMonth()+1;
-  date.day=d.getDay();
+  date.day=d.getDate();
   return date;
 }

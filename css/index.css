@@ -530,6 +530,43 @@ body.is-resizing .musicCardActions {
   font-size: 14px;
   line-height: 1;
 }
+#life .lifeCardActions {
+  box-sizing: border-box;
+  width: 160px;
+  padding: 20px 10px;
+  position: absolute;
+  right: -160px;
+  top: 20px;
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  background: #fff;
+  border-radius: 20px;
+  transition: right 0.2s ease;
+}
+#life .lifeCardActions ul {
+  display: flex;
+  gap: 10px;
+}
+#life .lifeCardActions ul li {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  border-radius: 15px;
+  height: 42px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+#life .lifeCardActions ul li:hover {
+  color: #4f6df5;
+  background: rgba(79, 100, 245, 0.08);
+}
+#life .lifeCardActions.disabled {
+  opacity: 0.5;
+}
+#life .lifeCardActions.disabled li {
+  cursor: not-allowed;
+}
 #life .lifeWrap {
   box-sizing: border-box;
   width: min(1120px, 100%);
@@ -539,6 +576,7 @@ body.is-resizing .musicCardActions {
   border: 1px solid rgba(20, 24, 40, 0.08);
   background-color: #fff;
   border-radius: 20px;
+  background: #fffaf3;
 }
 #life .lifeWrap .lifeTitle {
   margin-bottom: 28px;
@@ -554,33 +592,42 @@ body.is-resizing .musicCardActions {
   font-size: 15px;
 }
 #life .lifeWrap .lifeList {
-  column-count: 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   column-gap: 10px;
+  align-items: start;
 }
-#life .lifeWrap .lifeList .lifeCard {
+#life .lifeWrap .lifeList .lifeColumn {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  gap: 10px;
+}
+#life .lifeWrap .lifeList .lifeColumn .lifeCard {
   border: 1px solid rgba(20, 24, 40, 0.08);
   border-radius: 20px;
   padding: 20px;
-  margin-bottom: 10px;
   display: flex;
+  background: #fffdf8;
+  box-sizing: border-box;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  break-inside: avoid;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
 }
-#life .lifeWrap .lifeList .lifeCard .lifeCardTitle {
+#life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardTitle {
   display: flex;
   align-items: center;
   padding: 0 20px;
   gap: 20px;
 }
-#life .lifeWrap .lifeList .lifeCard .lifeCardTitle .time {
+#life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardTitle .time {
   color: #7b8191;
   font-size: 14px;
   letter-spacing: 0.5px;
 }
-#life .lifeWrap .lifeList .lifeCard .lifeCardTitle .mood {
+#life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardTitle .mood {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -591,30 +638,33 @@ body.is-resizing .musicCardActions {
   font-size: 20px;
   box-shadow: 0 4px 12px rgba(20, 24, 40, 0.08);
 }
-#life .lifeWrap .lifeList .lifeCard .lifeCardContent {
+#life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  width: 100%;
 }
-#life .lifeWrap .lifeList .lifeCard .lifeCardContent .pic {
+#life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent .pic {
+  width: 100%;
   max-height: 400px;
   overflow: hidden;
   border-radius: 20px;
 }
-#life .lifeWrap .lifeList .lifeCard .lifeCardContent .pic img {
+#life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent .pic img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
-#life .lifeWrap .lifeList .lifeCard .lifeCardContent .text {
+#life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent .text {
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
   padding: 2px 4px;
 }
-#life .lifeWrap .lifeList .lifeCard .lifeCardContent .text h2 {
+#life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent .text h2 {
   width: 100%;
   color: #202436;
   font-size: 22px;
@@ -622,7 +672,7 @@ body.is-resizing .musicCardActions {
   line-height: 1.35;
   letter-spacing: 0.5px;
 }
-#life .lifeWrap .lifeList .lifeCard .lifeCardContent .text p {
+#life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent .text p {
   color: #666f85;
   font-size: 15px;
   line-height: 1.8;
@@ -632,11 +682,19 @@ body.is-resizing .musicCardActions {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-#life .lifeWrap .lifeList .lifeCard:hover {
+#life .lifeWrap .lifeList .lifeColumn .lifeCard:hover {
   transform: translateY(-6px);
   box-shadow: 0 22px 45px rgba(20, 24, 40, 0.18);
   border-color: rgba(80, 120, 255, 0.35);
   cursor: pointer;
+}
+#life .lifeWrap .lifeList .lifeColumn .lifeCard.edit-mode {
+  opacity: 0.62;
+}
+#life .lifeWrap .lifeList .lifeColumn .lifeCard.selected {
+  opacity: 1;
+  border-color: #4f6df5;
+  box-shadow: 0 0 0 4px rgba(79, 109, 245, 0.18), 0 18px 45px rgba(20, 24, 40, 0.18);
 }
 .addLifeModal {
   display: none;

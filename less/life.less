@@ -14,6 +14,7 @@
   position: relative;
   padding-top: 30px;
 
+  // 左侧导航栏
   .leftBanner {
     position: absolute;
     top: 20px;
@@ -72,6 +73,50 @@
     }
   }
 
+  // 编辑框
+  .lifeCardActions {
+    box-sizing: border-box;
+    width: 160px;
+    padding: 20px 10px;
+    position: absolute;
+    right: -160px;
+    top: 20px;
+    border: 1px solid @borderSoft;
+    background: #fff;
+    border-radius: 20px;
+    transition: right .2s ease;
+
+    ul {
+      display: flex;
+      gap: 10px;
+
+      li {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        color: @textMuted;
+        border-radius: 15px;
+        height: 42px;
+        cursor: pointer;
+        transition: background .2s ease, color .2s ease;
+
+        &:hover {
+          color: @primaryColor;
+          background: rgba(79, 100, 245, .08)
+        }
+      }
+    }
+
+    &.disabled {
+      opacity: .5;
+
+      li {
+        cursor: not-allowed;
+      }
+    }
+  }
+
   // 内容区
   .lifeWrap {
     box-sizing: border-box;
@@ -82,6 +127,7 @@
     border: 1px solid @borderSoft;
     background-color: #fff;
     border-radius: 20px;
+    background: #fffaf3;
 
     // 标题区
     .lifeTitle {
@@ -102,109 +148,123 @@
 
     // 日记列表区
     .lifeList {
-      column-count: 3;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       column-gap: 10px;
-      
-      .lifeCard {
-        border: 1px solid @borderSoft;
-        border-radius: 20px;
-        padding: 20px;
-        margin-bottom: 10px;
+      align-items: start;
+
+      .lifeColumn {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        // 避免一张卡片拆成上下两部分分到不同列里
-        break-inside: avoid;
-        transition: transform .2s ease, box-shadow .2s ease, border .2s ease;
+        box-sizing: border-box;
+        gap: 10px;
 
-        // 日记标题
-        .lifeCardTitle {
+        .lifeCard {
+          border: 1px solid @borderSoft;
+          border-radius: 20px;
+          padding: 20px;
           display: flex;
-          align-items: center;
-          padding: 0 20px;
-          gap: 20px;
-
-          .time {
-            color: #7b8191;
-            font-size: 14px;
-            letter-spacing: .5px;
-          }
-
-          .mood {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            width: 38px;
-            height: 38px;
-
-            border-radius: 50%;
-
-            background: rgba(255, 192, 203, .18);
-
-            font-size: 20px;
-
-            box-shadow:
-              0 4px 12px rgba(20, 24, 40, .08);
-          }
-        }
-
-        // 日记核心内容
-        .lifeCardContent {
-          display: flex;
+          background: #fffdf8;
+          box-sizing: border-box;
+          width: 100%;
           flex-direction: column;
           align-items: center;
           gap: 20px;
+          transition: transform .2s ease, box-shadow .2s ease, border .2s ease;
 
-          // 图片区域
-          .pic {
-            max-height: 400px;
-            overflow: hidden;
-            border-radius: 20px;
-
-            img {
-              width: 100%;
-              height: auto;
-              display: block;
-            }
-          }
-
-          // 卡片文字区域
-          .text {
+          // 日记标题
+          .lifeCardTitle {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
             align-items: center;
-            padding: 2px 4px;
+            padding: 0 20px;
+            gap: 20px;
 
-            h2 {
-              width: 100%;
-              color: #202436;
-              font-size: 22px;
-              font-weight: 700;
-              line-height: 1.35;
+            .time {
+              color: #7b8191;
+              font-size: 14px;
               letter-spacing: .5px;
             }
 
-            p {
-              color: #666f85;
-              font-size: 15px;
-              line-height: 1.8;
-              letter-spacing: .2px;
-              display: -webkit-box;
-              -webkit-line-clamp: 3;
-              -webkit-box-orient: vertical;
-              overflow: hidden;
+            .mood {
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+
+              width: 38px;
+              height: 38px;
+
+              border-radius: 50%;
+
+              background: rgba(255, 192, 203, .18);
+
+              font-size: 20px;
+
+              box-shadow:
+                0 4px 12px rgba(20, 24, 40, .08);
             }
           }
-        }
 
-        &:hover {
-          transform: translateY(-6px);
-          box-shadow: 0 22px 45px rgba(20, 24, 40, .18);
-          border-color: rgba(80, 120, 255, .35);
-          cursor: pointer;
+          // 日记核心内容
+          .lifeCardContent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+
+            // 图片区域
+            .pic {
+              width: 100%;
+              max-height: 400px;
+              overflow: hidden;
+              border-radius: 20px;
+
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+              }
+            }
+
+            // 卡片文字区域
+            .text {
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+              align-items: center;
+              padding: 2px 4px;
+
+              h2 {
+                width: 100%;
+                color: #202436;
+                font-size: 22px;
+                font-weight: 700;
+                line-height: 1.35;
+                letter-spacing: .5px;
+              }
+
+              p {
+                color: #666f85;
+                font-size: 15px;
+                line-height: 1.8;
+                letter-spacing: .2px;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+              }
+            }
+          }
+
+          &:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 22px 45px rgba(20, 24, 40, .18);
+            border-color: rgba(80, 120, 255, .35);
+            cursor: pointer;
+          }
+
+          .cardSelectState();
         }
       }
     }

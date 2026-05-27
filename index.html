@@ -84,6 +84,19 @@
           <span class="icon"></span>
           <span class="text">上传</span>
         </div>
+        <div class="but editDiary">
+          <span class="icon"></span>
+          <span class="text">编辑</span>
+        </div>
+      </div>
+
+      <!-- 编辑日记卡片选项框 -->
+      <div class="lifeCardActions">
+        <ul>
+          <li>
+            <div class="but deleteButton">删除</div>
+          </li>
+        </ul>
       </div>
 
       <!-- 内容 -->
@@ -97,26 +110,30 @@
         <!-- 日记列表 -->
         <div class="lifeList">
           <!-- 日记卡片 -->
-          <section class="lifeCard">
-            <!-- 卡片标题 -->
-            <section class="lifeCardTitle">
-              <div class="time">2026年5月25日</div>
-              <div class="mood">🥰</div>
-            </section>
+          <div class="lifeColumn">
+            <section class="lifeCard">
+              <!-- 卡片标题 -->
+              <section class="lifeCardTitle">
+                <div class="time">2026年5月25日</div>
+                <div class="mood">🥰</div>
+              </section>
 
-            <!-- 卡片内容 -->
-            <section class="lifeCardContent">
-              <div class="pic"><img src="./assets/upload/life/lifeCardTest.jpg" alt=""></div>
-              <section class="text">
-                <h2>今日工作</h2>
-                <p>
-                  今天主要完成了这个网站的生活板块的页面，以及完善了一下弹出框中遮罩层的逻辑，将
-                遮罩层设置为通用的遮罩层，在写生活板块日记区域的时候，发现将照片存在localStorage
-                完全不显示，毕竟它只能存5MB左右，于是开始考虑接入后端和数据库，后端使用express框
-                架，数据库使用SQLite，明天继续完善基本的后端逻辑</p>
+              <!-- 卡片内容 -->
+              <section class="lifeCardContent">
+                <div class="pic"><img src="./assets/upload/life/lifeCardTest.jpg" alt=""></div>
+                <section class="text">
+                  <h2>今日工作</h2>
+                  <p>
+                    今天主要完成了这个网站的生活板块的页面，以及完善了一下弹出框中遮罩层的逻辑，将
+                    遮罩层设置为通用的遮罩层，在写生活板块日记区域的时候，发现将照片存在localStorage
+                    完全不显示，毕竟它只能存5MB左右，于是开始考虑接入后端和数据库，后端使用express框
+                    架，数据库使用SQLite，明天继续完善基本的后端逻辑</p>
+                </section>
               </section>
             </section>
-          </section>
+          </div>
+          <div class="lifeColumn"></div>
+          <div class="lifeColumn"></div>
         </div>
       </div>
     </div>
