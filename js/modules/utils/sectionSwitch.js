@@ -11,4 +11,11 @@ export function showSection(sectionId) {
 
   // 更新导航栏中具体按钮的状态
   navLinks.forEach(link => link.classList.toggle("is-active", link.getAttribute("name") === sectionId));
+
+  // 页面切换完成后，发出一个通知
+  document.dispatchEvent(new CustomEvent("section:show",{
+    detail:{
+      sectionId
+    }
+  }));
 }

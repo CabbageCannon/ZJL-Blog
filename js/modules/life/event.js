@@ -6,6 +6,7 @@ import { lifeState } from "./state.js";
 export function initEvents() {
   addLifeModal();
   commitLifeDiary();
+  listenSectionShow();
 }
 
 // 点击上传按钮弹出日记上传框
@@ -51,7 +52,7 @@ async function commitLifeDiary() {
 
     try {
       const createdDiary = await createDiary(cardInfo);
-      lifeState.diaryList.unshift(createdDiary);
+      lifeState.diaryList.push(createdDiary);
       renderLifeList(lifeState.diaryList);
 
       closeModalMask();
@@ -61,4 +62,17 @@ async function commitLifeDiary() {
     }
   }
   commitLifeButton.addEventListener('click', commitFunc);
+}
+
+// 监听页面切换
+function listenSectionShow(){
+  let hasRewndered=false;
+  document.addEventListener("section:show",(ev)=>{
+    if(hasRewndered)return;
+    // 如果不是切换到自己的页面则直接返回
+    if(ev.detail.sectionId!=="life")return;
+
+    renderLifeList(lifeState.diaryList);
+    hasRewndered=true;
+  })
 }
