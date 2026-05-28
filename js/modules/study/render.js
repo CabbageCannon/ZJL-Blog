@@ -1,25 +1,46 @@
 // 渲染学习笔记
 export function renderStudyNotes(studyState) {
   const noteList = document.querySelector("#study .studyNotesList");
-
-  const currentList = studyState.activeCategory === "all"
-    ? studyState.noteList
-    : studyState.noteList.filter(noteInfo=>noteInfo.category===studyState.activeCategory);
+  const notesCount = document.querySelector("#study .studyNotesHeader .studyNotesCount");
 
   if (!noteList) return;
 
+  const currentList = getCurrentList(studyState);
+
   noteList.innerHTML = "";
 
+  if (notesCount) {
+    notesCount.textContent = `${currentList.length} 条`;
+  }
 
+  // 出错，展示错误信息
   if (studyState.errorMessage) {
     noteList.appendChild(createMessage(studyState.errorMessage));
-  } else if (currentList.length === 0) {
-    noteList.appendChild(createMessage("还没有学习笔记，先记录第一条吧"));
-  } else {
-    currentList.forEach((nodeInfo) => {
-      noteList.appendChild(createStudyNote(nodeInfo));
-    })
+    return;
   }
+
+  // 笔记列表为空
+  if (currentList.length === 0) {
+    const text = studyState.activeCategory === "all"
+      ? "还没有学习笔记，先记录第一条吧"
+      : "当前分类还没有学习笔记";
+
+    noteList.appendChild(createMessage(text));
+    return;
+  }
+
+  // 渲染笔记卡片区域
+  currentList.forEach((nodeInfo) => {
+    noteList.appendChild(createStudyNote(nodeInfo));
+  })
+
+}
+
+// 获取当前需要展示的笔记数据列表
+function getCurrentList(studyState) {
+  return studyState.activeCategory === "all"
+    ? studyState.noteList
+    : studyState.noteList.filter(noteInfo => noteInfo.category === studyState.activeCategory);
 }
 
 // 创建学习笔记卡片
@@ -32,6 +53,8 @@ function createStudyNote(note) {
   const summary = document.createElement("p");
 
   card.className = "studyNote";
+  card.dataset.id=note.id;
+  
   meta.className = "studyNoteMeta";
   category.className = "studyNoteCategory";
   date.className = "studyNoteDate";
