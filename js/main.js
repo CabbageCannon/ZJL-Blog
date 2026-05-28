@@ -2,6 +2,8 @@ import { initNav } from "./modules/nav/index.js";
 import { initHome } from "./modules/home/index.js";
 import { initLife } from "./modules/life/index.js";
 import { initMusic } from "./modules/music/index.js";
+import { initStudy } from "./modules/study/index.js";
+
 
 // 初始化首页板块
 initHome();
@@ -9,5 +11,7 @@ initHome();
 initMusic();
 // 初始化生活板块
 await initLife();
+// 初始化学习板块
+await initStudy();
 // 初始化导航栏
 initNav();

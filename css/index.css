@@ -880,7 +880,7 @@ body.is-resizing .musicCardActions {
 #study .studyWrap .studyHeader .eyebrow {
   color: #4f6df5;
   font-size: 13px;
-  font-weight: 700px;
+  font-weight: 700;
 }
 #study .studyWrap .studyHeader h2 {
   margin: 8px 0 10px;
@@ -890,7 +890,8 @@ body.is-resizing .musicCardActions {
 }
 #study .studyWrap .studyHeader p {
   color: #6b7280;
-  font-size: 28px;
+  font-size: 15px;
+  line-height: 1.7;
   font-weight: 700;
 }
 #study .studyWrap .studyCards {
@@ -920,6 +921,12 @@ body.is-resizing .musicCardActions {
   transform: translateY(-4px);
   border-color: rgba(79, 109, 245, 0.32);
   box-shadow: 0 16px 36px rgba(79, 109, 245, 0.14);
+  cursor: pointer;
+}
+#study .studyWrap .studyCards .studyCard.active {
+  border-color: rgba(79, 109, 245, 0.5);
+  background: rgba(79, 109, 245, 0.06);
+  box-shadow: 0 16px 36px rgba(79, 109, 245, 0.14);
 }
 #study .studyWrap .studyPlan h3 {
   margin-bottom: 12px;
@@ -934,4 +941,90 @@ body.is-resizing .musicCardActions {
   color: #6b7280;
   font-size: 15px;
   line-height: 1.7;
+}
+#study .studyWrap .studyNotes {
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  box-shadow: 0 10px 30px rgba(20, 24, 40, 0.08);
+  padding: 24px;
+}
+#study .studyWrap .studyNotes h3 {
+  margin-bottom: 16px;
+  color: #202436;
+  font-size: 22px;
+}
+#study .studyWrap .studyNotes .studyNotesList {
+  display: grid;
+  gap: 14px;
+}
+#study .studyWrap .studyNotes .studyNotesList .studyNote {
+  padding: 18px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(20, 24, 40, 0.08);
+  background: #fbfcff;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+#study .studyWrap .studyNotes .studyNotesList .studyNote .studyNoteMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+#study .studyWrap .studyNotes .studyNotesList .studyNote .studyNoteMeta .studyNoteCategory {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  color: #4f6df5;
+  background: rgba(79, 109, 245, 0.1);
+  font-size: 13px;
+  font-weight: 700;
+}
+#study .studyWrap .studyNotes .studyNotesList .studyNote .studyNoteMeta .studyNoteDate {
+  color: #6b7280;
+  font-size: 13px;
+}
+#study .studyWrap .studyNotes .studyNotesList .studyNote h4 {
+  margin-bottom: 8px;
+  color: #202436;
+  font-size: 18px;
+  line-height: 1.4;
+}
+#study .studyWrap .studyNotes .studyNotesList .studyNote p {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.7;
+}
+#study .studyWrap .studyNotes .studyNotesList .studyNote:hover {
+  transform: translateY(-3px);
+  border-color: rgba(79, 109, 245, 0.32);
+  box-shadow: 0 14px 32px rgba(79, 109, 245, 0.12);
+}
+#study .studyWrap .studyNotes .studyNotesList .studyMessage {
+  padding: 32px 0;
+  color: #6b7280;
+  font-size: 15px;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  #study .studyWrap {
+    padding: 24px 16px 32px;
+  }
+  #study .studyWrap .studyCards {
+    grid-template-columns: 1fr;
+  }
+  #study .studyWrap .studyNotes {
+    padding: 20px;
+  }
+  #study .studyWrap .studyNotes .studyNote {
+    padding: 16px;
+  }
+  #study .studyWrap .studyNotes .studyNote .studyNoteMeta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
 }

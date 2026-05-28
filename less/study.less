@@ -30,7 +30,7 @@
       .eyebrow {
         color: @primaryColor;
         font-size: 13px;
-        font-weight: 700px;
+        font-weight: 700;
       }
 
       h2 {
@@ -42,7 +42,8 @@
 
       p {
         color: @textMuted;
-        font-size: 28px;
+        font-size: 15px;
+        line-height: 1.7;
         font-weight: 700;
       }
     }
@@ -77,6 +78,13 @@
           transform: translateY(-4px);
           border-color: rgba(79, 109, 245, .32);
           box-shadow: 0 16px 36px rgba(79, 109, 245, .14);
+          cursor: pointer;
+        }
+
+        &.active {
+          border-color: rgba(79, 109, 245, .5);
+          background: rgba(79, 109, 245, .06);
+          box-shadow: 0 16px 36px rgba(79, 109, 245, .14);
         }
       }
     }
@@ -100,5 +108,113 @@
         line-height: 1.7;
       }
     }
+
+    // 笔记列表
+    .studyNotes {
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid @borderSoft;
+      box-shadow: 0 10px 30px rgba(20, 24, 40, .08);
+      padding: 24px;
+
+      h3 {
+        margin-bottom: 16px;
+        color: @textMain;
+        font-size: 22px;
+      }
+
+      .studyNotesList {
+        display: grid;
+        gap: 14px;
+
+        .studyNote {
+          padding: 18px 20px;
+          border-radius: 12px;
+          border: 1px solid @borderSoft;
+          background: #fbfcff;
+          transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+
+          .studyNoteMeta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+
+            .studyNoteCategory {
+              display: inline-flex;
+              align-items: center;
+              height: 26px;
+              padding: 0 10px;
+              border-radius: 999px;
+              color: @primaryColor;
+              background: rgba(79, 109, 245, .1);
+              font-size: 13px;
+              font-weight: 700;
+            }
+
+            .studyNoteDate {
+              color: @textMuted;
+              font-size: 13px;
+            }
+          }
+
+          h4 {
+            margin-bottom: 8px;
+            color: @textMain;
+            font-size: 18px;
+            line-height: 1.4;
+          }
+
+          p {
+            color: @textMuted;
+            font-size: 14px;
+            line-height: 1.7;
+          }
+
+          &:hover {
+            transform: translateY(-3px);
+            border-color: rgba(79, 109, 245, .32);
+            box-shadow: 0 14px 32px rgba(79, 109, 245, .12);
+          }
+        }
+
+        .studyMessage {
+          padding: 32px 0;
+          color: @textMuted;
+          font-size: 15px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+// 移动端布局
+@media(max-width:768px) {
+  #study {
+    .studyWrap {
+      padding: 24px 16px 32px;
+
+      .studyCards {
+        grid-template-columns: 1fr;
+      }
+
+      .studyNotes {
+        padding: 20px;
+
+        .studyNote {
+          padding: 16px;
+
+          .studyNoteMeta {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 8px;
+          }
+        }
+      }
+    }
+
+
   }
 }
