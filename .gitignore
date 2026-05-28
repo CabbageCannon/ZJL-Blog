@@ -41,6 +41,7 @@ build/
 # =========================
 .cache/
 .temp/
+.playwright-cli/
 
 # =========================
 # runtime data

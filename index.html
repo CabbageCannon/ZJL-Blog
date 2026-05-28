@@ -103,8 +103,8 @@
       <div class="lifeWrap">
         <!-- 标题 -->
         <section class="lifeTitle">
-          <h2>我的生活分享</h1>
-            <p>分享最近的生活</p>
+          <h2>我的生活分享</h2>
+          <p>分享最近的生活</p>
         </section>
 
         <!-- 日记列表 -->
@@ -190,22 +190,6 @@
           <p>整理前端学习过程中的知识点、练习项目和阶段目标。</p>
         </section>
 
-        <!-- 学习卡片 -->
-        <section class="studyCards">
-          <article class="studyCard">
-            <h3>HTML / CSS</h3>
-            <p>整理页面结构、布局方式、响应式适配和 Less 样式拆分。</p>
-          </article>
-          <article class="studyCard">
-            <h3>JavaScript</h3>
-            <p>记录 DOM 操作、事件绑定、模块化、数据渲染和本地存储。</p>
-          </article>
-          <article class="studyCard">
-            <h3>后端基础</h3>
-            <p>学习 Express、接口设计、文件上传和 SQLite 数据存储。</p>
-          </article>
-        </section>
-
         <!-- 学习计划 -->
         <div class="studyPlan">
           <h3>近期学习计划</h3>
@@ -215,6 +199,42 @@
             <li>整理音乐模块中的数据渲染、编辑模式和本地存储逻辑。</li>
           </ul>
         </div>
+
+        <!-- 学习卡片 -->
+        <section class="studyCards">
+          <article class="studyCard active" data-category="all">
+            <h3>全部</h3>
+            <p>查看所有学习笔记</p>
+          </article>
+          <article class="studyCard" data-category="CSS">
+            <h3>HTML / CSS</h3>
+            <p>整理页面结构、布局方式、响应式适配和 Less 样式拆分。</p>
+          </article>
+          <article class="studyCard" data-category="JavaScript">
+            <h3>JavaScript</h3>
+            <p>记录 DOM 操作、事件绑定、模块化、数据渲染和本地存储。</p>
+          </article>
+          <article class="studyCard" data-category="后端基础">
+            <h3>后端基础</h3>
+            <p>学习 Express、接口设计、文件上传和 SQLite 数据存储。</p>
+          </article>
+        </section>
+
+        <!-- 笔记列表容器 -->
+        <section class="studyNotes">
+          <h3>学习笔记</h3>
+          <div class="studyNotesList">
+            <!-- 学习笔记结构 -->
+            <!-- <article class="studyNote">
+              <div class="studyNoteMeta">
+                <span class="studyNoteCategory">未分类</span>
+                <span class="studyNoteDate"></span>
+              </div>
+              <h4>未命名笔记</h4>
+              <p>暂无摘要</p>
+            </article> -->
+          </div>
+        </section>
       </div>
 
     </div>
