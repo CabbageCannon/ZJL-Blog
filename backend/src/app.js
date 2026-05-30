@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const diaryRoutes = require("./routes/diaryRoutes");
+const authRoutes=require("./routes/authRoutes");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
@@ -16,7 +17,10 @@ app.use(express.json());
 
 // 把../uploads文件夹下的文件暴露给浏览器，前端访问前缀需要填/uploads
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
-// 把路由器挂载到/api/life/diaries路径下
+
+// 把登录注册路由器挂载到/api/auth路径下
+app.use("/api/auth",authRoutes);
+// 把生活区日记路由器挂载到/api/life/diaries路径下
 app.use("/api/life/diaries", diaryRoutes);
 
 app.use(errorHandler);

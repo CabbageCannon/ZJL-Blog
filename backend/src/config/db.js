@@ -25,6 +25,14 @@ db.serialize(() => {
       created_at TEXT NOT NULL
     )
     `);
+  db.run(`
+    CREATE TABLE IF NOT EXISTS users(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      username TEXT NOT NULL UNIQUE,
+      inikname TEXT,
+      password_hash TEXT NOT NULL,
+      created_at TEXT NOT NULL
+      )`)
 });
 
 // 将该数据库作为接口暴露出来
