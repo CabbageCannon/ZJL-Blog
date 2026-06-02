@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const JWT_SELECT = process.env.JWT_SELECT || "zjl-blog-dev-secret";
 
 function authRequired(req, res, next) {
-  const authHeader = req.header.authorization || "";
+  const authHeader = req.headers.authorization || "";
   const token = authHeader.startsWith("Bearer ")
     ? authHeader.slice(7)
     : "";
@@ -15,6 +15,7 @@ function authRequired(req, res, next) {
 
   try{
     req.user=jwt.verify(token,JWT_SELECT);
+    console.log(req)
     next();
   }catch(err){
     res.status(401).json({message:"登录已过期"});

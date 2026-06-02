@@ -20,25 +20,25 @@ function findUserByUsername(username) {
 function createUser(userInfo) {
   const { username, nickname, passwordHash, createdAt } = userInfo;
 
-  return new Promise((resolve,reject)=>{
+  return new Promise((resolve, reject) => {
     db.run(`
       INSERT INTO users (username,nickname,password_hash,created_at)
-      VALUE(?,?,?,?)`),
-      [username,nickname,passwordHash,createdAt],
-      function(err){
-        if(err) return reject(err);
+      VALUES(?,?,?,?)`,
+      [username, nickname, passwordHash, createdAt],
+      function (err) {
+        if (err) return reject(err);
 
         resolve({
-          id:this.lastID,
+          id: this.lastID,
           username,
           nickname,
           createdAt
         })
-      }
+      });
   })
 }
 
-module.exports={
+module.exports = {
   findUserByUsername,
   createUser
 }

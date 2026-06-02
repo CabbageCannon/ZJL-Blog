@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const jwt = require("../middleware/authMiddleware");
+const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 const { JWT_SELECT } = require("../middleware/authMiddleware");
 
@@ -46,29 +46,29 @@ async function login(req, res, next) {
   try {
     const { username, password } = req.body || {};
 
-    if(!username || !password){
-      return res.status(401).json({message:"用户名和密码不能为空"});
+    if (!username || !password) {
+      return res.status(401).json({ message: "用户名和密码不能为空" });
     }
 
-    const user=await userModel.findUserByUsername(username);
+    const user = await userModel.findUserByUsername(username);
 
-    if(!user){
-      return res.status(401).json({message:"用户名或密码错误"});
+    if (!user) {
+      return res.status(401).json({ message: "用户名或密码错误" });
     }
 
-    const isMatch=await bcrypt.compare(password,user.passwordHash);
-    if(!isMatch){
-      return res.status(401).json({message:"用户名或密码错误"});
+    const isMatch = await bcrypt.compare(password, user.passwordHash);
+    if (!isMatch) {
+      return res.status(401).json({ message: "用户名或密码错误" });
     }
 
     res.json({
-      user:{
-        id:user.id,
-        username:user.username,
-        nickname:user.nickname,
-        createdAt:user.createdAt
+      user: {
+        id: user.id,
+        username: user.username,
+        nickname: user.nickname,
+        createdAt: user.createdAt
       },
-      token:createToken(user)
+      token: createToken(user)
     })
 
   } catch (error) {
@@ -93,13 +93,13 @@ function createToken(user) {
   )
 }
 
-function getMe(req,res){
+function getMe(req, res) {
   res.json({
-    user:req.user
+    user: req.user
   })
 }
 
-module.exports={
+module.exports = {
   register,
   login,
   getMe
