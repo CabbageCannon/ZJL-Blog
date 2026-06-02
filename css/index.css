@@ -2,7 +2,52 @@
   background: linear-gradient(45deg, rgba(255, 255, 255, 0.8) 0%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.8) 100%);
   box-shadow: inset 2px -2px 1px -1px rgba(255, 255, 255, 0.9), inset -2px 2px 1px -1px rgba(255, 255, 255, 0.9), inset 6px -6px 1px -6px rgba(255, 255, 255, 0.55), inset -6px 6px 1px -6px rgba(255, 255, 255, 0.55), inset 0 0 2px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 9999px;
-  border: 1px double rgba(51, 51, 51, 0.08);
+  border: 1px double oklch(28% 0.035 262 / 0.1);
+}
+.iconSvg {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  color: currentColor;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.iconSvg--sm {
+  font-size: 14px;
+}
+.iconSvg--md {
+  font-size: 18px;
+}
+.iconSvg--lg {
+  font-size: 22px;
+}
+.iconTextButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.iconOnlyButton {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+}
+.iconDanger {
+  color: oklch(58% 0.19 25);
+}
+.iconMuted {
+  color: oklch(47% 0.03 262);
+}
+.iconPrimary {
+  color: oklch(58% 0.18 262);
 }
 html,
 body {
@@ -23,11 +68,11 @@ body {
   background: linear-gradient(45deg, rgba(255, 255, 255, 0.8) 0%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.8) 100%);
   box-shadow: inset 2px -2px 1px -1px rgba(255, 255, 255, 0.9), inset -2px 2px 1px -1px rgba(255, 255, 255, 0.9), inset 6px -6px 1px -6px rgba(255, 255, 255, 0.55), inset -6px 6px 1px -6px rgba(255, 255, 255, 0.55), inset 0 0 2px rgba(0, 0, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 9999px;
-  border: 1px double rgba(51, 51, 51, 0.08);
+  border: 1px double oklch(28% 0.035 262 / 0.1);
 }
 .banner .logo {
   flex: none;
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-weight: 700;
   letter-spacing: 0;
 }
@@ -45,28 +90,29 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   height: 40px;
   padding: 0 16px;
   border-radius: 999px;
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 16px;
   font-weight: 600;
   transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 .banner .nav ul a:hover {
-  color: #4f6df5;
-  background-color: rgba(79, 100, 245, 0.08);
+  color: oklch(58% 0.18 262);
+  background-color: oklch(96% 0.025 262);
 }
 .banner .nav ul a.is-active {
-  color: #4f6df5;
-  background: rgba(79, 100, 245, 0.12);
-  box-shadow: 0 0 0 1px rgba(79, 109, 245, 0.2) inset;
+  color: oklch(58% 0.18 262);
+  background: oklch(93% 0.045 262);
+  box-shadow: 0 0 0 1px oklch(70% 0.16 262 / 0.2) inset;
 }
 .banner .user {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 16px;
 }
 .banner .user img {
@@ -78,6 +124,22 @@ body {
 .banner .user .name {
   line-height: 1;
   font-weight: 600;
+}
+.banner .user .authLoginButton,
+.banner .user .authLogoutButton {
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
+  border-radius: 20px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.banner .user .authLoginButton:hover,
+.banner .user .authLogoutButton:hover {
+  transform: translateY(-2px);
+  background-color: oklch(96% 0.025 262);
 }
 .indexContent {
   box-sizing: border-box;
@@ -137,11 +199,112 @@ body {
     grid-template-columns: 1fr;
   }
 }
+.authModal {
+  box-sizing: border-box;
+  display: none;
+  padding: 20px 20px;
+  width: min(560px, calc(100% - 32px));
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 9999;
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
+  background: #fff;
+  border-radius: 20px;
+}
+.authModal .title {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.authModal .title h2 {
+  font-weight: 700;
+  color: oklch(22% 0.035 262);
+}
+.authModal .title .closeAuthModalButton {
+  color: oklch(47% 0.03 262);
+  border-radius: 999px;
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
+  background-color: oklch(95% 0.014 262);
+}
+.authModal .title .closeAuthModalButton.iconOnlyButton {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+}
+.authModal .title .closeAuthModalButton:hover {
+  background-color: oklch(92% 0.025 262);
+  cursor: pointer;
+}
+.authModal .content {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.authModal .content .input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.authModal .content .input.nicknameInput {
+  display: none;
+}
+.authModal .content .input .inputTitle {
+  display: block;
+  font-weight: 500;
+}
+.authModal .content .input input {
+  box-sizing: border-box;
+  border: 1px solid oklch(84% 0.035 262);
+  border-radius: 10px;
+  padding: 0 12px;
+  width: 100%;
+  height: 42px;
+  outline: none;
+}
+.authModal .actions {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.authModal .actions .commitAuthButton {
+  height: 42px;
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
+  background-color: oklch(95% 0.014 262);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.authModal .actions .commitAuthButton:hover {
+  background-color: oklch(92% 0.025 262);
+}
+.authModal .actions .switchAuthModalButton {
+  border: none;
+  color: oklch(58% 0.18 262);
+  background-color: #fff;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+.authModal .actions .switchAuthModalButton:hover {
+  color: oklch(50% 0.2 262);
+}
 #music .musicWrap {
   display: flex;
   height: auto;
   width: 100%;
-  background-color: #f6f7fb;
+  background-color: oklch(97% 0.012 262);
 }
 #music .musicWrap .leftBanner {
   box-sizing: border-box;
@@ -149,7 +312,7 @@ body {
   height: 100%;
   width: 120px;
   padding: 32px 16px;
-  border-right: 1px solid rgba(20, 24, 40, 0.08);
+  border-right: 1px solid oklch(28% 0.035 262 / 0.09);
   font-size: 16px;
   display: flex;
   flex-direction: column;
@@ -165,25 +328,21 @@ body {
   height: 76px;
   margin-bottom: 16px;
   border-radius: 14px;
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 #music .musicWrap .leftBanner .but:hover {
-  color: #4f6df5;
-  background: rgba(79, 109, 245, 0.08);
+  color: oklch(58% 0.18 262);
+  background: oklch(96% 0.025 262);
   transform: translateY(-2px);
 }
 #music .musicWrap .leftBanner .but.active {
-  color: #4f6df5;
-  background: rgba(79, 109, 245, 0.12);
+  color: oklch(58% 0.18 262);
+  background: oklch(93% 0.045 262);
 }
 #music .musicWrap .leftBanner .but .icon {
-  display: block;
-  width: 24px;
-  height: 24px;
-  background: url("../imgs/icons/icon1.webp") no-repeat center;
-  background-size: contain;
+  font-size: 24px;
 }
 #music .musicWrap .leftBanner .but .text {
   font-size: 14px;
@@ -199,12 +358,12 @@ body {
 }
 #music .musicWrap .musicMain .musicHeader h2 {
   margin-bottom: 8px;
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 28px;
   font-weight: 700;
 }
 #music .musicWrap .musicMain .musicHeader p {
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 15px;
 }
 #music .musicWrap .musicMain .cards {
@@ -221,15 +380,15 @@ body {
   height: 300px;
   border-radius: 10px;
   background-color: #fff;
-  border: 1px solid rgba(20, 24, 40, 0.08);
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
   cursor: pointer;
-  box-shadow: 0 14px 35px rgba(20, 24, 40, 0.12);
+  box-shadow: 0 14px 30px oklch(22% 0.035 262 / 0.1);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 #music .musicWrap .musicMain .cards .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 22px 45px rgba(20, 24, 40, 0.18);
-  border-color: rgba(80, 120, 255, 0.35);
+  box-shadow: 0 20px 38px oklch(22% 0.035 262 / 0.14);
+  border-color: oklch(78% 0.09 262);
 }
 #music .musicWrap .musicMain .cards .card .cardCover {
   height: 210px;
@@ -249,36 +408,45 @@ body {
 #music .musicWrap .musicMain .cards .card .cardInfo .cardName {
   flex: 1;
   overflow: hidden;
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 18px;
   font-weight: 700;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 #music .musicWrap .musicMain .cards .card .cardInfo .cardLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   flex: none;
   padding: 8px 12px;
   border-radius: 999px;
   color: #fff;
   font-size: 14px;
-  background: #4f6df5;
+  background: oklch(58% 0.18 262);
   transition: background 0.2s ease;
 }
 #music .musicWrap .musicMain .cards .card .cardInfo .cardLink:hover {
-  background: #3652d9;
+  background: oklch(50% 0.2 262);
 }
 #music .musicWrap .musicMain .cards .card.edit-mode {
   opacity: 0.62;
 }
 #music .musicWrap .musicMain .cards .card.selected {
   opacity: 1;
-  border-color: #4f6df5;
-  box-shadow: 0 0 0 4px rgba(79, 109, 245, 0.18), 0 18px 45px rgba(20, 24, 40, 0.18);
+  border-color: oklch(58% 0.18 262);
+  box-shadow: 0 0 0 4px oklch(70% 0.16 262 / 0.24), 0 18px 45px oklch(22% 0.035 262 / 0.16);
 }
 #music .musicWrap .musicMain .cards .musicMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   width: 100%;
   padding: 72px 0;
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 18px;
   text-align: center;
 }
@@ -291,7 +459,7 @@ body {
   padding: 12px;
   border-radius: 16px 0 0 16px;
   background: #fff;
-  box-shadow: 0 16px 40px rgba(20, 24, 40, 0.14);
+  box-shadow: 0 16px 36px oklch(22% 0.035 262 / 0.12);
   transition: right 0.3s ease;
 }
 .musicCardActions.disabled {
@@ -307,17 +475,21 @@ body {
   border-bottom: 0;
 }
 .musicCardActions ul li div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   height: 42px;
   line-height: 42px;
   border-radius: 10px;
-  color: #202436;
+  color: oklch(22% 0.035 262);
   text-align: center;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
 .musicCardActions ul li div:hover {
-  color: #4f6df5;
-  background: rgba(79, 100, 245, 0.08);
+  color: oklch(58% 0.18 262);
+  background: oklch(96% 0.025 262);
 }
 .addMusicModal {
   display: none;
@@ -331,7 +503,7 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 18px;
-  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
+  box-shadow: 0 24px 70px oklch(18% 0.035 262 / 0.25);
 }
 .addMusicModal .title {
   display: flex;
@@ -341,7 +513,7 @@ body {
   margin-bottom: 24px;
 }
 .addMusicModal .title h2 {
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 22px;
   font-weight: 700;
 }
@@ -349,12 +521,17 @@ body {
   padding: 8px 12px;
   border: 0;
   border-radius: 999px;
-  color: #6b7280;
-  background: #f1f3f8;
+  color: oklch(47% 0.03 262);
+  background: oklch(95% 0.014 262);
   cursor: pointer;
 }
+.addMusicModal .title button.iconOnlyButton {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+}
 .addMusicModal .title button:hover {
-  background: #e6eaf3;
+  background: oklch(92% 0.025 262);
 }
 .addMusicModal .content .input {
   margin-bottom: 18px;
@@ -362,7 +539,7 @@ body {
 .addMusicModal .content .input span {
   display: block;
   margin-bottom: 8px;
-  color: #4b5563;
+  color: oklch(35% 0.035 262);
   font-size: 14px;
 }
 .addMusicModal .content .input input {
@@ -370,14 +547,14 @@ body {
   width: 100%;
   height: 42px;
   padding: 0 12px;
-  border: 1px solid #d8deea;
+  border: 1px solid oklch(84% 0.035 262);
   border-radius: 10px;
   background: #fff;
   outline: none;
 }
 .addMusicModal .content .input input:focus {
-  border-color: #4f6df5;
-  box-shadow: 0 0 0 3px rgba(79, 109, 245, 0.14);
+  border-color: oklch(58% 0.18 262);
+  box-shadow: 0 0 0 3px oklch(70% 0.16 262 / 0.24);
 }
 .addMusicModal .commitButton {
   display: block;
@@ -388,11 +565,11 @@ body {
   border-radius: 12px;
   color: #fff;
   font-size: 16px;
-  background: #4f6df5;
+  background: oklch(58% 0.18 262);
   cursor: pointer;
 }
 .addMusicModal .commitButton:hover {
-  background: #3652d9;
+  background: oklch(50% 0.2 262);
 }
 @media (max-width: 768px) {
   #music .musicWrap {
@@ -403,7 +580,7 @@ body {
     height: auto;
     padding: 12px 16px;
     border-right: 0;
-    border-bottom: 1px solid rgba(20, 24, 40, 0.08);
+    border-bottom: 1px solid oklch(28% 0.035 262 / 0.09);
     flex-direction: row;
     justify-content: center;
     gap: 12px;
@@ -466,11 +643,11 @@ body.is-resizing .musicCardActions {
   position: fixed;
   inset: 0;
   z-index: 9998;
-  background: rgba(15, 23, 42, 0.45);
+  background: oklch(20% 0.035 262 / 0.45);
   backdrop-filter: blur(4px);
 }
 #life {
-  background: radial-gradient(circle at 12% 10%, rgba(79, 109, 245, 0.12), transparent 35%), radial-gradient(circle at 88% 90%, rgba(59, 130, 246, 0.1), transparent 35%), #f6f7fb;
+  background: radial-gradient(circle at 12% 10%, oklch(70% 0.16 262 / 0.12), transparent 35%), radial-gradient(circle at 88% 90%, oklch(72% 0.14 235 / 0.1), transparent 35%), oklch(97% 0.012 262);
   overflow-y: auto;
   display: none;
   position: relative;
@@ -485,7 +662,7 @@ body.is-resizing .musicCardActions {
   height: auto;
   width: 120px;
   padding: 32px 16px;
-  border: 1px solid rgba(20, 24, 40, 0.08);
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
   border-radius: 0 20px 20px 0;
   border-left: none;
   font-size: 16px;
@@ -503,25 +680,21 @@ body.is-resizing .musicCardActions {
   width: 88px;
   height: 76px;
   border-radius: 14px;
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 #life .leftBanner .but:hover {
-  color: #4f6df5;
-  background: rgba(79, 109, 245, 0.08);
+  color: oklch(58% 0.18 262);
+  background: oklch(96% 0.025 262);
   transform: translateY(-2px);
 }
 #life .leftBanner .but.active {
-  color: #4f6df5;
-  background: rgba(79, 109, 245, 0.12);
+  color: oklch(58% 0.18 262);
+  background: oklch(93% 0.045 262);
 }
 #life .leftBanner .but .icon {
-  display: block;
-  width: 24px;
-  height: 24px;
-  background: url("../imgs/icons/icon1.webp") no-repeat center;
-  background-size: contain;
+  font-size: 24px;
 }
 #life .leftBanner .but .text {
   font-size: 14px;
@@ -534,7 +707,7 @@ body.is-resizing .musicCardActions {
   position: absolute;
   right: -160px;
   top: 20px;
-  border: 1px solid rgba(20, 24, 40, 0.08);
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
   background: #fff;
   border-radius: 20px;
   transition: right 0.2s ease;
@@ -548,15 +721,15 @@ body.is-resizing .musicCardActions {
   width: 100%;
   align-items: center;
   justify-content: center;
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   border-radius: 15px;
   height: 42px;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
 #life .lifeCardActions ul li:hover {
-  color: #4f6df5;
-  background: rgba(79, 100, 245, 0.08);
+  color: oklch(58% 0.18 262);
+  background: oklch(96% 0.025 262);
 }
 #life .lifeCardActions.disabled {
   opacity: 0.5;
@@ -570,22 +743,22 @@ body.is-resizing .musicCardActions {
   margin: 0 auto;
   padding: 32px 40px 40px;
   display: block;
-  border: 1px solid rgba(20, 24, 40, 0.08);
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
   background-color: #fff;
   border-radius: 20px;
-  background: #fffaf3;
+  background: oklch(98% 0.018 72);
 }
 #life .lifeWrap .lifeTitle {
   margin-bottom: 28px;
 }
 #life .lifeWrap .lifeTitle h2 {
   margin-bottom: 8px;
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 28px;
   font-weight: 700;
 }
 #life .lifeWrap .lifeTitle p {
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 15px;
 }
 #life .lifeWrap .lifeList {
@@ -601,11 +774,11 @@ body.is-resizing .musicCardActions {
   gap: 10px;
 }
 #life .lifeWrap .lifeList .lifeColumn .lifeCard {
-  border: 1px solid rgba(20, 24, 40, 0.08);
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
   border-radius: 20px;
   padding: 20px;
   display: flex;
-  background: #fffdf8;
+  background: oklch(99% 0.012 72);
   box-sizing: border-box;
   width: 100%;
   flex-direction: column;
@@ -620,7 +793,7 @@ body.is-resizing .musicCardActions {
   gap: 20px;
 }
 #life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardTitle .time {
-  color: #7b8191;
+  color: oklch(58% 0.025 262);
   font-size: 14px;
   letter-spacing: 0.5px;
 }
@@ -631,9 +804,9 @@ body.is-resizing .musicCardActions {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: rgba(255, 192, 203, 0.18);
+  background: oklch(94% 0.045 28);
   font-size: 20px;
-  box-shadow: 0 4px 12px rgba(20, 24, 40, 0.08);
+  box-shadow: 0 10px 24px oklch(22% 0.035 262 / 0.08);
 }
 #life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent {
   display: flex;
@@ -663,14 +836,14 @@ body.is-resizing .musicCardActions {
 }
 #life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent .text h2 {
   width: 100%;
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 22px;
   font-weight: 700;
   line-height: 1.35;
   letter-spacing: 0.5px;
 }
 #life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent .text p {
-  color: #666f85;
+  color: oklch(47% 0.03 262);
   font-size: 15px;
   line-height: 1.8;
   letter-spacing: 0.2px;
@@ -681,8 +854,8 @@ body.is-resizing .musicCardActions {
 }
 #life .lifeWrap .lifeList .lifeColumn .lifeCard:hover {
   transform: translateY(-6px);
-  box-shadow: 0 22px 45px rgba(20, 24, 40, 0.18);
-  border-color: rgba(80, 120, 255, 0.35);
+  box-shadow: 0 20px 38px oklch(22% 0.035 262 / 0.14);
+  border-color: oklch(78% 0.09 262);
   cursor: pointer;
 }
 #life .lifeWrap .lifeList .lifeColumn .lifeCard.edit-mode {
@@ -690,8 +863,8 @@ body.is-resizing .musicCardActions {
 }
 #life .lifeWrap .lifeList .lifeColumn .lifeCard.selected {
   opacity: 1;
-  border-color: #4f6df5;
-  box-shadow: 0 0 0 4px rgba(79, 109, 245, 0.18), 0 18px 45px rgba(20, 24, 40, 0.18);
+  border-color: oklch(58% 0.18 262);
+  box-shadow: 0 0 0 4px oklch(70% 0.16 262 / 0.24), 0 18px 45px oklch(22% 0.035 262 / 0.16);
 }
 .addLifeModal {
   display: none;
@@ -704,7 +877,7 @@ body.is-resizing .musicCardActions {
   border-radius: 14px;
   padding: 16px;
   z-index: 9999;
-  box-shadow: 0 20px 50px rgba(20, 24, 40, 0.25);
+  box-shadow: 0 24px 70px oklch(18% 0.035 262 / 0.25);
 }
 .addLifeModal .title {
   display: flex;
@@ -712,6 +885,16 @@ body.is-resizing .musicCardActions {
   justify-content: space-between;
   padding: 0 30px;
   margin-bottom: 12px;
+}
+.addLifeModal .title .closeLifeModalButton {
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
+  border-radius: 999px;
+  color: oklch(47% 0.03 262);
+  background: oklch(95% 0.014 262);
+  cursor: pointer;
+}
+.addLifeModal .title .closeLifeModalButton:hover {
+  background: oklch(92% 0.025 262);
 }
 .addLifeModal .content {
   display: flex;
@@ -732,7 +915,7 @@ body.is-resizing .musicCardActions {
 .addLifeModal .content .input textarea {
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid rgba(20, 24, 40, 0.08);
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
   border-radius: 10px;
   padding: 10px 12px;
 }
@@ -747,7 +930,7 @@ body.is-resizing .musicCardActions {
   align-items: center;
   justify-content: center;
   border-radius: 14px;
-  background: #f4f6fb;
+  background: oklch(95% 0.015 262);
   cursor: pointer;
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
@@ -755,20 +938,20 @@ body.is-resizing .musicCardActions {
   display: none;
 }
 .addLifeModal .content .input .moodInput input:checked + span {
-  background: rgba(79, 109, 245, 0.12);
-  box-shadow: 0 0 0 2px rgba(79, 109, 245, 0.25);
+  background: oklch(93% 0.045 262);
+  box-shadow: 0 0 0 2px oklch(70% 0.16 262 / 0.24);
 }
 .addLifeModal .commitLifeButton {
   width: 100%;
   height: 42px;
   border: 0;
   border-radius: 10px;
-  background: #4f6df5;
+  background: oklch(58% 0.18 262);
   color: #fff;
   cursor: pointer;
 }
 #home {
-  background: radial-gradient(circle at 12% 10%, rgba(79, 109, 245, 0.12), transparent 35%), radial-gradient(circle at 88% 90%, rgba(59, 130, 246, 0.1), transparent 35%), #f6f7fb;
+  background: radial-gradient(circle at 12% 10%, oklch(70% 0.16 262 / 0.12), transparent 35%), radial-gradient(circle at 88% 90%, oklch(72% 0.14 235 / 0.1), transparent 35%), oklch(97% 0.012 262);
   overflow-y: auto;
   display: block;
 }
@@ -786,28 +969,28 @@ body.is-resizing .musicCardActions {
 #home .homeUpdates {
   border-radius: 12px;
   background: #fff;
-  border: 1px solid rgba(20, 24, 40, 0.08);
-  box-shadow: 0 10px 30px rgba(20, 24, 40, 0.08);
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
+  box-shadow: 0 10px 24px oklch(22% 0.035 262 / 0.08);
   padding: 24px;
 }
 #home .homeHero h1 {
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 36px;
   line-height: 1.2;
   margin: 8px 0 10px;
 }
 #home .homeHero .eyebrow {
-  color: #4f6df5;
+  color: oklch(58% 0.18 262);
   font-size: 13px;
   font-weight: 700;
 }
 #home .homeHero .subTitle {
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 13px;
   font-weight: 700;
 }
 #home .homeQuickLinks h2 {
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 22px;
   margin-bottom: 14px;
 }
@@ -818,30 +1001,33 @@ body.is-resizing .musicCardActions {
 }
 #home .homeQuickLinks .quickCard {
   border-radius: 10px;
-  border: 1px solid rgba(20, 24, 40, 0.08);
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
   background: #fff;
   padding: 16px;
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 #home .homeQuickLinks .quickCard h3 {
-  color: #202436;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: oklch(22% 0.035 262);
   font-size: 18px;
   margin-bottom: 8px;
 }
 #home .homeQuickLinks .quickCard p {
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 14px;
   line-height: 1.5;
 }
 #home .homeQuickLinks .quickCard:hover {
   transform: translateY(-2px);
-  border-color: rgba(79, 109, 245, 0.32);
-  box-shadow: 0 8px 20px rgba(79, 109, 245, 0.14);
+  border-color: oklch(78% 0.09 262);
+  box-shadow: 0 14px 30px oklch(22% 0.035 262 / 0.1);
 }
 #home .homeAbout h2,
 #home .homeUpdates h2 {
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 22px;
   margin-bottom: 12px;
 }
@@ -849,7 +1035,7 @@ body.is-resizing .musicCardActions {
 #home .homeUpdates p,
 #home .homeAbout li,
 #home .homeUpdates li {
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 15px;
   line-height: 1.7;
 }
@@ -858,7 +1044,7 @@ body.is-resizing .musicCardActions {
   gap: 8px;
 }
 #study {
-  background: radial-gradient(circle at 12% 10%, rgba(79, 109, 245, 0.12), transparent 35%), radial-gradient(circle at 88% 90%, rgba(59, 130, 246, 0.1), transparent 35%), #f6f7fb;
+  background: radial-gradient(circle at 12% 10%, oklch(70% 0.16 262 / 0.12), transparent 35%), radial-gradient(circle at 88% 90%, oklch(72% 0.14 235 / 0.1), transparent 35%), oklch(97% 0.012 262);
   overflow-y: auto;
 }
 #study .studyWrap {
@@ -875,26 +1061,26 @@ body.is-resizing .musicCardActions {
 #study .studyWrap .studyPlan {
   border-radius: 12px;
   background: #fff;
-  border: 1px solid rgba(20, 24, 40, 0.08);
-  box-shadow: 0 10px 30px rgba(20, 24, 40, 0.08);
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
+  box-shadow: 0 10px 24px oklch(22% 0.035 262 / 0.08);
   padding: 24px;
 }
 #study .studyWrap .studyHeader {
   grid-column: 1/-1;
 }
 #study .studyWrap .studyHeader .eyebrow {
-  color: #4f6df5;
+  color: oklch(58% 0.18 262);
   font-size: 13px;
   font-weight: 700;
 }
 #study .studyWrap .studyHeader h2 {
   margin: 8px 0 10px;
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 28px;
   font-weight: 700;
 }
 #study .studyWrap .studyHeader p {
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 15px;
   line-height: 1.7;
   font-weight: 700;
@@ -912,38 +1098,41 @@ body.is-resizing .musicCardActions {
   flex: none;
   border-radius: 12px;
   background: #fff;
-  border: 1px solid rgba(20, 24, 40, 0.08);
-  box-shadow: 0 10px 30px rgba(20, 24, 40, 0.08);
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
+  box-shadow: 0 10px 24px oklch(22% 0.035 262 / 0.08);
   padding: 14px 18px;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 #study .studyWrap .studyAside .studyCards .studyCard h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 6px;
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 16px;
 }
 #study .studyWrap .studyAside .studyCards .studyCard p {
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 13px;
   line-height: 1.55;
 }
 #study .studyWrap .studyAside .studyCards .studyCard:hover {
   transform: translateY(-4px);
-  border-color: rgba(79, 109, 245, 0.32);
-  box-shadow: 0 16px 36px rgba(79, 109, 245, 0.14);
+  border-color: oklch(78% 0.09 262);
+  box-shadow: 0 20px 38px oklch(22% 0.035 262 / 0.14);
   cursor: pointer;
 }
 #study .studyWrap .studyAside .studyCards .studyCard.active {
-  border-color: rgba(79, 109, 245, 0.5);
-  background: rgba(79, 109, 245, 0.06);
-  box-shadow: 0 16px 36px rgba(79, 109, 245, 0.14);
+  border-color: oklch(68% 0.14 262);
+  background: oklch(96% 0.025 262);
+  box-shadow: 0 14px 30px oklch(22% 0.035 262 / 0.1);
 }
 #study .studyWrap .studyAside .studyPlan {
   padding: 20px;
 }
 #study .studyWrap .studyAside .studyPlan h3 {
   margin-bottom: 12px;
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 20px;
 }
 #study .studyWrap .studyAside .studyPlan ul {
@@ -952,16 +1141,16 @@ body.is-resizing .musicCardActions {
 }
 #study .studyWrap .studyAside .studyPlan li {
   padding-left: 10px;
-  border-left: 3px solid rgba(79, 109, 245, 0.18);
-  color: #6b7280;
+  border-left: 3px solid oklch(70% 0.16 262 / 0.24);
+  color: oklch(47% 0.03 262);
   font-size: 15px;
   line-height: 1.7;
 }
 #study .studyWrap .studyNotes {
   border-radius: 12px;
   background: #fff;
-  border: 1px solid rgba(20, 24, 40, 0.08);
-  box-shadow: 0 10px 30px rgba(20, 24, 40, 0.08);
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
+  box-shadow: 0 10px 24px oklch(22% 0.035 262 / 0.08);
   padding: 24px;
   min-height: 520px;
 }
@@ -973,12 +1162,15 @@ body.is-resizing .musicCardActions {
   margin-bottom: 16px;
 }
 #study .studyWrap .studyNotes .studyNotesHeader h3 {
-  color: #202436;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: oklch(22% 0.035 262);
   font-size: 22px;
 }
 #study .studyWrap .studyNotes .studyNotesHeader .studyNotesCount {
   flex: none;
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 13px;
 }
 #study .studyWrap .studyNotes .studyNotesList {
@@ -988,8 +1180,8 @@ body.is-resizing .musicCardActions {
 #study .studyWrap .studyNotes .studyNotesList .studyNote {
   padding: 18px 20px;
   border-radius: 12px;
-  border: 1px solid rgba(20, 24, 40, 0.08);
-  background: #fbfcff;
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
+  background: oklch(98% 0.012 262);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 #study .studyWrap .studyNotes .studyNotesList .studyNote .studyNoteMeta {
@@ -1002,37 +1194,43 @@ body.is-resizing .musicCardActions {
 #study .studyWrap .studyNotes .studyNotesList .studyNote .studyNoteMeta .studyNoteCategory {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   height: 26px;
   padding: 0 10px;
   border-radius: 999px;
-  color: #4f6df5;
-  background: rgba(79, 109, 245, 0.1);
+  color: oklch(58% 0.18 262);
+  background: oklch(93% 0.045 262);
   font-size: 13px;
   font-weight: 700;
 }
 #study .studyWrap .studyNotes .studyNotesList .studyNote .studyNoteMeta .studyNoteDate {
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 13px;
 }
 #study .studyWrap .studyNotes .studyNotesList .studyNote h4 {
   margin-bottom: 8px;
-  color: #202436;
+  color: oklch(22% 0.035 262);
   font-size: 18px;
   line-height: 1.4;
 }
 #study .studyWrap .studyNotes .studyNotesList .studyNote p {
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 14px;
   line-height: 1.7;
 }
 #study .studyWrap .studyNotes .studyNotesList .studyNote:hover {
   transform: translateY(-3px);
-  border-color: rgba(79, 109, 245, 0.32);
-  box-shadow: 0 14px 32px rgba(79, 109, 245, 0.12);
+  border-color: oklch(78% 0.09 262);
+  box-shadow: 0 14px 30px oklch(22% 0.035 262 / 0.1);
 }
 #study .studyWrap .studyNotes .studyNotesList .studyMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   padding: 32px 0;
-  color: #6b7280;
+  color: oklch(47% 0.03 262);
   font-size: 15px;
   text-align: center;
 }

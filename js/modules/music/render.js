@@ -1,3 +1,5 @@
+import { createIcon } from "../utils/createIcon.js";
+
 // 根据 state 渲染 DOM
 export function renderMusicList(state) {
   const cardsContainer = document.querySelector("#music .cards");
@@ -9,10 +11,10 @@ export function renderMusicList(state) {
   // 判断当前音乐卡片状态
   if (state.errorMessage) {
     // 音乐板块出错了
-    cardsContainer.appendChild(createMessage(state.errorMessage));
+    cardsContainer.appendChild(createMessage(state.errorMessage, "icon-warning"));
   } else if (state.musicList.length === 0) {
     // 暂时没有卡片
-    cardsContainer.appendChild(createMessage("还没有收藏音乐，点击上传添加第一首吧"));
+    cardsContainer.appendChild(createMessage("还没有收藏音乐，点击上传添加第一首吧", "icon-empty"));
   } else {
     // 生成音乐卡片
     state.musicList.forEach(item => cardsContainer.appendChild(createMusicCard(item, state)))
@@ -84,7 +86,10 @@ function createMusicCard(item, state) {
   link.href = item.link;
   link.target = "_blank";
   link.rel = "noopener noreferrer";
-  link.textContent = "去听";
+
+  const linkText = document.createElement("span");
+  linkText.textContent = "去听";
+  link.append(createIcon("icon-play", "iconSvg iconSvg--sm"), linkText);
 
   // 拼凑card元素
   info.appendChild(name);
@@ -97,12 +102,21 @@ function createMusicCard(item, state) {
 }
 
 // 创建错误信息
-function createMessage(text) {
+function createMessage(text, iconName) {
   const message = document.createElement("div");
+  const messageText = document.createElement("span");
+
   message.className = "musicMessage";
-  message.textContent = text;
+  messageText.textContent = text;
+
+  if (iconName) {
+    message.appendChild(createIcon(iconName, "iconSvg iconSvg--lg iconMuted"));
+  }
+
+  message.appendChild(messageText);
   return message;
 }
+
 
 // 检验当前是否是移动端布局
 function isMobileView() {

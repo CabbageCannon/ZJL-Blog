@@ -1,0 +1,61 @@
+// out:false
+
+// Local icon system
+// Usage:
+// <svg class="iconSvg" aria-hidden="true">
+//   <use href="./assets/icons/sprite.svg#icon-home"></use>
+// </svg>
+
+.iconSvg {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  color: currentColor;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+
+.iconSvg--sm {
+  font-size: 14px;
+}
+
+.iconSvg--md {
+  font-size: 18px;
+}
+
+.iconSvg--lg {
+  font-size: 22px;
+}
+
+.iconTextButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.iconOnlyButton {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+}
+
+.iconDanger {
+  color: @dangerColor;
+}
+
+.iconMuted {
+  color: @textMuted;
+}
+
+.iconPrimary {
+  color: @primaryColor;
+}

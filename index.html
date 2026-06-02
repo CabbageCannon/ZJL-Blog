@@ -15,17 +15,55 @@
     <div class="logo">ZJL</div>
     <div class="nav">
       <ul>
-        <li><a href="javascript:;" name="home">首页</a></li>
-        <li><a href="javascript:;" name="life">生活</a></li>
-        <li><a href="javascript:;" name="music">音乐</a></li>
-        <li><a href="javascript:;" name="study">学习</a></li>
+        <li>
+          <a href="javascript:;" name="home">
+            <svg class="iconSvg iconSvg--md" aria-hidden="true">
+              <use href="./assets/icons/sprite.svg#icon-home"></use>
+            </svg>
+            <span>首页</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;" name="life">
+            <svg class="iconSvg iconSvg--md" aria-hidden="true">
+              <use href="./assets/icons/sprite.svg#icon-life"></use>
+            </svg>
+            <span>生活</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;" name="music">
+            <svg class="iconSvg iconSvg--md" aria-hidden="true">
+              <use href="./assets/icons/sprite.svg#icon-music"></use>
+            </svg>
+            <span>音乐</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:;" name="study">
+            <svg class="iconSvg iconSvg--md" aria-hidden="true">
+              <use href="./assets/icons/sprite.svg#icon-study"></use>
+            </svg>
+            <span>学习</span>
+          </a>
+        </li>
       </ul>
     </div>
-    <div class="user">
+    <div class="user authUser">
       <img src="./assets/upload/touxiang.jpg" alt="">
-      <div class="name">
-        卷心菜投手
-      </div>
+      <div class="name">未登录</div>
+      <button class="authLoginButton iconTextButton">
+        <svg class="iconSvg iconSvg--sm" aria-hidden="true">
+          <use href="./assets/icons/sprite.svg#icon-login"></use>
+        </svg>
+        <span>登录</span>
+      </button>
+      <button class="authLogoutButton iconTextButton" style="display: none;">
+        <svg class="iconSvg iconSvg--sm" aria-hidden="true">
+          <use href="./assets/icons/sprite.svg#icon-logout"></use>
+        </svg>
+        <span>退出</span>
+      </button>
     </div>
   </div>
 
@@ -45,15 +83,30 @@
           <h2>快捷入口</h2>
           <div class="quickGrid">
             <article class="quickCard" data-target="life">
-              <h3>生活</h3>
+              <h3>
+                <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-life"></use>
+                </svg>
+                <span>生活</span>
+              </h3>
               <p>看看最近的日常与片段。</p>
             </article>
             <article class="quickCard" data-target="music">
-              <h3>音乐</h3>
+              <h3>
+                <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-music"></use>
+                </svg>
+                <span>音乐</span>
+              </h3>
               <p>进入音乐收藏，管理歌单卡片。</p>
             </article>
             <article class="quickCard" data-target="study">
-              <h3>学习</h3>
+              <h3>
+                <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-study"></use>
+                </svg>
+                <span>学习</span>
+              </h3>
               <p>整理知识点与练习记录。</p>
             </article>
           </div>
@@ -81,11 +134,15 @@
       <!-- 左侧操作栏 -->
       <div class="leftBanner">
         <div class="but addNewDiary">
-          <span class="icon"></span>
+          <svg class="icon iconSvg iconSvg--lg" aria-hidden="true">
+            <use href="./assets/icons/sprite.svg#icon-upload"></use>
+          </svg>
           <span class="text">上传</span>
         </div>
         <div class="but editDiary">
-          <span class="icon"></span>
+          <svg class="icon iconSvg iconSvg--lg" aria-hidden="true">
+            <use href="./assets/icons/sprite.svg#icon-edit"></use>
+          </svg>
           <span class="text">编辑</span>
         </div>
       </div>
@@ -94,7 +151,12 @@
       <div class="lifeCardActions">
         <ul>
           <li>
-            <div class="but deleteButton">删除</div>
+            <div class="but deleteButton iconTextButton">
+              <svg class="iconSvg iconSvg--sm iconDanger" aria-hidden="true">
+                <use href="./assets/icons/sprite.svg#icon-delete"></use>
+              </svg>
+              <span>删除</span>
+            </div>
           </li>
         </ul>
       </div>
@@ -145,15 +207,21 @@
         <div class="leftBanner">
           <!-- 上传按钮 -->
           <div class="but addNewSongs">
-            <span class="icon"></span>
+            <svg class="icon iconSvg iconSvg--lg" aria-hidden="true">
+              <use href="./assets/icons/sprite.svg#icon-upload"></use>
+            </svg>
             <span class="text">上传</span>
           </div>
           <div class="but editSongs">
-            <span class="icon"></span>
+            <svg class="icon iconSvg iconSvg--lg" aria-hidden="true">
+              <use href="./assets/icons/sprite.svg#icon-edit"></use>
+            </svg>
             <span class="text">编辑</span>
           </div>
           <div class="but feedback">
-            <span class="icon"></span>
+            <svg class="icon iconSvg iconSvg--lg" aria-hidden="true">
+              <use href="./assets/icons/sprite.svg#icon-feedback"></use>
+            </svg>
             <span class="text">反馈</span>
           </div>
         </div>
@@ -194,19 +262,39 @@
           <!-- 学习卡片 -->
           <section class="studyCards">
             <article class="studyCard active" data-category="all" role="button" tabindex="0">
-              <h3>全部</h3>
+              <h3>
+                <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-grid"></use>
+                </svg>
+                <span>全部</span>
+              </h3>
               <p>查看所有学习笔记</p>
             </article>
             <article class="studyCard" data-category="CSS" role="button" tabindex="0">
-              <h3>HTML / CSS</h3>
+              <h3>
+                <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-css"></use>
+                </svg>
+                <span>HTML / CSS</span>
+              </h3>
               <p>整理页面结构、布局方式、响应式适配和 Less 样式拆分。</p>
             </article>
             <article class="studyCard" data-category="JavaScript" role="button" tabindex="0">
-              <h3>JavaScript</h3>
+              <h3>
+                <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-js"></use>
+                </svg>
+                <span>JavaScript</span>
+              </h3>
               <p>记录 DOM 操作、事件绑定、模块化、数据渲染和本地存储。</p>
             </article>
             <article class="studyCard" data-category="后端基础" role="button" tabindex="0">
-              <h3>后端基础</h3>
+              <h3>
+                <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-server"></use>
+                </svg>
+                <span>后端基础</span>
+              </h3>
               <p>学习 Express、接口设计、文件上传和 SQLite 数据存储。</p>
             </article>
           </section>
@@ -226,7 +314,12 @@
         <!-- 笔记列表容器 -->
         <section class="studyNotes">
           <div class="studyNotesHeader">
-            <h3>学习笔记</h3>
+            <h3>
+              <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                <use href="./assets/icons/sprite.svg#icon-note"></use>
+              </svg>
+              <span>学习笔记</span>
+            </h3>
             <span class="studyNotesCount"></span>
           </div>
           <div class="studyNotesList">
@@ -249,12 +342,51 @@
   <!-- 遮罩层 -->
   <div class="modalMask"></div>
 
+  <!-- 弹窗 -->
+
+  <!-- 登录界面弹窗 -->
+  <div class="authModal">
+    <!-- 标题 -->
+    <div class="title">
+      <h2>账号登录</h2>
+      <button class="closeAuthModalButton iconOnlyButton" aria-label="关闭登录弹窗">
+        <svg class="iconSvg iconSvg--md" aria-hidden="true">
+          <use href="./assets/icons/sprite.svg#icon-close"></use>
+        </svg>
+      </button>
+    </div>
+    <!-- 内容 -->
+    <div class="content">
+      <div class="input usernameInput">
+        <span class="inputTitle">用户名</span>
+        <input type="text" class="authUsernameInput" maxlength="20">
+      </div>
+      <div class="input nicknameInput">
+        <span class="inputTitle">昵称</span>
+        <input type="text" class="authNicknameInput" maxlength="20">
+      </div>
+      <div class="input passwordInput">
+        <span class="inputTitle">密码</span>
+        <input type="text" class="authPasswordInput" maxlength="30">
+      </div>
+      <p class="authMessage"></p>
+    </div>
+    <div class="actions">
+      <button class="commitAuthButton">登录</button>
+      <button class="switchAuthModalButton">没有账号？去注册</button>
+    </div>
+  </div>
+
   <!-- 音乐区域弹出框 -->
   <!-- 上传音乐的弹出框 -->
   <div class="addMusicModal">
     <div class="title">
       <h2>上传内容</h2>
-      <button class="closeButton">关闭</button>
+      <button class="closeButton iconOnlyButton" aria-label="关闭音乐弹窗">
+        <svg class="iconSvg iconSvg--md" aria-hidden="true">
+          <use href="./assets/icons/sprite.svg#icon-close"></use>
+        </svg>
+      </button>
     </div>
     <div class="content">
       <div class="songName input">
@@ -272,18 +404,32 @@
     </div>
     <button class="commitButton">提交</button>
   </div>
-
   <!-- 音乐卡片编辑框 -->
   <div class="musicCardActions">
     <ul>
       <li>
-        <div class="deleteButton">删除</div>
+        <div class="deleteButton iconTextButton">
+          <svg class="iconSvg iconSvg--sm iconDanger" aria-hidden="true">
+            <use href="./assets/icons/sprite.svg#icon-delete"></use>
+          </svg>
+          <span>删除</span>
+        </div>
       </li>
       <li>
-        <div class="moveToFirstButton">移到最前</div>
+        <div class="moveToFirstButton iconTextButton">
+          <svg class="iconSvg iconSvg--sm" aria-hidden="true">
+            <use href="./assets/icons/sprite.svg#icon-move-first"></use>
+          </svg>
+          <span>移到最前</span>
+        </div>
       </li>
       <li>
-        <div class="moveToLastButton">移到最后</div>
+        <div class="moveToLastButton iconTextButton">
+          <svg class="iconSvg iconSvg--sm" aria-hidden="true">
+            <use href="./assets/icons/sprite.svg#icon-move-last"></use>
+          </svg>
+          <span>移到最后</span>
+        </div>
       </li>
     </ul>
   </div>
@@ -292,7 +438,11 @@
   <div class="addLifeModal">
     <div class="title">
       <h2>发布日记</h2>
-      <button class="closeLifeModalButton">关闭</button>
+      <button class="closeLifeModalButton iconOnlyButton" aria-label="关闭日记弹窗">
+        <svg class="iconSvg iconSvg--md" aria-hidden="true">
+          <use href="./assets/icons/sprite.svg#icon-close"></use>
+        </svg>
+      </button>
     </div>
 
     <div class="content">

@@ -45,6 +45,7 @@ body {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        gap: 6px;
         height: 40px;
         padding: 0 16px;
         border-radius: 999px;
@@ -55,13 +56,13 @@ body {
 
         &:hover {
           color: @primaryColor;
-          background-color: rgba(79, 100, 245, .08);
+          background-color: @brandPrimarySoft;
         }
 
         &.is-active {
           color: @primaryColor;
-          background: rgba(79, 100, 245, .12);
-          box-shadow: 0 0 0 1px rgba(79, 109, 245, .2) inset;
+          background: @brandPrimaryActive;
+          box-shadow: 0 0 0 1px @brandPrimaryInset inset;
         }
       }
     }
@@ -86,6 +87,23 @@ body {
     .name {
       line-height: 1;
       font-weight: 600;
+    }
+
+    .authLoginButton,
+    .authLogoutButton {
+      padding: 5px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: 1px solid @borderSoft;
+      border-radius: 20px;
+      transition: transform .2s ease, background .2s ease;
+
+      &:hover{
+        transform: translateY(-2px);
+        background-color: @brandPrimarySoft;
+      }
     }
   }
 }
@@ -128,7 +146,7 @@ body {
         gap: 6px;
       }
 
-      a{
+      a {
         height: 34px;
         padding: 0 10px;
         font-size: 14px;
@@ -136,6 +154,7 @@ body {
     }
 
     .user {
+
       // 用户名可先隐藏，只保留头像
       .name {
         display: none;
@@ -153,20 +172,20 @@ body {
     padding-top: 72px;
     overflow-y: auto;
 
-    #home{
-      .homeWrap{
+    #home {
+      .homeWrap {
         padding: 16px;
       }
 
-      .homeHero h1{
+      .homeHero h1 {
         font-size: 16px;
       }
 
-      .homeHero h1{
+      .homeHero h1 {
         font-size: 28px;
       }
 
-      .homeQuickLinks .quickGrid{
+      .homeQuickLinks .quickGrid {
         grid-template-columns: 1fr;
       }
     }

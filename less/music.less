@@ -11,7 +11,7 @@
     // 左侧导航栏
     .leftBanner {
       box-sizing: border-box;
-      background-color: #fff;
+      background-color: @cardBg;
       height: 100%;
       width: 120px;
       padding: 32px 16px;
@@ -39,21 +39,17 @@
 
         &:hover {
           color: @primaryColor;
-          background: rgba(79, 109, 245, .08);
+          background: @brandPrimarySoft;
           transform: translateY(-2px);
         }
 
         &.active {
           color: @primaryColor;
-          background: rgba(79, 109, 245, .12);
+          background: @brandPrimaryActive;
         }
 
         .icon {
-          display: block;
-          width: 24px;
-          height: 24px;
-          background: url("../imgs/icons/icon1.webp") no-repeat center;
-          background-size: contain;
+          font-size: 24px;
         }
 
         .text {
@@ -102,16 +98,16 @@
           width: 220px;
           height: 300px;
           border-radius: 10px;
-          background-color: #fff;
-          border: 1px solid rgba(20, 24, 40, .08);
+          background-color: @musicSurface;
+          border: 1px solid @borderSoft;
           cursor: pointer;
-          box-shadow: 0 14px 35px rgba(20, 24, 40, .12);
+          box-shadow: @shadowCard;
           transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 
           &:hover {
             transform: translateY(-6px);
-            box-shadow: 0 22px 45px rgba(20, 24, 40, .18);
-            border-color: rgba(80, 120, 255, .35);
+            box-shadow: @shadowCardHover;
+            border-color: @brandPrimaryBorder;
           }
 
           .cardCover {
@@ -133,7 +129,7 @@
             .cardName {
               flex: 1;
               overflow: hidden;
-              color: #202436;
+              color: @textMain;
               font-size: 18px;
               font-weight: 700;
               white-space: nowrap;
@@ -141,16 +137,20 @@
             }
 
             .cardLink {
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              gap: 6px;
               flex: none;
               padding: 8px 12px;
               border-radius: 999px;
-              color: #fff;
+              color: @textInverse;
               font-size: 14px;
-              background: #4f6df5;
+              background: @brandPrimary;
               transition: background .2s ease;
 
               &:hover {
-                background: #3652d9;
+                background: @brandPrimaryHover;
               }
             }
           }
@@ -160,6 +160,11 @@
         }
 
         .musicMessage {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
           width: 100%;
           padding: 72px 0;
           color: @textMuted;
@@ -180,8 +185,8 @@
   width: 160px;
   padding: 12px;
   border-radius: 16px 0 0 16px;
-  background: #fff;
-  box-shadow: 0 16px 40px rgba(20, 24, 40, .14);
+  background: @cardBg;
+  box-shadow: @shadowPanel;
   transition: right .3s ease;
 
   &.disabled {
@@ -201,6 +206,10 @@
       }
 
       div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
         height: 42px;
         line-height: 42px;
         border-radius: 10px;
@@ -211,7 +220,7 @@
 
         &:hover {
           color: @primaryColor;
-          background: rgba(79, 100, 245, .08);
+          background: @brandPrimarySoft;
         }
       }
     }
@@ -224,14 +233,14 @@
   box-sizing: border-box;
   width: 460px;
   padding: 24px;
-  background-color: #fff;
+  background-color: @cardBg;
   position: fixed;
   z-index: 9999;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 18px;
-  box-shadow: 0 24px 80px rgba(15, 23, 42, .28);
+  box-shadow: @shadowModal;
 
   .title {
     display: flex;
@@ -251,11 +260,17 @@
       border: 0;
       border-radius: 999px;
       color: @textMuted;
-      background: #f1f3f8;
+      background: @buttonBg;
       cursor: pointer;
 
+      &.iconOnlyButton {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+      }
+
       &:hover {
-        background: #e6eaf3;
+        background: @buttonHoverBg;
       }
     }
   }
@@ -267,7 +282,7 @@
       span {
         display: block;
         margin-bottom: 8px;
-        color: #4b5563;
+        color: @textBody;
         font-size: 14px;
       }
 
@@ -276,14 +291,14 @@
         width: 100%;
         height: 42px;
         padding: 0 12px;
-        border: 1px solid #d8deea;
+        border: 1px solid @borderInput;
         border-radius: 10px;
-        background: #fff;
+        background: @cardBg;
         outline: none;
 
         &:focus {
           border-color: @primaryColor;
-          box-shadow: 0 0 0 3px rgba(79, 109, 245, .14);
+          box-shadow: @shadowFocus;
         }
       }
     }
@@ -296,7 +311,7 @@
     margin-top: 8px;
     border: 0;
     border-radius: 12px;
-    color: #fff;
+    color: @textInverse;
     font-size: 16px;
     background: @primaryColor;
     cursor: pointer;

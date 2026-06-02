@@ -1,0 +1,123 @@
+// out:false
+
+// 登录注册弹出框样式
+.authModal {
+  box-sizing: border-box;
+  display: none;
+  padding: 20px 20px;
+  width: min(560px, calc(100% - 32px));
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 9999;
+  border: 1px solid @borderSoft;
+  background: @cardBg;
+  border-radius: 20px;
+
+  // 标题
+  .title {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    h2 {
+      font-weight: 700;
+      color: @textMain;
+    }
+
+    .closeAuthModalButton {
+      color: @textMuted;
+      border-radius: 999px;
+      border: 1px solid @borderSoft;
+      background-color: @buttonBg;
+
+      &.iconOnlyButton {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+      }
+
+      &:hover {
+        background-color: @buttonHoverBg;
+        cursor: pointer;
+      }
+    }
+  }
+
+  // 内容
+  .content {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    .input {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      &.nicknameInput{
+        display: none;
+      }
+
+      .inputTitle {
+        display: block;
+        font-weight: 500;
+      }
+
+      input {
+        box-sizing: border-box;
+        border: 1px solid @borderInput;
+        border-radius: 10px;
+        padding: 0 12px;
+        width: 100%;
+        height: 42px;
+        outline: none;
+      }
+    }
+  }
+
+  // 操作
+  .actions{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    // 提交按钮
+    .commitAuthButton{
+      height: 42px;
+      border: 1px solid @borderSoft;
+      background-color: @buttonBg;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      &:hover{
+        background-color: @buttonHoverBg;
+      }
+    }
+
+    // 切换登录注册按钮
+    .switchAuthModalButton{
+      border: none;
+      color: @brandPrimary;
+      background-color: @cardBg;
+      text-decoration-line: underline;
+      cursor: pointer;
+
+      &:hover {
+        color: @brandPrimaryHover;
+      }
+    }
+  }
+}

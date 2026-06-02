@@ -1,14 +1,85 @@
 // out:false
 
-@primaryColor: #4f6df5;
-@primaryHover: #3652d9;
-@textMain: #202436;
-@textMuted: #6b7280;
-@pageBg: #f6f7fb;
+// =========================
+// Color System
+// impeccable colorize
+// =========================
+
+// 品牌主色：用于主要操作、当前状态、重点交互
+@brandPrimary: oklch(58% 0.18 262);
+@brandPrimaryHover: oklch(50% 0.2 262);
+@brandPrimarySoft: oklch(96% 0.025 262);
+@brandPrimarySofter: oklch(98% 0.015 262);
+@brandPrimaryActive: oklch(93% 0.045 262);
+@brandPrimaryBorder: oklch(78% 0.09 262);
+@brandPrimaryBorderStrong: oklch(68% 0.14 262);
+@brandPrimaryRing: oklch(70% 0.16 262 / .24);
+@brandPrimaryInset: oklch(70% 0.16 262 / .2);
+
+// 个人化点缀色：用于头像、生活感、轻微趣味，不做主操作色
+@brandPersonal: oklch(66% 0.18 28);
+@brandPersonalSoft: oklch(96% 0.035 28);
+@brandPersonalBorder: oklch(82% 0.08 28);
+
+// 文本色
+@textMain: oklch(22% 0.035 262);
+@textBody: oklch(35% 0.035 262);
+@textMuted: oklch(47% 0.03 262);
+@textSubtle: oklch(58% 0.025 262);
+@textInverse: #fff;
+
+// 页面和卡片表面
+@pageBg: oklch(97% 0.012 262);
 @cardBg: #fff;
-@borderSoft: rgba(20, 24, 40, .08);
-@shadowCard: 0 14px 35px rgba(20, 24, 40, .12);
-@shadowCardHover: 0 22px 45px rgba(20, 24, 40, .18);
+@surfaceSoft: oklch(98% 0.01 262);
+@surfaceMuted: oklch(95% 0.015 262);
+@surfaceRaised: #fff;
+@pageGlowPrimary: oklch(70% 0.16 262 / .12);
+@pageGlowSecondary: oklch(72% 0.14 235 / .1);
+
+// 模块专属表面
+@lifeSurface: oklch(98% 0.018 72);
+@lifeSurfaceSoft: oklch(99% 0.012 72);
+@studySurface: oklch(98% 0.012 262);
+@musicSurface: #fff;
+
+// 按钮
+@buttonBg: oklch(95% 0.014 262);
+@buttonHoverBg: oklch(92% 0.025 262);
+
+// 边框
+@borderSoft: oklch(28% 0.035 262 / .09);
+@borderInput: oklch(84% 0.035 262);
+@borderDarkSoft: oklch(28% 0.035 262 / .1);
+
+// 语义色
+@successColor: oklch(55% 0.14 150);
+@successSoft: oklch(96% 0.04 150);
+@warningColor: oklch(68% 0.15 78);
+@warningSoft: oklch(97% 0.05 78);
+@dangerColor: oklch(58% 0.19 25);
+@dangerSoft: oklch(96% 0.045 25);
+@infoColor: @brandPrimary;
+@infoSoft: @brandPrimarySoft;
+
+// 阴影
+@shadowSoft: 0 10px 24px oklch(22% 0.035 262 / .08);
+@shadowCard: 0 14px 30px oklch(22% 0.035 262 / .1);
+@shadowCardHover: 0 20px 38px oklch(22% 0.035 262 / .14);
+@shadowPanel: 0 16px 36px oklch(22% 0.035 262 / .12);
+@shadowModal: 0 24px 70px oklch(18% 0.035 262 / .25);
+@shadowFocus: 0 0 0 3px @brandPrimaryRing;
+
+// 遮罩
+@maskBg: oklch(20% 0.035 262 / .45);
+
+// 装饰色
+@moodBg: oklch(94% 0.045 28);
+
+// 兼容旧变量名，避免一次迁移影响太大
+@primaryColor: @brandPrimary;
+@primaryHover: @brandPrimaryHover;
+
 
 // 玻璃边框
 .glassFrame {
@@ -38,7 +109,7 @@
   border-radius: 9999px;
 
   // 边框线
-  border: 1px double rgba(51, 51, 51, 0.08);
+  border: 1px double @borderDarkSoft;
 }
 
 // 卡片被编辑以及被选择的样式
@@ -49,8 +120,8 @@
 
   &.selected {
     opacity: 1;
-    border-color: #4f6df5;
-    box-shadow: 0 0 0 4px rgba(79, 109, 245, .18),
-      0 18px 45px rgba(20, 24, 40, .18);
+    border-color: @brandPrimary;
+    box-shadow: 0 0 0 4px @brandPrimaryRing,
+      0 18px 45px oklch(22% 0.035 262 / .16);
   }
 }

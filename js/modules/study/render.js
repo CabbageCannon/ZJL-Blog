@@ -1,3 +1,5 @@
+import { createIcon } from "../utils/createIcon.js";
+
 // 渲染学习笔记
 export function renderStudyNotes(studyState) {
   const noteList = document.querySelector("#study .studyNotesList");
@@ -15,7 +17,7 @@ export function renderStudyNotes(studyState) {
 
   // 出错，展示错误信息
   if (studyState.errorMessage) {
-    noteList.appendChild(createMessage(studyState.errorMessage));
+    noteList.appendChild(createMessage(studyState.errorMessage, "icon-warning"));
     return;
   }
 
@@ -25,7 +27,7 @@ export function renderStudyNotes(studyState) {
       ? "还没有学习笔记，先记录第一条吧"
       : "当前分类还没有学习笔记";
 
-    noteList.appendChild(createMessage(text));
+    noteList.appendChild(createMessage(text, "icon-empty"));
     return;
   }
 
@@ -59,7 +61,10 @@ function createStudyNote(note) {
   category.className = "studyNoteCategory";
   date.className = "studyNoteDate";
 
-  category.textContent = note.category || "未分类";
+  const categoryText = document.createElement("span");
+  categoryText.textContent = note.category || "未分类";
+  category.append(createIcon(getCategoryIcon(note.category), "iconSvg iconSvg--sm"), categoryText);
+
   date.textContent = note.date || "";
   title.textContent = note.title || "未命名笔记";
   summary.textContent = note.summary || "暂无摘要";
@@ -71,9 +76,28 @@ function createStudyNote(note) {
 }
 
 // 创建信息提示
-function createMessage(text) {
+function createMessage(text, iconName) {
   const message = document.createElement("div");
+  const messageText = document.createElement("span");
+
   message.className = "studyMessage";
-  message.textContent = text;
+  messageText.textContent = text;
+
+  if (iconName) {
+    message.appendChild(createIcon(iconName, "iconSvg iconSvg--lg iconMuted"));
+  }
+
+  message.appendChild(messageText);
   return message;
+}
+
+// 根据笔记分类选择图标
+function getCategoryIcon(category) {
+  const iconMap = {
+    CSS: "icon-css",
+    JavaScript: "icon-js",
+    "后端基础": "icon-server"
+  };
+
+  return iconMap[category] || "icon-note";
 }

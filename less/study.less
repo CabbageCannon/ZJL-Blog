@@ -3,8 +3,8 @@
 // 学习区域
 #study {
   background:
-    radial-gradient(circle at 12% 10%, rgba(79, 109, 245, .12), transparent 35%),
-    radial-gradient(circle at 88% 90%, rgba(59, 130, 246, .1), transparent 35%),
+    radial-gradient(circle at 12% 10%, @pageGlowPrimary, transparent 35%),
+    radial-gradient(circle at 88% 90%, @pageGlowSecondary, transparent 35%),
     @pageBg;
   overflow-y: auto;
 
@@ -21,9 +21,9 @@
     .studyHeader,
     .studyPlan {
       border-radius: 12px;
-      background: #fff;
+      background: @cardBg;
       border: 1px solid @borderSoft;
-      box-shadow: 0 10px 30px rgba(20, 24, 40, .08);
+      box-shadow: @shadowSoft;
       padding: 24px;
     }
 
@@ -64,13 +64,16 @@
         .studyCard {
           flex: none;
           border-radius: 12px;
-          background: #fff;
+          background: @cardBg;
           border: 1px solid @borderSoft;
-          box-shadow: 0 10px 30px rgba(20, 24, 40, .08);
+          box-shadow: @shadowSoft;
           padding: 14px 18px;
           transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 
           h3 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             margin-bottom: 6px;
             color: @textMain;
             font-size: 16px;
@@ -84,15 +87,15 @@
 
           &:hover {
             transform: translateY(-4px);
-            border-color: rgba(79, 109, 245, .32);
-            box-shadow: 0 16px 36px rgba(79, 109, 245, .14);
+            border-color: @brandPrimaryBorder;
+            box-shadow: @shadowCardHover;
             cursor: pointer;
           }
 
           &.active {
-            border-color: rgba(79, 109, 245, .5);
-            background: rgba(79, 109, 245, .06);
-            box-shadow: 0 16px 36px rgba(79, 109, 245, .14);
+            border-color: @brandPrimaryBorderStrong;
+            background: @brandPrimarySoft;
+            box-shadow: @shadowCard;
           }
         }
       }
@@ -113,7 +116,7 @@
 
         li {
           padding-left: 10px;
-          border-left: 3px solid rgba(79, 109, 245, .18);
+          border-left: 3px solid @brandPrimaryRing;
           color: @textMuted;
           font-size: 15px;
           line-height: 1.7;
@@ -124,9 +127,9 @@
     // 笔记列表
     .studyNotes {
       border-radius: 12px;
-      background: #fff;
+      background: @cardBg;
       border: 1px solid @borderSoft;
-      box-shadow: 0 10px 30px rgba(20, 24, 40, .08);
+      box-shadow: @shadowSoft;
       padding: 24px;
       min-height: 520px;
 
@@ -138,6 +141,9 @@
         margin-bottom: 16px;
 
         h3 {
+          display: flex;
+          align-items: center;
+          gap: 8px;
           color: @textMain;
           font-size: 22px;
         }
@@ -157,7 +163,7 @@
           padding: 18px 20px;
           border-radius: 12px;
           border: 1px solid @borderSoft;
-          background: #fbfcff;
+          background: @studySurface;
           transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 
           .studyNoteMeta {
@@ -170,11 +176,12 @@
             .studyNoteCategory {
               display: inline-flex;
               align-items: center;
+              gap: 6px;
               height: 26px;
               padding: 0 10px;
               border-radius: 999px;
               color: @primaryColor;
-              background: rgba(79, 109, 245, .1);
+              background: @brandPrimaryActive;
               font-size: 13px;
               font-weight: 700;
             }
@@ -200,12 +207,17 @@
 
           &:hover {
             transform: translateY(-3px);
-            border-color: rgba(79, 109, 245, .32);
-            box-shadow: 0 14px 32px rgba(79, 109, 245, .12);
+            border-color: @brandPrimaryBorder;
+            box-shadow: @shadowCard;
           }
         }
 
         .studyMessage {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
           padding: 32px 0;
           color: @textMuted;
           font-size: 15px;

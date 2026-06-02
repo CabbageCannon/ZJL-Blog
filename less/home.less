@@ -4,8 +4,8 @@
 #home {
   // 背景光晕效果
   background:
-    radial-gradient(circle at 12% 10%, rgba(79, 109, 245, .12), transparent 35%),
-    radial-gradient(circle at 88% 90%, rgba(59, 130, 246, .1), transparent 35%),
+    radial-gradient(circle at 12% 10%, @pageGlowPrimary, transparent 35%),
+    radial-gradient(circle at 88% 90%, @pageGlowSecondary, transparent 35%),
     @pageBg;
   // y轴方向超出时自动出现滚动轴
   overflow-y: auto;
@@ -25,9 +25,9 @@
   .homeAbout,
   .homeUpdates {
     border-radius: 12px;
-    background: #fff;
+    background: @cardBg;
     border: 1px solid @borderSoft;
-    box-shadow: 0 10px 30px rgba(20, 24, 40, .08);
+    box-shadow: @shadowSoft;
     padding: 24px;
   }
 
@@ -70,12 +70,15 @@
     .quickCard {
       border-radius: 10px;
       border: 1px solid @borderSoft;
-      background: #fff;
+      background: @cardBg;
       padding: 16px;
       cursor: pointer;
       transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 
       h3 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
         color: @textMain;
         font-size: 18px;
         margin-bottom: 8px;
@@ -89,8 +92,8 @@
 
       &:hover {
         transform: (translateY(-2px));
-        border-color: rgba(79, 109, 245, .32);
-        box-shadow: 0 8px 20px rgba(79, 109, 245, .14);
+        border-color: @brandPrimaryBorder;
+        box-shadow: @shadowCard;
       }
     }
   }

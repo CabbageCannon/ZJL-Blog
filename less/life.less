@@ -4,8 +4,8 @@
 #life {
   // 背景光晕效果
   background:
-    radial-gradient(circle at 12% 10%, rgba(79, 109, 245, .12), transparent 35%),
-    radial-gradient(circle at 88% 90%, rgba(59, 130, 246, .1), transparent 35%),
+    radial-gradient(circle at 12% 10%, @pageGlowPrimary, transparent 35%),
+    radial-gradient(circle at 88% 90%, @pageGlowSecondary, transparent 35%),
     @pageBg;
   // y轴方向超出时自动出现滚动轴
   overflow-y: auto;
@@ -20,7 +20,7 @@
     top: 20px;
     left: 0;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: @cardBg;
     height: auto;
     width: 120px;
     padding: 32px 16px;
@@ -48,21 +48,17 @@
 
       &:hover {
         color: @primaryColor;
-        background: rgba(79, 109, 245, .08);
+        background: @brandPrimarySoft;
         transform: translateY(-2px);
       }
 
       &.active {
         color: @primaryColor;
-        background: rgba(79, 109, 245, .12);
+        background: @brandPrimaryActive;
       }
 
       .icon {
-        display: block;
-        width: 24px;
-        height: 24px;
-        background: url("../imgs/icons/icon1.webp") no-repeat center;
-        background-size: contain;
+        font-size: 24px;
       }
 
       .text {
@@ -82,7 +78,7 @@
     right: -160px;
     top: 20px;
     border: 1px solid @borderSoft;
-    background: #fff;
+    background: @cardBg;
     border-radius: 20px;
     transition: right .2s ease;
 
@@ -103,7 +99,7 @@
 
         &:hover {
           color: @primaryColor;
-          background: rgba(79, 100, 245, .08)
+          background: @brandPrimarySoft;
         }
       }
     }
@@ -125,9 +121,9 @@
     padding: 32px 40px 40px;
     display: block;
     border: 1px solid @borderSoft;
-    background-color: #fff;
+    background-color: @cardBg;
     border-radius: 20px;
-    background: #fffaf3;
+    background: @lifeSurface;
 
     // 标题区
     .lifeTitle {
@@ -164,7 +160,7 @@
           border-radius: 20px;
           padding: 20px;
           display: flex;
-          background: #fffdf8;
+          background: @lifeSurfaceSoft;
           box-sizing: border-box;
           width: 100%;
           flex-direction: column;
@@ -180,7 +176,7 @@
             gap: 20px;
 
             .time {
-              color: #7b8191;
+              color: @textSubtle;
               font-size: 14px;
               letter-spacing: .5px;
             }
@@ -195,12 +191,12 @@
 
               border-radius: 50%;
 
-              background: rgba(255, 192, 203, .18);
+              background: @moodBg;
 
               font-size: 20px;
 
               box-shadow:
-                0 4px 12px rgba(20, 24, 40, .08);
+                @shadowSoft;
             }
           }
 
@@ -237,7 +233,7 @@
 
               h2 {
                 width: 100%;
-                color: #202436;
+                color: @textMain;
                 font-size: 22px;
                 font-weight: 700;
                 line-height: 1.35;
@@ -245,7 +241,7 @@
               }
 
               p {
-                color: #666f85;
+                color: @textMuted;
                 font-size: 15px;
                 line-height: 1.8;
                 letter-spacing: .2px;
@@ -259,8 +255,8 @@
 
           &:hover {
             transform: translateY(-6px);
-            box-shadow: 0 22px 45px rgba(20, 24, 40, .18);
-            border-color: rgba(80, 120, 255, .35);
+            box-shadow: @shadowCardHover;
+            border-color: @brandPrimaryBorder;
             cursor: pointer;
           }
 
@@ -280,11 +276,11 @@
   top: 50%;
   transform: translate(-50%, -50%);
   width: min(560px, calc(100% - 32px));
-  background: #fff;
+  background: @cardBg;
   border-radius: 14px;
   padding: 16px;
   z-index: 9999;
-  box-shadow: 0 20px 50px rgba(20, 24, 40, .25);
+  box-shadow: @shadowModal;
 
   .title {
     display: flex;
@@ -292,6 +288,18 @@
     justify-content: space-between;
     padding: 0 30px;
     margin-bottom: 12px;
+
+    .closeLifeModalButton {
+      border: 1px solid @borderSoft;
+      border-radius: 999px;
+      color: @textMuted;
+      background: @buttonBg;
+      cursor: pointer;
+
+      &:hover {
+        background: @buttonHoverBg;
+      }
+    }
   }
 
   .content {
@@ -334,7 +342,7 @@
 
           border-radius: 14px;
 
-          background: #f4f6fb;
+          background: @surfaceMuted;
 
           cursor: pointer;
 
@@ -347,10 +355,10 @@
 
         input:checked+span {
           background:
-            rgba(79, 109, 245, .12);
+            @brandPrimaryActive;
 
           box-shadow:
-            0 0 0 2px rgba(79, 109, 245, .25);
+            0 0 0 2px @brandPrimaryRing;
         }
       }
     }
@@ -362,7 +370,7 @@
     border: 0;
     border-radius: 10px;
     background: @primaryColor;
-    color: #fff;
+    color: @textInverse;
     cursor: pointer;
   }
 }

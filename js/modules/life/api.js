@@ -1,8 +1,17 @@
+import { loadToken } from "../utils/userStorage.js";
 const BASE_URL = "http://localhost:3001";
 
 // 获取日记信息
 export async function fetchDiaries() {
-  const res = await fetch(`${BASE_URL}/api/life/diaries`);
+  const token = loadToken();
+  if(!token)
+    throw new Error("登录已过期，请重新登录");
+
+  const res = await fetch(`${BASE_URL}/api/life/diaries`, {
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  });
 
   if (!res.ok) {
     throw new Error("获取日记失败");
@@ -14,7 +23,7 @@ export async function fetchDiaries() {
 
 // 创建日记
 export async function createDiary(lifeInfo) {
-  const { mood, title, content, imageFile,imageRatio } = lifeInfo;
+  const { mood, title, content, imageFile, imageRatio } = lifeInfo;
   const formData = new FormData();
 
   formData.append("mood", mood || "🥰");
@@ -22,7 +31,7 @@ export async function createDiary(lifeInfo) {
   formData.append("content", content || "");
   if (imageFile) {
     formData.append("image", imageFile);
-    formData.append("imageRatio",imageRatio);
+    formData.append("imageRatio", imageRatio);
   }
 
   const res = await fetch(`${BASE_URL}/api/life/diaries`, {
