@@ -7,7 +7,7 @@ const {authRequired}=require("../middleware/authMiddleware");
 const router=express.Router();
 
 router.get("/",authRequired,controller.getDiaries);
-router.post("/",upload.single("image"),controller.postDiary);
-router.delete("/:id",controller.deleteDiary);
+router.post("/",authRequired,upload.single("image"),controller.postDiary);
+router.delete("/:id",authRequired,controller.deleteDiary);
 
 module.exports=router;

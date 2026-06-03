@@ -31,13 +31,14 @@ function addLifeModal() {
     ev.stopPropagation();
 
     showModalMask(addLifeModal);
+  })
 
-    closeBut.addEventListener('click', (ev) => {
-      ev.preventDefault();
-      ev.stopPropagation();
+  // 给关闭按钮绑定点击事件
+  closeBut.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
 
-      closeModalMask();
-    })
+    closeModalMask();
   })
 }
 
@@ -66,6 +67,7 @@ function bindCardClickEvents() {
     ev.stopPropagation();
     const target = ev.target;
     const card = target.closest('.lifeCard');
+    if (!lifeState.isEdit) return;
     const id = Number(card.dataset.id);
 
     if (lifeState.selectDiariesId.includes(id))

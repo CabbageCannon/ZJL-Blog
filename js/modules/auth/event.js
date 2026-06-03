@@ -10,7 +10,7 @@ export function bindEvents() {
   bindLogoutEvents();
 }
 
-// 绑定输入输出框相关事件
+// 绑定登录退出框相关事件
 function bindAuthModalEvents() {
   const authLoginButton = document.querySelector(".banner .authUser .authLoginButton");
   const closeAuthModalButton = document.querySelector(".authModal .title .closeAuthModalButton");
@@ -31,7 +31,7 @@ function bindCommitFormEvents() {
 // 绑定退出登录相关事件
 function bindLogoutEvents() {
   const authLogoutButton = document.querySelector(".banner .authUser .authLogoutButton");
-  authLogoutButton.addEventListener("click",authLogout);
+  authLogoutButton.addEventListener("click", authLogout);
 }
 
 function authLogout(ev) {
@@ -63,14 +63,16 @@ async function userLoginAndRegister(ev) {
         username: username,
         password: password
       })
+      // 更新登录状态
+      authState.user = res.user;
+      authState.mode = "authenticated";
+      saveToken(res.token);
+      authState.token=res.token;
     } catch (err) {
       alert(err.message);
+    } finally {
+      clearInputs();
     }
-
-    // 更新登录状态
-    authState.user = res.user;
-    authState.mode = "authenticated";
-    saveToken(res.token);
 
     // 将登录框关闭
     closeModalMask();
@@ -91,11 +93,13 @@ async function userLoginAndRegister(ev) {
         nickname: nickname,
         password: password
       })
+      authState.mode = "login";
     } catch (err) {
       alert(err.message);
+    } finally {
+      clearInputs();
     }
 
-    authState.mode = "login";
     renderAuthModal(authState);
     return;
   }

@@ -23,6 +23,7 @@ export async function fetchDiaries() {
 
 // 创建日记
 export async function createDiary(lifeInfo) {
+  const token=loadToken();
   const { mood, title, content, imageFile, imageRatio } = lifeInfo;
   const formData = new FormData();
 
@@ -35,6 +36,9 @@ export async function createDiary(lifeInfo) {
   }
 
   const res = await fetch(`${BASE_URL}/api/life/diaries`, {
+    headers:{
+      Authorization:`Bearer ${token}`
+    },
     method: "POST",
     body: formData
   });
@@ -50,7 +54,11 @@ export async function createDiary(lifeInfo) {
 
 // 删除日记
 export async function deleteDiary(id) {
+  const token=loadToken();
   const res = await fetch(`${BASE_URL}/api/life/diaries/${id}`, {
+    headers:{
+      Authorization:`Bearer ${token}`
+    },
     method: "DELETE"
   });
 

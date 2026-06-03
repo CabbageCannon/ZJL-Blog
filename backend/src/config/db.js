@@ -24,6 +24,7 @@ db.serialize(() => {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       username TEXT NOT NULL UNIQUE,
       nickname TEXT,
+      image_url TEXT,
       password_hash TEXT NOT NULL,
       created_at TEXT NOT NULL
       )`)
@@ -38,6 +39,7 @@ db.serialize(() => {
       title TEXT,
       content TEXT,
       image_url TEXT,
+      image_ratio,
       created_at TEXT NOT NULL,
       FOREIGN KEY(user_id) REFERENCES users(id)
         ON DELETE CASCADE

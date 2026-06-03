@@ -15,7 +15,6 @@ function authRequired(req, res, next) {
 
   try{
     req.user=jwt.verify(token,JWT_SELECT);
-    console.log(req)
     next();
   }catch(err){
     res.status(401).json({message:"登录已过期"});
