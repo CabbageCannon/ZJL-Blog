@@ -2,6 +2,7 @@ import { initEvents } from "./event.js";
 import { lifeState } from "./state.js";
 import { fetchDiaries } from "./api.js";
 import { render } from "./render.js";
+import { isLifeVisible } from "./utils/isLifeVisible.js";
 
 export async function initLife() {
   // 尝试从后端拉取日记数据
@@ -20,7 +21,8 @@ export async function initLife() {
     lifeState.diaryList = [];
     lifeState.isEdit = false;
     lifeState.selectDiariesId = [];
-    render(lifeState);
+    if(isLifeVisible())
+      render(lifeState);
   })
 
   // 绑定事件
@@ -39,5 +41,6 @@ async function loadLifeDiaries() {
 
   lifeState.isEdit = false;
   lifeState.selectDiariesId = [];
-  render(lifeState);
+  if(isLifeVisible())
+    render(lifeState);
 }

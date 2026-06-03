@@ -78,6 +78,7 @@ async function userLoginAndRegister(ev) {
       }))
     } catch (err) {
       alert(err.message);
+      return;
     } finally {
       clearInputs();
     }
@@ -104,6 +105,7 @@ async function userLoginAndRegister(ev) {
       authState.mode = "login";
     } catch (err) {
       alert(err.message);
+      return;
     } finally {
       clearInputs();
     }

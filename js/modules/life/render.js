@@ -8,19 +8,25 @@ export function render(lifeState) {
   const lifeList = document.querySelector('#life .lifeList');
   const lifeColumns = Array.from(lifeList.querySelectorAll(".lifeColumn"));
   const editBut = document.querySelector("#life .leftBanner .but.editDiary");
-  // 清空日记内容
-  lifeColumns.forEach(column => column.innerHTML = "");
-  diaryList.forEach(cardInfo => {
-    const card = createLifeCard(cardInfo, lifeState);
-    const shortestColumn = getShortestColumn(lifeColumns);
-    shortestColumn.appendChild(card);
-  })
+
+  // 渲染日记内容
+  renderLifeCards(lifeColumns, diaryList, lifeState);
 
   // 渲染编辑框
   renderLifeCardActions(lifeState);
 
   // 渲染编辑按钮
   renderEditButton(editBut, lifeState);
+}
+
+// 渲染日记内容
+function renderLifeCards(lifeColumns, diaryList, lifeState) {
+  lifeColumns.forEach(column => column.innerHTML = "");
+  diaryList.forEach(cardInfo => {
+    const card = createLifeCard(cardInfo, lifeState);
+    const shortestColumn = getShortestColumn(lifeColumns);
+    shortestColumn.appendChild(card);
+  })
 }
 
 // 创建卡片

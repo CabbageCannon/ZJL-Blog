@@ -119,14 +119,11 @@ async function commitLifeDiary() {
 
 // 监听页面切换
 function listenSectionShow() {
-  let hasRewndered = false;
   document.addEventListener("section:show", (ev) => {
-    if (hasRewndered) return;
     // 如果不是切换到自己的页面则直接返回
     if (ev.detail.sectionId !== "life") return;
 
     render(lifeState);
-    hasRewndered = true;
   })
 }
 
