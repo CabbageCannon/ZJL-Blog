@@ -41,6 +41,7 @@ function authLogout(ev) {
   removeToken();
   authState.token = null;
   authState.user = null;
+  document.dispatchEvent(new CustomEvent("auth:logout"));
   renderAuthUser(authState);
 }
 
@@ -67,7 +68,14 @@ async function userLoginAndRegister(ev) {
       authState.user = res.user;
       authState.mode = "authenticated";
       saveToken(res.token);
-      authState.token=res.token;
+      authState.token = res.token;
+
+      // 登录成功后,发送一个事件
+      document.dispatchEvent(new CustomEvent("auth:login", {
+        detail: {
+          user: authState.user
+        }
+      }))
     } catch (err) {
       alert(err.message);
     } finally {

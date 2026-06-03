@@ -1,4 +1,5 @@
 import { createIcon } from "../utils/createIcon.js";
+import {isMobileView} from "../utils/isMobileView.js";
 
 // 根据 state 渲染 DOM
 export function renderMusicList(state) {
@@ -115,12 +116,6 @@ function createMessage(text, iconName) {
 
   message.appendChild(messageText);
   return message;
-}
-
-
-// 检验当前是否是移动端布局
-function isMobileView() {
-  return window.matchMedia("(max-width:768px)").matches;
 }
 
 // 渲染编辑框和编辑按钮

@@ -100,7 +100,7 @@ body {
       border-radius: 20px;
       transition: transform .2s ease, background .2s ease;
 
-      &:hover{
+      &:hover {
         transform: translateY(-2px);
         background-color: @brandPrimarySoft;
       }
@@ -128,48 +128,68 @@ body {
 
   // banner区域
   .banner {
-    height: 72px;
-    padding: 0 16px;
+    height: 108px;
+    padding: 10px 12px;
     font-size: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
     border-radius: 0;
 
     .logo {
-      flex: none;
-    }
-
-    .nav {
-      // position设置为static:元素属于普通文档流(默认)
-      position: static;
-      transform: none;
-
-      ul {
-        gap: 6px;
-      }
-
-      a {
-        height: 34px;
-        padding: 0 10px;
-        font-size: 14px;
-      }
+      height: 40px;
+      display: flex;
+      align-items: center;
     }
 
     .user {
+      height: 40px;
+      margin-left: auto;
 
-      // 用户名可先隐藏，只保留头像
       .name {
         display: none;
       }
 
       img {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
+      }
+
+      .authLoginButton,
+      .authLogoutButton {
+        min-height: 36px;
+        padding: 0 10px;
+      }
+    }
+
+    .nav {
+      order: 3;
+      width: 100%;
+      // 横向超出后有滚动轴
+      overflow-x: auto;
+      // position设置为static:元素属于普通文档流(默认)
+      position: static;
+      transform: none;
+
+      ul {
+        // 扩展到内容完全放的下为止
+        width: max-content;
+        min-width: 100%;
+        gap: 6px;
+      }
+
+      a {
+        height: 38px;
+        padding: 0 12px;
+        font-size: 14px;
+        white-space: nowrap;
       }
     }
   }
 
   // content区域
   .indexContent {
-    padding-top: 72px;
+    padding-top: 108px;
     overflow-y: auto;
 
     #home {

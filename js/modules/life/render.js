@@ -1,5 +1,6 @@
 import { formatDate } from "../utils/formatDate.js";
 import { resolveImageUrl } from "./api.js";
+import { isMobileView } from "../utils/isMobileView.js";
 
 // 渲染页面
 export function render(lifeState) {
@@ -19,7 +20,7 @@ export function render(lifeState) {
   renderLifeCardActions(lifeState);
 
   // 渲染编辑按钮
-  renderEditButton(editBut,lifeState);
+  renderEditButton(editBut, lifeState);
 }
 
 // 创建卡片
@@ -97,18 +98,25 @@ function getShortestColumn(columns) {
 
 // 渲染编辑框
 function renderLifeCardActions(lifeState) {
-  const lifeCardActions = document.querySelector("#life .lifeCardActions");
+  const lifeCardActions = document.querySelector(".lifeCardActions");
 
-  if (lifeState.isEdit) {
-    lifeCardActions.style.right = "0";
-    lifeState.selectDiariesId.length === 0 ? lifeCardActions.classList.add("disabled") : lifeCardActions.classList.remove("disabled");
+  lifeCardActions.classList.toggle(
+    "disabled",
+    lifeState.selectDiariesId.length === 0
+  )
+
+  if (isMobileView()) {
+    lifeCardActions.style.right = "12px";
+    lifeCardActions.style.bottom = lifeState.isEdit ? "12px" : "-96px";
   } else {
-    lifeCardActions.style.right = "-160px"
+    lifeCardActions.style.bottom = "auto";
+    lifeCardActions.style.right = lifeState.isEdit ? "0" : "-160px";
   }
+
 }
 
 // 渲染编辑按钮
-function renderEditButton(editBut,lifeState) {
+function renderEditButton(editBut, lifeState) {
   if (lifeState.isEdit)
     editBut.querySelector(".text").textContent = "取消";
   else

@@ -55,7 +55,6 @@ function editLifeCard() {
 
       render(lifeState)
     }
-
   })
 }
 
@@ -133,7 +132,7 @@ function listenSectionShow() {
 
 // 点击删除按钮删除对应日记
 function deleteDiaries() {
-  const deleteButton = document.querySelector("#life .lifeCardActions .but.deleteButton");
+  const deleteButton = document.querySelector(".lifeCardActions .but.deleteButton");
 
   deleteButton.addEventListener('click', handleDeleteDiary);
 }

@@ -155,35 +155,55 @@ body {
 }
 @media (max-width: 768px) {
   .banner {
-    height: 72px;
-    padding: 0 16px;
+    height: 108px;
+    padding: 10px 12px;
     font-size: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
     border-radius: 0;
   }
   .banner .logo {
-    flex: none;
+    height: 40px;
+    display: flex;
+    align-items: center;
   }
-  .banner .nav {
-    position: static;
-    transform: none;
-  }
-  .banner .nav ul {
-    gap: 6px;
-  }
-  .banner .nav a {
-    height: 34px;
-    padding: 0 10px;
-    font-size: 14px;
+  .banner .user {
+    height: 40px;
+    margin-left: auto;
   }
   .banner .user .name {
     display: none;
   }
   .banner .user img {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
+  }
+  .banner .user .authLoginButton,
+  .banner .user .authLogoutButton {
+    min-height: 36px;
+    padding: 0 10px;
+  }
+  .banner .nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    position: static;
+    transform: none;
+  }
+  .banner .nav ul {
+    width: max-content;
+    min-width: 100%;
+    gap: 6px;
+  }
+  .banner .nav a {
+    height: 38px;
+    padding: 0 12px;
+    font-size: 14px;
+    white-space: nowrap;
   }
   .indexContent {
-    padding-top: 72px;
+    padding-top: 108px;
     overflow-y: auto;
   }
   .indexContent #home .homeWrap {
@@ -604,12 +624,14 @@ body {
     line-height: 1.6;
   }
   #music .musicWrap .musicMain .cards {
+    align-items: center;
     gap: 18px;
     flex-direction: column;
     align-content: center;
   }
   #music .musicWrap .musicMain .cards .card {
-    width: 60%;
+    width: 100%;
+    max-width: 360px;
     height: auto;
   }
   #music .musicWrap .musicMain .cards .card .cardCover {
@@ -623,12 +645,12 @@ body {
     top: auto;
     right: 16px;
     bottom: -180px;
-    width: calc(100%-32px);
+    width: calc(100% - 32px);
     border-radius: 16px;
     transition: bottom 0.3s ease;
   }
   .addMusicModal {
-    width: calc(100%-32px);
+    width: calc(100% - 32px);
     padding: 20px;
   }
   .addMusicModal .title h2 {
@@ -699,43 +721,6 @@ body.is-resizing .musicCardActions {
 #life .leftBanner .but .text {
   font-size: 14px;
   line-height: 1;
-}
-#life .lifeCardActions {
-  box-sizing: border-box;
-  width: 160px;
-  padding: 20px 10px;
-  position: absolute;
-  right: -160px;
-  top: 20px;
-  border: 1px solid oklch(28% 0.035 262 / 0.09);
-  background: #fff;
-  border-radius: 20px;
-  transition: right 0.2s ease;
-}
-#life .lifeCardActions ul {
-  display: flex;
-  gap: 10px;
-}
-#life .lifeCardActions ul li {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  color: oklch(47% 0.03 262);
-  border-radius: 15px;
-  height: 42px;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-#life .lifeCardActions ul li:hover {
-  color: oklch(58% 0.18 262);
-  background: oklch(96% 0.025 262);
-}
-#life .lifeCardActions.disabled {
-  opacity: 0.5;
-}
-#life .lifeCardActions.disabled li {
-  cursor: not-allowed;
 }
 #life .lifeWrap {
   box-sizing: border-box;
@@ -809,10 +794,6 @@ body.is-resizing .musicCardActions {
   box-shadow: 0 10px 24px oklch(22% 0.035 262 / 0.08);
 }
 #life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
   width: 100%;
 }
 #life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent .pic {
@@ -820,6 +801,7 @@ body.is-resizing .musicCardActions {
   max-height: 400px;
   overflow: hidden;
   border-radius: 20px;
+  margin-bottom: 20px;
 }
 #life .lifeWrap .lifeList .lifeColumn .lifeCard .lifeCardContent .pic img {
   width: 100%;
@@ -872,7 +854,7 @@ body.is-resizing .musicCardActions {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(560px, calc(100% - 32px));
+  width: min(560px, calc 68%);
   background: #fff;
   border-radius: 14px;
   padding: 16px;
@@ -949,6 +931,147 @@ body.is-resizing .musicCardActions {
   background: oklch(58% 0.18 262);
   color: #fff;
   cursor: pointer;
+}
+.lifeCardActions {
+  box-sizing: border-box;
+  width: 160px;
+  padding: 20px 10px;
+  position: absolute;
+  right: -160px;
+  top: 120px;
+  border: 1px solid oklch(28% 0.035 262 / 0.09);
+  background: #fff;
+  border-radius: 20px;
+  transition: right 0.2s ease;
+}
+.lifeCardActions ul {
+  display: flex;
+  gap: 10px;
+}
+.lifeCardActions ul li {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  color: oklch(47% 0.03 262);
+  border-radius: 15px;
+  height: 42px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.lifeCardActions ul li:hover {
+  color: oklch(58% 0.18 262);
+  background: oklch(96% 0.025 262);
+}
+.lifeCardActions.disabled {
+  opacity: 0.5;
+}
+.lifeCardActions.disabled li {
+  cursor: not-allowed;
+}
+@media (max-width: 768px) {
+  #life {
+    padding: 12px;
+  }
+  #life .leftBanner {
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid oklch(28% 0.035 262 / 0.09);
+    border-radius: 14px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+  #life .leftBanner .but {
+    width: 96px;
+    height: 64px;
+    gap: 8px;
+  }
+  #life .leftBanner .but .icon {
+    font-size: 22px;
+  }
+  #life .leftBanner .but .text {
+    font-size: 14px;
+  }
+  #life .lifeWrap {
+    width: 100%;
+    padding: 18px;
+    border-radius: 14px;
+  }
+  #life .lifeWrap .lifeTitle {
+    width: 100%;
+    padding: 18px;
+    border-radius: 14px;
+  }
+  #life .lifeWrap .lifeTitle h2 {
+    font-size: 24px;
+  }
+  #life .lifeWrap .lifeTitle p {
+    font-size: 14px;
+  }
+  #life .lifeWrap .lifeList {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  #life .lifeWrap .lifeList .lifeColumn {
+    gap: 12px;
+  }
+  #life .lifeWrap .lifeList .lifeCard {
+    padding: 16px;
+    border-radius: 14px;
+  }
+  #life .lifeWrap .lifeList .lifeCard .lifeCardTitle {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0;
+  }
+  #life .lifeWrap .lifeList .lifeCard .lifeCardContent {
+    gap: 14px;
+  }
+  #life .lifeWrap .lifeList .lifeCard .lifeCardContent .pic {
+    border-radius: 14px;
+  }
+  #life .lifeWrap .lifeList .lifeCard .lifeCardContent .text {
+    align-items: flex-start;
+  }
+  #life .lifeWrap .lifeList .lifeCard .lifeCardContent .text h2 {
+    font-size: 20px;
+  }
+  #life .lifeWrap .lifeList .lifeCard .lifeCardContent .text p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .addLifeModal {
+    width: calc(100% - 24px);
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    padding: 16px;
+  }
+  .addLifeModal .title {
+    padding: 0;
+  }
+  .addLifeModal .content {
+    padding: 8px 0;
+  }
+  .lifeCardActions {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: -96px;
+    width: auto;
+    padding: 10px;
+    border-radius: 14px;
+    transition: bottom 0.2s ease;
+  }
+  .lifeCardActions ul {
+    flex-direction: row;
+    justify-content: center;
+  }
 }
 #home {
   background: radial-gradient(circle at 12% 10%, oklch(70% 0.16 262 / 0.12), transparent 35%), radial-gradient(circle at 88% 90%, oklch(72% 0.14 235 / 0.1), transparent 35%), oklch(97% 0.012 262);
@@ -1237,9 +1360,33 @@ body.is-resizing .musicCardActions {
 @media (max-width: 768px) {
   #study .studyWrap {
     padding: 24px 16px 32px;
-  }
-  #study .studyWrap .studyCards {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  #study .studyWrap .studyHeader {
+    padding: 18px;
+  }
+  #study .studyWrap .studyHeader h2 {
+    font-size: 24px;
+  }
+  #study .studyWrap .studyHeader p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  #study .studyWrap .studyAside {
+    gap: 12px;
+  }
+  #study .studyWrap .studyAside .studyPlan {
+    padding: 18px;
+  }
+  #study .studyWrap .studyNotes {
+    min-height: auto;
+    padding: 18px;
+  }
+  #study .studyWrap .studyNotes .studyNotesHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
   }
   #study .studyWrap .studyNotes {
     padding: 20px;

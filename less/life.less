@@ -69,50 +69,6 @@
     }
   }
 
-  // 编辑框
-  .lifeCardActions {
-    box-sizing: border-box;
-    width: 160px;
-    padding: 20px 10px;
-    position: absolute;
-    right: -160px;
-    top: 20px;
-    border: 1px solid @borderSoft;
-    background: @cardBg;
-    border-radius: 20px;
-    transition: right .2s ease;
-
-    ul {
-      display: flex;
-      gap: 10px;
-
-      li {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        color: @textMuted;
-        border-radius: 15px;
-        height: 42px;
-        cursor: pointer;
-        transition: background .2s ease, color .2s ease;
-
-        &:hover {
-          color: @primaryColor;
-          background: @brandPrimarySoft;
-        }
-      }
-    }
-
-    &.disabled {
-      opacity: .5;
-
-      li {
-        cursor: not-allowed;
-      }
-    }
-  }
-
   // 内容区
   .lifeWrap {
     box-sizing: border-box;
@@ -202,10 +158,6 @@
 
           // 日记核心内容
           .lifeCardContent {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
             width: 100%;
 
             // 图片区域
@@ -214,6 +166,7 @@
               max-height: 400px;
               overflow: hidden;
               border-radius: 20px;
+              margin-bottom: 20px;
 
               img {
                 width: 100%;
@@ -275,7 +228,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(560px, calc(100% - 32px));
+  width: min(560px, calc (100% - 32px));
   background: @cardBg;
   border-radius: 14px;
   padding: 16px;
@@ -372,5 +325,177 @@
     background: @primaryColor;
     color: @textInverse;
     cursor: pointer;
+  }
+}
+
+// 生活区编辑框
+.lifeCardActions {
+  box-sizing: border-box;
+  width: 160px;
+  padding: 20px 10px;
+  position: absolute;
+  right: -160px;
+  top: 120px;
+  border: 1px solid @borderSoft;
+  background: @cardBg;
+  border-radius: 20px;
+  transition: right .2s ease;
+
+  ul {
+    display: flex;
+    gap: 10px;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      color: @textMuted;
+      border-radius: 15px;
+      height: 42px;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+
+      &:hover {
+        color: @primaryColor;
+        background: @brandPrimarySoft;
+      }
+    }
+  }
+
+  &.disabled {
+    opacity: .5;
+
+    li {
+      cursor: not-allowed;
+    }
+  }
+}
+
+// 响应式布局
+@media(max-width:768px) {
+  #life {
+    padding: 12px;
+
+    .leftBanner {
+      position: static;
+      width: 100%;
+      height: auto;
+      padding: 12px;
+      margin-bottom: 12px;
+      border: 1px solid @borderSoft;
+      border-radius: 14px;
+      flex-direction: row;
+      justify-content: center;
+      gap: 10px;
+
+      .but {
+        width: 96px;
+        height: 64px;
+        gap: 8px;
+
+        .icon {
+          font-size: 22px;
+        }
+
+        .text {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .lifeWrap {
+      width: 100%;
+      padding: 18px;
+      border-radius: 14px;
+
+      .lifeTitle {
+        width: 100%;
+        padding: 18px;
+        border-radius: 14px;
+
+        h2 {
+          font-size: 24px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
+
+      .lifeList {
+        grid-template-columns: 1fr;
+        gap: 12px;
+
+        .lifeColumn {
+          gap: 12px;
+        }
+
+        .lifeCard {
+          padding: 16px;
+          border-radius: 14px;
+
+          .lifeCardTitle {
+            width: 100%;
+            justify-content: space-between;
+            padding: 0;
+          }
+
+          .lifeCardContent{
+            gap: 14px;
+
+            .pic{
+              border-radius: 14px;
+            }
+
+            .text{
+              align-items: flex-start;
+
+              h2{
+                font-size: 20px;
+              }
+
+              p{
+                font-size: 14px;
+                line-height: 1.7;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .addLifeModal{
+    width: calc(100% - 24px);
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    padding: 16px;
+
+    .title{
+      padding: 0;
+    }
+
+    .content{
+      padding: 8px 0;
+    }
+  }
+
+  .lifeCardActions {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: -96px;
+    width: auto;
+    padding: 10px;
+    border-radius: 14px;
+    transition: bottom .2s ease;
+
+    ul {
+      flex-direction: row;
+      justify-content: center;
+    }
   }
 }

@@ -364,12 +364,14 @@
         }
 
         .cards {
+          align-items: center;
           gap: 18px;
           flex-direction: column;
           align-content: center;
 
           .card {
-            width: 60%;
+            width: 100%;
+            max-width: 360px;
             height: auto;
 
             .cardCover {
@@ -391,13 +393,13 @@
     top: auto;
     right: 16px;
     bottom: -180px;
-    width: calc(100%-32px);
+    width: calc(100% - 32px);
     border-radius: 16px;
     transition: bottom .3s ease;
   }
 
   .addMusicModal {
-    width: calc(100%-32px);
+    width: calc(100% - 32px);
     padding: 20px;
 
     .title {

@@ -147,20 +147,6 @@
         </div>
       </div>
 
-      <!-- 编辑日记卡片选项框 -->
-      <div class="lifeCardActions">
-        <ul>
-          <li>
-            <div class="but deleteButton iconTextButton">
-              <svg class="iconSvg iconSvg--sm iconDanger" aria-hidden="true">
-                <use href="./assets/icons/sprite.svg#icon-delete"></use>
-              </svg>
-              <span>删除</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-
       <!-- 内容 -->
       <div class="lifeWrap">
         <!-- 标题 -->
@@ -259,6 +245,16 @@
         </section>
 
         <aside class="studyAside">
+          <!-- 学习计划 -->
+          <div class="studyPlan">
+            <h3>近期学习计划</h3>
+            <ul>
+              <li>完善学习板块的页面结构和样式。</li>
+              <li>复盘生活板块的后端接口和图片上传流程。</li>
+              <li>整理音乐模块中的数据渲染、编辑模式和本地存储逻辑。</li>
+            </ul>
+          </div>
+
           <!-- 学习卡片 -->
           <section class="studyCards">
             <article class="studyCard active" data-category="all" role="button" tabindex="0">
@@ -298,18 +294,7 @@
               <p>学习 Express、接口设计、文件上传和 SQLite 数据存储。</p>
             </article>
           </section>
-
-          <!-- 学习计划 -->
-          <div class="studyPlan">
-            <h3>近期学习计划</h3>
-            <ul>
-              <li>完善学习板块的页面结构和样式。</li>
-              <li>复盘生活板块的后端接口和图片上传流程。</li>
-              <li>整理音乐模块中的数据渲染、编辑模式和本地存储逻辑。</li>
-            </ul>
-          </div>
         </aside>
-
 
         <!-- 笔记列表容器 -->
         <section class="studyNotes">
@@ -469,6 +454,20 @@
     </div>
 
     <button class="commitLifeButton">发布</button>
+  </div>
+
+  <!-- 生活区编辑日记卡片选项框 -->
+  <div class="lifeCardActions">
+    <ul>
+      <li>
+        <div class="but deleteButton iconTextButton">
+          <svg class="iconSvg iconSvg--sm iconDanger" aria-hidden="true">
+            <use href="./assets/icons/sprite.svg#icon-delete"></use>
+          </svg>
+          <span>删除</span>
+        </div>
+      </li>
+    </ul>
   </div>
 
   <script type="module" src="./js/main.js"></script>
