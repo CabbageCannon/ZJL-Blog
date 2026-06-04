@@ -1,7 +1,7 @@
 const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 
-const dbPath = path.join(__dirname, '../../zjl_blog.db');
+const dbPath = process.env.DB_PATH || path.join(__dirname, '../../zjl_blog.db');
 
 const db = new sqlite3.Database(dbPath, (err) => {
   // 数据库成功打开后err===null

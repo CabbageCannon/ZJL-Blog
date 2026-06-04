@@ -56,3 +56,6 @@ backend/uploads/
 # optional
 # =========================
 coverage/
+
+# Local Netlify folder
+.netlify

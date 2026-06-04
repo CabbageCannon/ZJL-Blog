@@ -1,0 +1,10 @@
+backend/
+node_modules/
+less/
+docs/
+.playwright-cli/
+.vscode/
+AGENTS.md
+PRODUCT.md
+frontend-skills-usage-guide.md
+package-lock.json
