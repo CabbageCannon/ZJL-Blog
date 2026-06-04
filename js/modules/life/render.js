@@ -6,11 +6,10 @@ import { isMobileView } from "../utils/isMobileView.js";
 export function render(lifeState) {
   const diaryList = lifeState.diaryList;
   const lifeList = document.querySelector('#life .lifeList');
-  const lifeColumns = Array.from(lifeList.querySelectorAll(".lifeColumn"));
   const editBut = document.querySelector("#life .leftBanner .but.editDiary");
 
   // 渲染日记内容
-  renderLifeCards(lifeColumns, diaryList, lifeState);
+  renderLifeCards(lifeList, diaryList, lifeState);
 
   // 渲染编辑框
   renderLifeCardActions(lifeState);
@@ -20,11 +19,28 @@ export function render(lifeState) {
 }
 
 // 渲染日记内容
-function renderLifeCards(lifeColumns, diaryList, lifeState) {
-  lifeColumns.forEach(column => column.innerHTML = "");
+function renderLifeCards(lifeList, diaryList, lifeState) {
+  lifeList.innerHTML = "";
+
+  if (diaryList.length === 0) {
+    lifeList.appendChild(createMessage("还没有日记,发布第一条吧"));
+    return;
+  }
+
+  const lifeColumns = [];
+
+  // 创建lifeColumn
+  new Array(3).fill(0).forEach(() => {
+    const lifeColumn = document.createElement("div");
+    lifeColumn.className = "lifeColumn";
+    lifeList.appendChild(lifeColumn);
+    lifeColumns.push(lifeColumn);
+  })
+
   diaryList.forEach(cardInfo => {
     const card = createLifeCard(cardInfo, lifeState);
     const shortestColumn = getShortestColumn(lifeColumns);
+    console.log(lifeColumns);
     shortestColumn.appendChild(card);
   })
 }
@@ -127,4 +143,12 @@ function renderEditButton(editBut, lifeState) {
     editBut.querySelector(".text").textContent = "取消";
   else
     editBut.querySelector(".text").textContent = "编辑";
+}
+
+// 创建提示信息
+function createMessage(text) {
+  const message = document.createElement("p");
+  message.className = "lifeListMessage";
+  message.textContent = text;
+  return message;
 }

@@ -105,6 +105,12 @@
       column-gap: 10px;
       align-items: start;
 
+      .lifeListMessage {
+        grid: 3fr;
+        color: @textMuted;
+        font-size: 15px;
+      }
+
       .lifeColumn {
         display: flex;
         flex-direction: column;
@@ -228,7 +234,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(560px, calc (100% - 32px));
+  width: ~"min(560px, calc(100% - 32px))";
   background: @cardBg;
   border-radius: 14px;
   padding: 16px;
@@ -442,21 +448,21 @@
             padding: 0;
           }
 
-          .lifeCardContent{
+          .lifeCardContent {
             gap: 14px;
 
-            .pic{
+            .pic {
               border-radius: 14px;
             }
 
-            .text{
+            .text {
               align-items: flex-start;
 
-              h2{
+              h2 {
                 font-size: 20px;
               }
 
-              p{
+              p {
                 font-size: 14px;
                 line-height: 1.7;
               }
@@ -467,17 +473,17 @@
     }
   }
 
-  .addLifeModal{
+  .addLifeModal {
     width: calc(100% - 24px);
     max-height: calc(100dvh - 24px);
     overflow-y: auto;
     padding: 16px;
 
-    .title{
+    .title {
       padding: 0;
     }
 
-    .content{
+    .content {
       padding: 8px 0;
     }
   }

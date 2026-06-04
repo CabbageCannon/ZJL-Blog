@@ -854,7 +854,7 @@ body.is-resizing .musicCardActions {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(560px, calc 68%);
+  width: min(560px, calc(100% - 32px));
   background: #fff;
   border-radius: 14px;
   padding: 16px;

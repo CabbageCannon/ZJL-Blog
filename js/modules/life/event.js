@@ -3,6 +3,7 @@ import { createDiary, deleteDiary } from "./api.js";
 import { render } from "./render.js";
 import { lifeState } from "./state.js";
 import { getImageRatio } from "../utils/getImageRatio.js";
+import { loadToken } from "../utils/userStorage.js";
 
 export function initEvents() {
   // 点击上传按钮弹出上传框
@@ -30,6 +31,9 @@ function addLifeModal() {
     ev.preventDefault();
     ev.stopPropagation();
 
+    // 如果没登录,直接返回,不允许上传
+    if (!requireLogin()) return;
+
     showModalMask(addLifeModal);
   })
 
@@ -46,6 +50,11 @@ function addLifeModal() {
 function editLifeCard() {
   const editBut = document.querySelector("#life .leftBanner .but.editDiary");
   editBut.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    if (!requireLogin()) return;
+    
     if (lifeState.isEdit) {
       lifeState.isEdit = false;
       lifeState.selectDiariesId = [];
@@ -66,6 +75,7 @@ function bindCardClickEvents() {
     ev.stopPropagation();
     const target = ev.target;
     const card = target.closest('.lifeCard');
+    if (!card) return;
     if (!lifeState.isEdit) return;
     const id = Number(card.dataset.id);
 
@@ -172,4 +182,14 @@ async function handleDeleteDiary(ev) {
   lifeState.selectDiariesId = [];
   // 重新渲染
   render(lifeState);
+}
+
+// 查看登录状态
+function requireLogin() {
+  const token = loadToken();
+
+  if (token) return true;
+
+  alert("请先登录后再操作生活日记");
+  return false;
 }
