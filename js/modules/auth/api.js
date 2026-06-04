@@ -1,4 +1,6 @@
-const baseUrl = "http://localhost:3001";
+import { API_BASE_URL } from "../../config/apiConfig.js";
+
+const baseUrl=API_BASE_URL;
 
 // 用户注册
 export async function registerUser(userInfo) {
