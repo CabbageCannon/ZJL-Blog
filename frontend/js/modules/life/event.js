@@ -4,6 +4,8 @@ import { render, renderLifeCardActions } from "./render.js";
 import { lifeState } from "./state.js";
 import { getImageRatio } from "../utils/getImageRatio.js";
 import { loadToken } from "../utils/userStorage.js";
+import { compressImageFile } from "../utils/compressImage.js";
+import { showToast } from "../utils/toast.js";
 
 export function initEvents() {
   // 点击上传按钮弹出上传框
@@ -95,36 +97,89 @@ async function commitLifeDiary() {
   const titleInput = addLifeModal.querySelector(".lifeTitleInput");
   const contentInput = addLifeModal.querySelector(".lifeContentInput");
   const imageInput = addLifeModal.querySelector(".lifeImageInput");
-  const cardInfo = {};
+  let isSubmitting = false;
 
   const commitFunc = async function (ev) {
     ev.preventDefault();
     ev.stopPropagation();
+
+    // 如果正在提交表单，直接返回
+    if (isSubmitting) return;
+
+    const cardInfo = {};
     const moodInput = addLifeModal.querySelector('input[name="mood"]:checked');
+    const originImageFile = imageInput.files[0] || null;
+    const title = titleInput.value.trim();
+    const content = contentInput.value.trim();
 
-    // 将表单信息传入cardInfo
-    // 处理文件信息
-    const imageFile = imageInput.files[0] || null;
-    const imageInfo = await getImageRatio(imageFile);
+    // 基础校验
+    if (!title && !content && !originImageFile) {
+      showToast("至少写点内容或选择一张图片", "warning");
+      return;
+    }
 
-    cardInfo.title = titleInput.value;
-    cardInfo.mood = moodInput ? moodInput.value : null;
-    cardInfo.content = contentInput.value;
-    cardInfo.imageFile = imageFile;
-    cardInfo.imageRatio = imageFile ? imageInfo.imageRatio : null;
+    isSubmitting = true;
+    setButtonLoading(commitLifeButton, true, "发布中");
 
     try {
+      // 压缩上传的图片
+      const compressedImageFile = originImageFile
+        ? await compressImageFile(originImageFile)
+        : null;
+
+      const imageRatio = compressImageFile
+        ? await getImageRatio(compressedImageFile)
+        : null;
+
+      // 日记卡片信息
+      const cardInfo = {
+        title,
+        content,
+        mood: moodInput ? moodInput : null,
+        imageFile: compressedImageFile,
+        imageRatio
+      };
+
+      // 调用api创建日记
       const createdDiary = await createDiary(cardInfo);
       lifeState.diaryList.push(createdDiary);
       render();
 
+      // 关闭弹出框
       closeModalMask();
+      // 展示发布成功信息
+      showToast("日记发布成功", "success");
     } catch (err) {
       console.error(err);
-      alert(err.message || "日记发布失败，请稍后再试");
+      showToast(err.message || "发布日记失败，请稍后再试", "error");
+    } finally {
+      isSubmitting = false;
+      setButtonLoading(commitLifeButton, false);
     }
   }
   commitLifeButton.addEventListener('click', commitFunc);
+}
+
+// 设置按钮加载状态
+function setButtonLoading(commitLifeButton, loading, loadingText = "处理中") {
+  if (!commitLifeButton) return;
+
+  // 如果此时不是加载阶段
+  if (!loading) {
+    commitLifeButton.textContent = commitLifeButton.dataset.originText || "发布";
+    commitLifeButton.disabled = false;
+    commitLifeButton.classList.remove("is-loading");
+    return;
+  } else {
+    if (!commitLifeButton.dataset.originText) {
+      commitLifeButton.dataset.originText = commitLifeButton.textContent;
+    }
+
+    commitLifeButton.textContent = loadingText;
+    commitLifeButton.disabled = true;
+    commitLifeButton.classList.add("is-loading");
+    return;
+  }
 }
 
 // 监听页面切换

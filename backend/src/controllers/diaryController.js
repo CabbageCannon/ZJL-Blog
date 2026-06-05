@@ -49,9 +49,11 @@ async function postDiary(req, res, next) {
     // 400是错误状态码
     if (!title && !content && !imagePath) return res.status(400).json({ message: "title/content/image required" });
 
-    const created = await model.createDiary({
+    let created = await model.createDiary({
       userId, mood, title, content, imagePath, createdAt, imageRatio
     });
+
+    created = (await attachSignedImageUrls([{}, created]))[1];
 
     // 状态码201表示创建成功
     res.status(201).json(created);

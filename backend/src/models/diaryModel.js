@@ -9,7 +9,6 @@ async function listDiaries(userId) {
       mood,
       title,
       content,
-      image_url as "imageUrl",
       image_path as "imagePath",
       created_at as "createdAt",
       image_ratio as "imageRatio"
@@ -49,7 +48,6 @@ async function createDiary(cardInfo) {
     imagePath,
     imageRatio,
     createdAt,
-    imageUrl:null
   };
 }
 

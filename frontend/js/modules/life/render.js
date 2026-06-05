@@ -2,6 +2,7 @@ import { formatDate } from "../utils/formatDate.js";
 import { resolveImageUrl } from "./api.js";
 import { isMobileView } from "../utils/isMobileView.js";
 import { lifeState } from "./state.js";
+import { observeLazyImage } from "../utils/lazyImage.js";
 
 const lifeList = document.querySelector('#life .lifeList');
 // 渲染页面
@@ -74,7 +75,11 @@ function createLifeCard(cardInfo, lifeState) {
 
   // 配置卡片内容
   if (imageUrl) {
-    cardContentPicImg.src = resolveImageUrl(imageUrl);
+    cardContentPicImg.dataset.src = resolveImageUrl(imageUrl);
+    observeLazyImage(cardContentPicImg);
+    cardContentPicImg.addEventListener("load", () => {
+      cardContentPicImg.classList.add("is-load");
+    })
     cardContentPic.className = "pic";
     cardContentPic.style.aspectRatio = imageRatio || "auto";
     cardContentPic.appendChild(cardContentPicImg);
