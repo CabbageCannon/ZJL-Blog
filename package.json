@@ -6,13 +6,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node backend/src/server.js",
     "dev:api": "node backend/src/server.js",
-    "dev:web": "live-server --port=5500 --watch=index.html,css,js,less,json,assets,imgs"
+    "dev:web": "live-server frontend --port=5500 --watch=frontend/index.html,frontend/css,frontend/js,frontend/less,frontend/json,frontend/assets,frontend/imgs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@supabase/supabase-js": "^2.107.0",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",

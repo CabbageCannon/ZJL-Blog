@@ -1,6 +1,6 @@
 import { showModalMask, closeModalMask } from "../utils/showModalMask.js";
 import { createDiary, deleteDiary } from "./api.js";
-import { render } from "./render.js";
+import { render, renderLifeCardActions } from "./render.js";
 import { lifeState } from "./state.js";
 import { getImageRatio } from "../utils/getImageRatio.js";
 import { loadToken } from "../utils/userStorage.js";
@@ -54,15 +54,15 @@ function editLifeCard() {
     ev.stopPropagation();
 
     if (!requireLogin()) return;
-    
+
     if (lifeState.isEdit) {
       lifeState.isEdit = false;
       lifeState.selectDiariesId = [];
-      render(lifeState);
+      render();
     } else {
       lifeState.isEdit = true;
 
-      render(lifeState)
+      render()
     }
   })
 }
@@ -84,7 +84,7 @@ function bindCardClickEvents() {
     else
       lifeState.selectDiariesId.push(id);
 
-    render(lifeState);
+    render();
   })
 }
 
@@ -116,7 +116,7 @@ async function commitLifeDiary() {
     try {
       const createdDiary = await createDiary(cardInfo);
       lifeState.diaryList.push(createdDiary);
-      render(lifeState);
+      render();
 
       closeModalMask();
     } catch (err) {
@@ -130,10 +130,20 @@ async function commitLifeDiary() {
 // 监听页面切换
 function listenSectionShow() {
   document.addEventListener("section:show", (ev) => {
-    // 如果不是切换到自己的页面则直接返回
-    if (ev.detail.sectionId !== "life") return;
+    const detail = ev.detail;
+    // 如果是从自己切换到别处
+    if (detail.lastSectionId === "life" && detail.nextSectionId !== "life") {
+      clearEditingState();
+      renderLifeCardActions(lifeState);
+      return;
+    }
 
-    render(lifeState);
+    if (detail.nextSectionId !== "life")
+      return;
+    else
+      renderLifeCardActions(lifeState);
+
+    render();
   })
 }
 
@@ -181,7 +191,7 @@ async function handleDeleteDiary(ev) {
   // 执行成功后,清空选中
   lifeState.selectDiariesId = [];
   // 重新渲染
-  render(lifeState);
+  render();
 }
 
 // 查看登录状态
@@ -192,4 +202,11 @@ function requireLogin() {
 
   alert("请先登录后再操作生活日记");
   return false;
+}
+
+// 清空编辑状态
+function clearEditingState() {
+  lifeState.isEdit = false;
+  lifeState.selectDiariesId = [];
+  lifeState.selectedImageDataUrl = ""
 }

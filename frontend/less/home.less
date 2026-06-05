@@ -1,0 +1,460 @@
+// out:false
+
+// 首页区域
+#home {
+  .sectionCanvas();
+  overflow-y: auto;
+  display: block;
+
+  .homeWrap {
+    box-sizing: border-box;
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    padding: 36px 32px 56px;
+    display: grid;
+    gap: 18px;
+  }
+
+  .homeHero {
+    .panelSurface();
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
+    min-height: 420px;
+    padding: clamp(28px, 5vw, 56px);
+    border-radius: @radiusXl;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      right: -120px;
+      top: -120px;
+      border-radius: 50%;
+      background: @brandPersonalSoft;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: 18%;
+      bottom: -110px;
+      border-radius: 50%;
+      background: @brandPrimarySoft;
+    }
+
+    .heroCopy,
+    .heroPanel {
+      position: relative;
+      z-index: 1;
+    }
+
+    .heroCopy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-radius: @radiusPill;
+      color: @brandPrimary;
+      background: @brandPrimarySoft;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin-bottom: 18px;
+      color: @textMain;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    .subTitle {
+      max-width: 62ch;
+      color: @textBody;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .heroActions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+
+      .heroButton {
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: @radiusPill;
+        border: 1px solid transparent;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform .22s ease, background .22s ease, color .22s ease, border-color .22s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+        }
+
+        &.primary {
+          color: @textInverse;
+          background: @brandPrimary;
+
+          &:hover {
+            background: @brandPrimaryHover;
+          }
+        }
+
+        &.secondary {
+          color: @textMain;
+          background: @cardBg;
+          border-color: @borderSoft;
+
+          &:hover {
+            color: @brandPrimary;
+            border-color: @brandPrimaryBorder;
+          }
+        }
+      }
+    }
+
+    .heroPanel {
+      align-self: center;
+      padding: 18px;
+      border: 1px solid @borderSoft;
+      border-radius: @radiusLg;
+      background: oklch(100% 0 0 / .72);
+      box-shadow: @shadowPanel;
+      backdrop-filter: blur(14px);
+
+      .heroPanelTop {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding-bottom: 16px;
+        margin-bottom: 14px;
+        border-bottom: 1px solid @borderSoft;
+
+        img {
+          width: 56px;
+          height: 56px;
+          border-radius: @radiusMd;
+          object-fit: cover;
+        }
+
+        span {
+          display: block;
+          margin-bottom: 4px;
+          color: @textSubtle;
+          font-size: 13px;
+        }
+
+        strong {
+          color: @textMain;
+          font-size: 20px;
+        }
+      }
+
+      .capabilityList {
+        display: grid;
+        gap: 10px;
+
+        li {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          min-height: 46px;
+          padding: 0 12px;
+          border-radius: @radiusMd;
+          background: @surfaceSoft;
+
+          span {
+            color: @textSubtle;
+            font-size: 13px;
+          }
+
+          strong {
+            color: @textMain;
+            font-size: 14px;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+  .homeQuickLinks,
+  .homeAbout,
+  .homeUpdates {
+    .panelSurface();
+    border-radius: @radiusXl;
+    padding: 24px;
+  }
+
+  .sectionTitle {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 18px;
+
+    h2 {
+      color: @textMain;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    p {
+      max-width: 48ch;
+      color: @textMuted;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+  }
+
+  .homeQuickLinks {
+    .quickGrid {
+      display: grid;
+      grid-template-columns: 1.25fr .85fr .9fr;
+      gap: 14px;
+    }
+
+    .quickCard {
+      position: relative;
+      overflow: hidden;
+      min-height: 190px;
+      padding: 22px;
+      border-radius: @radiusLg;
+      border: 1px solid @borderSoft;
+      background: @cardBg;
+      cursor: pointer;
+      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        right: -46px;
+        bottom: -54px;
+        border-radius: 50%;
+        background: @brandPrimarySoft;
+      }
+
+      &.quickCardLife {
+        background:
+          linear-gradient(135deg, @brandPersonalSoft, @cardBg 55%);
+
+        &::after {
+          background: @brandPersonalSoft;
+        }
+      }
+
+      h3 {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+        color: @textMain;
+        font-size: 22px;
+        font-weight: 800;
+      }
+
+      p {
+        position: relative;
+        z-index: 1;
+        max-width: 34ch;
+        color: @textBody;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .quickMeta {
+        position: absolute;
+        left: 22px;
+        bottom: 20px;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 0 10px;
+        border-radius: @radiusPill;
+        color: @brandPrimary;
+        background: @brandPrimarySoft;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      &:hover {
+        transform: translateY(-5px);
+        border-color: @brandPrimaryBorder;
+        box-shadow: @shadowCardHover;
+      }
+    }
+  }
+
+  .homeAbout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, .8fr);
+    gap: 24px;
+    align-items: center;
+
+    h2 {
+      margin-bottom: 12px;
+      color: @textMain;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    p {
+      max-width: 68ch;
+      color: @textBody;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .proofList {
+      display: grid;
+      gap: 10px;
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 48px;
+        padding: 0 14px;
+        border-radius: @radiusMd;
+        background: @surfaceSoft;
+
+        strong {
+          color: @textMain;
+        }
+
+        span {
+          color: @textMuted;
+          font-size: 14px;
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  .homeUpdates {
+    h2 {
+      margin-bottom: 16px;
+      color: @textMain;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    li {
+      min-height: 120px;
+      padding: 18px;
+      border-radius: @radiusLg;
+      background: @surfaceSoft;
+      color: @textBody;
+      font-size: 15px;
+      line-height: 1.75;
+
+      span {
+        display: block;
+        margin-bottom: 12px;
+        color: @brandPersonal;
+        font-weight: 800;
+      }
+    }
+  }
+}
+
+@media(max-width: 900px) {
+  #home {
+    .homeHero,
+    .homeAbout {
+      grid-template-columns: 1fr;
+    }
+
+    .homeQuickLinks .quickGrid,
+    .homeUpdates ul {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media(max-width: 768px) {
+  #home {
+    .homeWrap {
+      padding: 20px 14px 32px;
+      gap: 14px;
+    }
+
+    .homeHero,
+    .homeQuickLinks,
+    .homeAbout,
+    .homeUpdates {
+      border-radius: @radiusLg;
+      padding: 18px;
+    }
+
+    .homeHero {
+      min-height: auto;
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .subTitle {
+        font-size: 15px;
+      }
+
+      .heroPanel {
+        padding: 14px;
+      }
+    }
+
+    .sectionTitle {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+
+      h2 {
+        font-size: 24px;
+      }
+    }
+
+    .homeAbout {
+      .proofList li {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+
+        span {
+          text-align: left;
+        }
+      }
+    }
+  }
+}

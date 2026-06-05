@@ -73,23 +73,48 @@
     <div class="section" id="home">
       <section class="homeWrap">
         <section class="homeHero">
-          <p class="eyebrow">WELCOME</p>
-          <h1>ZJL 的个人空间</h1>
-          <p class="subTitle">记录生活、沉淀学习，也把喜欢的音乐收藏起来</p>
+          <div class="heroCopy">
+            <p class="eyebrow">Portfolio Lab / 2026</p>
+            <h1>我把学习过程做成一个可以被追问的网站</h1>
+            <p class="subTitle">这里记录生活、音乐和学习，也展示我如何拆页面、写接口、接数据库并部署上线。</p>
+            <div class="heroActions">
+              <button class="heroButton primary quickCard" data-target="life">查看生活模块</button>
+              <button class="heroButton secondary quickCard" data-target="study">看学习记录</button>
+            </div>
+          </div>
+          <aside class="heroPanel" aria-label="项目能力概览">
+            <div class="heroPanelTop">
+              <img src="./assets/upload/touxiang.jpg" alt="ZJL 的头像">
+              <div>
+                <span>上线中的个人项目</span>
+                <strong>ZJL Blog</strong>
+              </div>
+            </div>
+            <ul class="capabilityList">
+              <li><span>Frontend</span><strong>原生 JS 模块化</strong></li>
+              <li><span>Backend</span><strong>Express + JWT</strong></li>
+              <li><span>Database</span><strong>Supabase Postgres</strong></li>
+              <li><span>Storage</span><strong>Private bucket + signed URL</strong></li>
+            </ul>
+          </aside>
         </section>
 
         <!-- 进入各板块的快捷入口 -->
         <section class="homeQuickLinks">
-          <h2>快捷入口</h2>
+          <div class="sectionTitle">
+            <h2>功能板块</h2>
+            <p>每个入口都对应一个可以展开讲实现细节的练习点。</p>
+          </div>
           <div class="quickGrid">
-            <article class="quickCard" data-target="life">
+            <article class="quickCard quickCardLife" data-target="life">
               <h3>
                 <svg class="iconSvg iconSvg--md" aria-hidden="true">
                   <use href="./assets/icons/sprite.svg#icon-life"></use>
                 </svg>
                 <span>生活</span>
               </h3>
-              <p>看看最近的日常与片段。</p>
+              <p>登录后展示个人日记，图片进入私有存储，后端临时签发访问地址。</p>
+              <span class="quickMeta">Auth / Storage / Waterfall</span>
             </article>
             <article class="quickCard" data-target="music">
               <h3>
@@ -98,7 +123,8 @@
                 </svg>
                 <span>音乐</span>
               </h3>
-              <p>进入音乐收藏，管理歌单卡片。</p>
+              <p>本地歌单收藏，支持上传、编辑、批量删除和卡片排序。</p>
+              <span class="quickMeta">State / LocalStorage</span>
             </article>
             <article class="quickCard" data-target="study">
               <h3>
@@ -107,23 +133,31 @@
                 </svg>
                 <span>学习</span>
               </h3>
-              <p>整理知识点与练习记录。</p>
+              <p>按分类筛选学习笔记，把阶段目标和技术复盘放在同一个视图里。</p>
+              <span class="quickMeta">Render / Filter</span>
             </article>
           </div>
         </section>
 
         <!-- 自我介绍 -->
         <section class="homeAbout">
-          <h2>关于我</h2>
-          <p>前端学习者，喜欢把想法做成可交互页面，也在持续打磨工程化能力。</p>
+          <div>
+            <h2>关于这个站点</h2>
+            <p>它不是套模板的博客，而是一份可打开的学习档案。页面里的登录、日记、图片存储、模块化渲染和部署流程，都可以继续拆开说明。</p>
+          </div>
+          <ul class="proofList">
+            <li><strong>Netlify</strong><span>前端静态部署</span></li>
+            <li><strong>Render</strong><span>Express 后端托管</span></li>
+            <li><strong>Supabase</strong><span>数据库和私有文件存储</span></li>
+          </ul>
         </section>
 
         <section class="homeUpdates">
-          <h2>近期动态</h2>
+          <h2>近期迭代</h2>
           <ul>
-            <li>完成音乐模块编辑模式的交互优化。</li>
-            <li>正在升级首页与导航的视觉和结构。</li>
-            <li>下一步计划补齐移动端细节与可访问性。</li>
+            <li><span>01</span> 已完成前后端分离部署，线上注册、登录和用户日记闭环可用。</li>
+            <li><span>02</span> 图片上传正在迁移到 Supabase 私有桶，数据库只保存文件路径。</li>
+            <li><span>03</span> 下一步会继续补充交互反馈、空状态和移动端细节。</li>
           </ul>
         </section>
       </section>
@@ -159,26 +193,6 @@
         <div class="lifeList">
           <!-- 日记卡片 -->
           <div class="lifeColumn">
-            <section class="lifeCard">
-              <!-- 卡片标题 -->
-              <section class="lifeCardTitle">
-                <div class="time">2026年5月25日</div>
-                <div class="mood">🥰</div>
-              </section>
-
-              <!-- 卡片内容 -->
-              <section class="lifeCardContent">
-                <div class="pic"><img src="./assets/upload/life/lifeCardTest.jpg" alt=""></div>
-                <section class="text">
-                  <h2>今日工作</h2>
-                  <p>
-                    今天主要完成了这个网站的生活板块的页面，以及完善了一下弹出框中遮罩层的逻辑，将
-                    遮罩层设置为通用的遮罩层，在写生活板块日记区域的时候，发现将照片存在localStorage
-                    完全不显示，毕竟它只能存5MB左右，于是开始考虑接入后端和数据库，后端使用express框
-                    架，数据库使用SQLite，明天继续完善基本的后端逻辑</p>
-                </section>
-              </section>
-            </section>
           </div>
           <div class="lifeColumn"></div>
           <div class="lifeColumn"></div>

@@ -1,11 +1,11 @@
 import { createIcon } from "../utils/createIcon.js";
-import {isMobileView} from "../utils/isMobileView.js";
+import { isMobileView } from "../utils/isMobileView.js";
 
+const editButton = document.querySelector("#music .editSongs");
+const musicCardActions = document.querySelector(".musicCardActions");
 // 根据 state 渲染 DOM
 export function renderMusicList(state) {
   const cardsContainer = document.querySelector("#music .cards");
-  const editButton = document.querySelector("#music .editSongs");
-  const musicCardActions = document.querySelector(".musicCardActions");
 
   cardsContainer.innerHTML = "";
 
@@ -22,7 +22,7 @@ export function renderMusicList(state) {
   }
 
   // 渲染编辑状态
-  renderMusicAction(editButton, musicCardActions, state);
+  renderMusicAction(state);
 
   // 窗口大小变化时重新渲染编辑框，只绑定一次
   if (!renderMusicList.hasResizeListener) {
@@ -32,16 +32,16 @@ export function renderMusicList(state) {
       document.body.classList.add("is-resizing");
 
       // 重新渲染编辑框
-      renderMusicAction(editButton, musicCardActions, state);
+      renderMusicAction(state);
 
       // 设置定时器，防止渲染还未完成就移除is-resizing类
       // 重置定时器
       clearTimeout(resizeTimer);
-      resizeTimer=null;
+      resizeTimer = null;
 
       resizeTimer = setTimeout(() => {
         document.body.classList.remove("is-resizing");
-      },120);
+      }, 120);
     })
 
     renderMusicList.hasResizeListener = true;
@@ -65,10 +65,12 @@ function createMusicCard(item, state) {
 
   if (state.isEditMode) {
     card.classList.add("edit-mode");
+    console.log(3);
   }
 
   if (isSelected) {
     card.classList.add("selected");
+
   }
 
   // 配置cover
@@ -119,7 +121,7 @@ function createMessage(text, iconName) {
 }
 
 // 渲染编辑框和编辑按钮
-function renderMusicAction(editButton, musicCardActions, state) {
+export function renderMusicAction(state) {
   const editButtonText = editButton.querySelector('.text');
   // 更改左侧选项栏中编辑按钮信息
   if (state.isEditMode) {
@@ -136,10 +138,12 @@ function renderMusicAction(editButton, musicCardActions, state) {
     editButton.classList.remove('active');
   }
   if (isMobileView()) {
+    musicCardActions.style.transform = "none";
     musicCardActions.style.right = "16px";
     musicCardActions.style.bottom = state.isEditMode ? "16px" : "-180px";
   } else {
-    musicCardActions.style.right = state.isEditMode ? "0px" : "-180px";
+    musicCardActions.style.right = "0px";
     musicCardActions.style.bottom = "auto";
+    musicCardActions.style.transform = state.isEditMode ? "translateX(0)" : "translateX(100%)";
   }
 }

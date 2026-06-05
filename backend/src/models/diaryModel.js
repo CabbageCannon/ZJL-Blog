@@ -10,6 +10,7 @@ async function listDiaries(userId) {
       title,
       content,
       image_url as "imageUrl",
+      image_path as "imagePath",
       created_at as "createdAt",
       image_ratio as "imageRatio"
     FROM diaries
@@ -23,21 +24,21 @@ async function listDiaries(userId) {
 
 // 创建日记
 async function createDiary(cardInfo) {
-  const { userId, mood, title, content, imageUrl, imageRatio, createdAt } = cardInfo;
+  const { userId, mood, title, content, imagePath, imageRatio, createdAt } = cardInfo;
 
   const result = await db.query(
     `INSERT INTO diaries (
       mood,
       title,
       content,
-      image_url,
+      image_path,
       image_ratio,
       created_at,
       user_id
     )
     VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING id`,
-    [mood, title, content, imageUrl, imageRatio, createdAt, userId]
+    [mood, title, content, imagePath, imageRatio, createdAt, userId]
   );
 
   return {
@@ -45,16 +46,17 @@ async function createDiary(cardInfo) {
     mood,
     title,
     content,
-    imageUrl,
+    imagePath,
     imageRatio,
-    createdAt
+    createdAt,
+    imageUrl:null
   };
 }
 
 // 查找日记图片
 async function findDiaryImageById(id, userId) {
   const result = await db.query(
-    `SELECT image_url as "imageUrl"
+    `SELECT image_path as "imagePath"
      FROM diaries
      WHERE id = $1 AND user_id = $2`,
     [id, userId]

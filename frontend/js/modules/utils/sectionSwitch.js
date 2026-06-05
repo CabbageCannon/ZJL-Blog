@@ -1,0 +1,25 @@
+const sections = Array.from(document.querySelectorAll(".indexContent .section"));
+const navLinks = Array.from(document.querySelectorAll(".banner .nav a"));
+// 刚进入网页时，展示的是首页
+let lastSectionId = "home";
+// 展示指定板块
+export function showSection(nextSectionId) {
+  const targetSection = sections.find(section => section.id === nextSectionId);
+  if (!targetSection) return;
+
+  // 展示对应内容页
+  sections.forEach(section => section.style.display = section.id === nextSectionId ? "block" : "none");
+
+  // 更新导航栏中具体按钮的状态
+  navLinks.forEach(link => link.classList.toggle("is-active", link.getAttribute("name") === nextSectionId));
+
+  // 页面切换完成后，发出一个通知
+  document.dispatchEvent(new CustomEvent("section:show", {
+    detail: {
+      lastSectionId,
+      nextSectionId
+    }
+  }));
+
+  lastSectionId=nextSectionId;
+}

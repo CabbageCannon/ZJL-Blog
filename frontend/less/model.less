@@ -6,7 +6,9 @@
   inset: 0;
   // 遮罩层在页面上面，但比弹窗低一层
   z-index: 9998;
-  background: @maskBg;
+  background:
+    radial-gradient(circle at 50% 20%, oklch(70% 0.14 255 / .18), transparent 32%),
+    @maskBg;
   // 使遮罩层后面的元素看起来像玻璃
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
 }

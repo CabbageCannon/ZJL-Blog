@@ -72,6 +72,5 @@ export async function deleteDiary(id) {
 
 // 处理图片地址
 export function resolveImageUrl(imageUrl) {
-  if (!imageUrl) return "";
-  return `${BASE_URL}${imageUrl}`;
+  return imageUrl || "";
 }

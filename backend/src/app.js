@@ -5,7 +5,6 @@ const path = require("path");
 const diaryRoutes = require("./routes/diaryRoutes");
 const authRoutes = require("./routes/authRoutes");
 const errorHandler = require("./middleware/errorHandler");
-const { uploadDir } = require("./config/upload")
 
 const app = express();
 
@@ -19,7 +18,6 @@ if (process.env.NODE_ENV !== "production") {
   allowedOrigins.push("http://localhost:5500");
   allowedOrigins.push("http://127.0.0.1:5500");
 }
-
 // app.use就是往express请求处理链中注册功能
 
 // 处理跨域，服务器与前端在不同的端口，理论上前端无法访问后端，这就是跨域
@@ -34,9 +32,6 @@ app.use(cors({
 }));
 // 后端会自动json.parse()
 app.use(express.json());
-
-// 把../uploads文件夹下的文件暴露给浏览器，前端访问前缀需要填/uploads
-app.use("/uploads", express.static(uploadDir));
 
 // 把登录注册路由器挂载到/api/auth路径下
 app.use("/api/auth", authRoutes);

@@ -1,12 +1,14 @@
+
 import { state } from "./state.js";
 import { renderMusicList } from "./render.js";
 import { saveMusicList } from "./storage.js";
-import { showModalMask,closeModalMask } from "../utils/showModalMask.js";
+import { showModalMask, closeModalMask } from "../utils/showModalMask.js";
 
 // 绑定音乐模块事件
 export function bindEvents() {
   addSongsModal();
   editSongsModal();
+  listenSectionShow();
 }
 
 // 用户添加音乐功能
@@ -145,4 +147,28 @@ function editSongsModal() {
     // 重新渲染
     renderMusicList(state);
   })
+}
+
+function listenSectionShow() {
+  document.addEventListener("section:show", (ev) => {
+    const detail = ev.detail;
+
+    if (detail.lastSectionId === "music" && detail.nextSectionId !== "music") {
+      console.log(2);
+      clearEditingState();
+      renderMusicList(state);
+      return;
+    }
+
+    if (detail.nextSectionId === "music") {
+      clearEditingState();
+      renderMusicList(state)
+    }
+  })
+}
+
+// 刷新编辑状态
+function clearEditingState() {
+  state.isEditMode = false;
+  state.selectedMusicIds = [];
 }

@@ -4,27 +4,42 @@ html,
 body {
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
+  color: @textBody;
+  background: @pageBg;
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", Arial, sans-serif;
 }
 
 // banner 区域
 .banner {
   box-sizing: border-box;
   position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100px;
-  width: 100%;
-  font-size: 30px;
-  padding: 0 40px;
+  width: min(1180px, calc(100% - 32px));
+  min-height: 72px;
+  padding: 12px 18px;
 
-  .glassFrame;
+  .glassFrame();
 
   // 导航栏中logo区域
   .logo {
     flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 42px;
+    border-radius: @radiusPill;
+    background: @textMain;
     color: @textMain;
+    color: @textInverse;
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: 0;
   }
@@ -39,30 +54,35 @@ body {
     ul {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
+      padding: 4px;
+      border: 1px solid @borderSoft;
+      border-radius: @radiusPill;
+      background: @surfaceSoft;
 
       a {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 6px;
-        height: 40px;
-        padding: 0 16px;
-        border-radius: 999px;
+        height: 38px;
+        padding: 0 14px;
+        border-radius: @radiusPill;
         color: @textMuted;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
-        transition: color .2s ease, background .2s ease, box-shadow .2s ease;
+        transition: color .22s ease, background .22s ease, box-shadow .22s ease, transform .22s ease;
 
         &:hover {
           color: @primaryColor;
-          background-color: @brandPrimarySoft;
+          background-color: @cardBg;
+          transform: translateY(-1px);
         }
 
         &.is-active {
-          color: @primaryColor;
-          background: @brandPrimaryActive;
-          box-shadow: 0 0 0 1px @brandPrimaryInset inset;
+          color: @textInverse;
+          background: @brandPrimary;
+          box-shadow: 0 8px 18px oklch(56% 0.17 255 / .2);
         }
       }
     }
@@ -74,14 +94,16 @@ body {
     align-items: center;
     gap: 10px;
     color: @textMain;
-    font-size: 16px;
+    font-size: 14px;
 
     img {
-      height: 48px;
-      width: 48px;
-      border-radius: 999px;
+      height: 42px;
+      width: 42px;
+      border-radius: @radiusPill;
       // object-fit设置为cover使得图片铺满容器，并且保持比例，不会因为容器是圆形的而变形
       object-fit: cover;
+      border: 2px solid @cardBg;
+      box-shadow: 0 0 0 1px @borderSoft;
     }
 
     .name {
@@ -91,18 +113,22 @@ body {
 
     .authLoginButton,
     .authLogoutButton {
-      padding: 5px 10px;
+      min-height: 36px;
+      padding: 0 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
       border: 1px solid @borderSoft;
-      border-radius: 20px;
-      transition: transform .2s ease, background .2s ease;
+      border-radius: @radiusPill;
+      background: @cardBg;
+      color: @textBody;
+      transition: transform .22s ease, background .22s ease, color .22s ease;
 
       &:hover {
         transform: translateY(-2px);
         background-color: @brandPrimarySoft;
+        color: @brandPrimary;
       }
     }
   }
@@ -111,7 +137,7 @@ body {
 // content 区域
 .indexContent {
   box-sizing: border-box;
-  padding-top: 100px;
+  padding-top: 104px;
   height: 100%;
   display: flex;
   overflow: hidden;
@@ -128,16 +154,18 @@ body {
 
   // banner区域
   .banner {
-    height: 108px;
+    top: 0;
+    width: 100%;
+    min-height: 104px;
     padding: 10px 12px;
-    font-size: 20px;
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 8px;
-    border-radius: 0;
+    border-radius: 0 0 @radiusLg @radiusLg;
 
     .logo {
       height: 40px;
+      width: 52px;
       display: flex;
       align-items: center;
     }
@@ -179,8 +207,8 @@ body {
       }
 
       a {
-        height: 38px;
-        padding: 0 12px;
+        height: 36px;
+        padding: 0 11px;
         font-size: 14px;
         white-space: nowrap;
       }
@@ -189,7 +217,7 @@ body {
 
   // content区域
   .indexContent {
-    padding-top: 108px;
+    padding-top: 104px;
     overflow-y: auto;
 
     #home {

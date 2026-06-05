@@ -15,8 +15,8 @@ export async function initLife() {
     lifeState.diaryList = [];
     lifeState.isEdit = false;
     lifeState.selectDiariesId = [];
-    if(isLifeVisible())
-      render(lifeState);
+    if (isLifeVisible())
+      render();
   })
 
   // 绑定事件
@@ -27,13 +27,13 @@ export async function initLife() {
 async function loadLifeDiaries() {
   // 如果登录已过期则直接清空生活板块日记区并直接返回
   const token = loadToken();
-  if(!token){
-    lifeState.diaryList=[];
-    lifeState.isEdit=false;
-    lifeState.selectDiariesId=[];
+  if (!token) {
+    lifeState.diaryList = [];
+    lifeState.isEdit = false;
+    lifeState.selectDiariesId = [];
 
-    if(isLifeVisible()){
-      render(lifeState);
+    if (isLifeVisible()) {
+      render();
     }
 
     return;
@@ -49,6 +49,6 @@ async function loadLifeDiaries() {
 
   lifeState.isEdit = false;
   lifeState.selectDiariesId = [];
-  if(isLifeVisible())
-    render(lifeState);
+  if (isLifeVisible())
+    render();
 }

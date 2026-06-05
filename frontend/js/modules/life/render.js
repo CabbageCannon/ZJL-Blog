@@ -1,15 +1,15 @@
 import { formatDate } from "../utils/formatDate.js";
 import { resolveImageUrl } from "./api.js";
 import { isMobileView } from "../utils/isMobileView.js";
+import { lifeState } from "./state.js";
 
+const lifeList = document.querySelector('#life .lifeList');
 // 渲染页面
-export function render(lifeState) {
-  const diaryList = lifeState.diaryList;
-  const lifeList = document.querySelector('#life .lifeList');
+export function render() {
   const editBut = document.querySelector("#life .leftBanner .but.editDiary");
 
   // 渲染日记内容
-  renderLifeCards(lifeList, diaryList, lifeState);
+  renderLifeCards(lifeState);
 
   // 渲染编辑框
   renderLifeCardActions(lifeState);
@@ -19,9 +19,10 @@ export function render(lifeState) {
 }
 
 // 渲染日记内容
-function renderLifeCards(lifeList, diaryList, lifeState) {
+function renderLifeCards(lifeState) {
   lifeList.innerHTML = "";
 
+  const diaryList = lifeState.diaryList;
   if (diaryList.length === 0) {
     lifeList.appendChild(createMessage("还没有日记,发布第一条吧"));
     return;
@@ -40,7 +41,6 @@ function renderLifeCards(lifeList, diaryList, lifeState) {
   diaryList.forEach(cardInfo => {
     const card = createLifeCard(cardInfo, lifeState);
     const shortestColumn = getShortestColumn(lifeColumns);
-    console.log(lifeColumns);
     shortestColumn.appendChild(card);
   })
 }
@@ -119,7 +119,7 @@ function getShortestColumn(columns) {
 }
 
 // 渲染编辑框
-function renderLifeCardActions(lifeState) {
+export function renderLifeCardActions(lifeState) {
   const lifeCardActions = document.querySelector(".lifeCardActions");
 
   lifeCardActions.classList.toggle(
@@ -128,11 +128,13 @@ function renderLifeCardActions(lifeState) {
   )
 
   if (isMobileView()) {
+    lifeCardActions.style.transform = "none";
     lifeCardActions.style.right = "12px";
     lifeCardActions.style.bottom = lifeState.isEdit ? "12px" : "-96px";
   } else {
     lifeCardActions.style.bottom = "auto";
-    lifeCardActions.style.right = lifeState.isEdit ? "0" : "-160px";
+    lifeCardActions.style.right = "0";
+    lifeCardActions.style.transform = lifeState.isEdit ? "translateX(0)" : "translateX(100%)";
   }
 
 }
