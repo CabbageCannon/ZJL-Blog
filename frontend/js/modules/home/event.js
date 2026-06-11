@@ -1,5 +1,3 @@
-import { showSection } from "../utils/sectionSwitch.js";
-
 export function bindEvents(){
   qucikLinksModal();
 }
@@ -13,7 +11,7 @@ function qucikLinksModal(){
       ev.preventDefault();
       ev.stopPropagation();
 
-      showSection(quickCard.dataset.target);
+      window.location.hash=quickCard.dataset.target;
     })
   })
 }

@@ -154,7 +154,6 @@ function listenSectionShow() {
     const detail = ev.detail;
 
     if (detail.lastSectionId === "music" && detail.nextSectionId !== "music") {
-      console.log(2);
       clearEditingState();
       renderMusicList(state);
       return;

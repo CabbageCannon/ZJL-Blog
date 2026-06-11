@@ -25,9 +25,9 @@ export async function showSection(nextSectionId) {
     console.error(err);
     showToast("该模块加载失败", "error")
     return;
+  } finally {
+    targetSection.classList.remove("is-loading");
   }
-
-  targetSection.classList.remove("is-loading");
 
   // 页面切换完成后，发出一个通知
   document.dispatchEvent(new CustomEvent("section:show", {
