@@ -6,7 +6,7 @@ body {
   height: 100%;
   overflow-x: hidden;
   color: @textBody;
-  background: @pageBg;
+  .sectionCanvas();
   font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Segoe UI", Arial, sans-serif;
 }
 
@@ -21,7 +21,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: min(1180px, calc(100% - 32px));
+  width: ~"min(1180px, calc(100% - 32px))";
   min-height: 72px;
   padding: 12px 18px;
 
@@ -137,7 +137,7 @@ body {
 // content 区域
 .indexContent {
   box-sizing: border-box;
-  padding-top: 104px;
+  padding-top: 0;
   height: 100%;
   display: flex;
   overflow: hidden;

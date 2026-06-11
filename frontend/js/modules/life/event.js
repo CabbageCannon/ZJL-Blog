@@ -127,8 +127,8 @@ async function commitLifeDiary() {
         ? await compressImageFile(originImageFile)
         : null;
 
-      const imageRatio = compressImageFile
-        ? await getImageRatio(compressedImageFile)
+      const imageRatio = compressedImageFile
+        ? (await getImageRatio(compressedImageFile)).imageRatio
         : null;
 
       // 日记卡片信息

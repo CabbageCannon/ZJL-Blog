@@ -1,0 +1,49 @@
+// out:false
+
+.indexContent .section {
+  position: relative;
+
+  &.is-loading::before {
+    content: "";
+    position: absolute;
+    z-index: 20;
+    inset: 0;
+    border-radius: @radiusXl;
+    background:
+      linear-gradient(90deg,
+        oklch(96% 0.012 255),
+        oklch(99% 0.006 255),
+        oklch(96% 0.012 255));
+    background-size: 220% 100%;
+    animation: sectionSkeleton 1.1s ease-in-out infinite;
+    box-shadow: @shadowSoft;
+  }
+
+  &.is-loading::after {
+    content: "加载中";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 21;
+    transform: translate(-50%, -50%);
+    color: @textMuted;
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+@keyframes sectionSkeleton {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  .indexContent .section.is-loading::before {
+    animation: none;
+  }
+}
