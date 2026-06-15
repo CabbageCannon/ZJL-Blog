@@ -55,8 +55,7 @@ function addSongsModal() {
     // 渲染页面
     renderMusicList(state);
 
-    modal.style.display = "none";
-    mask.style.display = "none";
+    closeModalMask();
 
     // 清空输入框
     inputs[0].value = "";

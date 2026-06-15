@@ -3,6 +3,7 @@ const sectionLoaders = {
   life: () => import("../life/index.js").then(module => module.initLife()),
   music: () => import("../music/index.js").then(module => module.initMusic()),
   study: () => import("../study/index.js").then(module => module.initStudy()),
+  settings: () => import("../settings/index.js").then(module => module.initSettings()),
 }
 
 // 缓存加载数据

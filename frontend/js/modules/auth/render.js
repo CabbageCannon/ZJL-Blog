@@ -1,11 +1,13 @@
+const DEFAULT_AVATAR = "./imgs/defaultTouxiang.png";
+
 export function renderAuth(authState) {
   renderAuthUser(authState);
   renderAuthModal(authState);
 }
 
-// 渲染用户图标
 export function renderAuthUser(authState) {
   const name = document.querySelector(".banner .name");
+  const avatar = document.querySelector(".banner .user img");
   const authLoginButton = document.querySelector(".banner .authLoginButton");
   const authLogoutButton = document.querySelector(".banner .authLogoutButton");
 
@@ -13,16 +15,22 @@ export function renderAuthUser(authState) {
 
   if (authState.user) {
     name.textContent = authState.user.nickname || authState.user.username;
+    if (avatar) {
+      avatar.src = authState.user.imageUrl || DEFAULT_AVATAR;
+    }
     authLoginButton.style.display = "none";
     authLogoutButton.style.display = "flex";
-  } else {
-    name.textContent = "未登录";
-    authLoginButton.style.display = "flex";
-    authLogoutButton.style.display = "none";
+    return;
   }
+
+  name.textContent = "未登录";
+  if (avatar) {
+    avatar.src = DEFAULT_AVATAR;
+  }
+  authLoginButton.style.display = "flex";
+  authLogoutButton.style.display = "none";
 }
 
-// 渲染登录注册弹出框
 export function renderAuthModal(authState) {
   if (authState.mode !== "login" && authState.mode !== "register") return;
 
@@ -33,17 +41,19 @@ export function renderAuthModal(authState) {
 
   if (authState.mode === "login") {
     titleContent.textContent = "账号登录";
-    commitAuthButton.textContent = "登录";
+    setCommitButtonText(commitAuthButton, "登录");
     nicknameInput.style.display = "none";
     switchAuthModalButton.textContent = "没有账号？去注册";
     return;
   }
 
-  if (authState.mode === "register") {
-    titleContent.textContent = "账号注册"
-    commitAuthButton.textContent = "注册";
-    nicknameInput.style.display = "flex";
-    switchAuthModalButton.textContent = "已有账号？去登录";
-    return;
-  }
+  titleContent.textContent = "账号注册";
+  setCommitButtonText(commitAuthButton, "注册");
+  nicknameInput.style.display = "flex";
+  switchAuthModalButton.textContent = "已有账号？去登录";
+}
+
+function setCommitButtonText(button, text) {
+  delete button.dataset.originText;
+  button.textContent = text;
 }

@@ -148,3 +148,25 @@
     transform: rotate(360deg);
   }
 }
+
+button.is-loading,
+.but.is-loading,
+.iconTextButton.is-loading {
+  cursor: wait;
+  opacity: .72;
+  pointer-events: none;
+}
+
+button.is-loading::after,
+.but.is-loading::after,
+.iconTextButton.is-loading::after {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-left: 8px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: buttonSpin .72s linear infinite;
+}

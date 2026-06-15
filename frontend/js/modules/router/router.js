@@ -1,6 +1,6 @@
 import { showSection } from "../utils/sectionSwitch.js";
 
-const validSections = new Set(["home", "life", "music", "study"]);
+const validSections = new Set(["home", "life", "music", "study", "settings"]);
 function initRouter() {
   window.addEventListener("hashchange", handleHashChange);
   handleHashChange();

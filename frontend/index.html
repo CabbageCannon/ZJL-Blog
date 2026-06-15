@@ -47,6 +47,14 @@
             <span>学习</span>
           </a>
         </li>
+        <li>
+          <a href="javascript:;" name="settings">
+            <svg class="iconSvg iconSvg--md" aria-hidden="true">
+              <use href="./assets/icons/sprite.svg#icon-user"></use>
+            </svg>
+            <span>设置</span>
+          </a>
+        </li>
       </ul>
     </div>
     <div class="user authUser">
@@ -335,6 +343,100 @@
         </section>
       </div>
 
+    </div>
+
+    <!-- 用户设置部分 -->
+    <div class="section" id="settings">
+      <div class="settingsWrapper">
+        <section class="settingsHeader">
+          <div class="settingsHeaderIcon">
+            <svg class="iconSvg iconSvg--lg" aria-hidden="true">
+              <use href="./assets/icons/sprite.svg#icon-user"></use>
+            </svg>
+          </div>
+          <div class="settingsHeaderText">
+            <p class="eyebrow">ACCOUNT SETTINGS</p>
+            <h2>账号设置</h2>
+            <p>维护你的昵称、头像和账号状态，这里的修改会同步到顶部用户信息。</p>
+          </div>
+          <div class="settingsHeaderState">
+            <span class="statusDot"></span>
+            <strong class="settingsLoginStateText">未登录</strong>
+            <span class="settingsLoginHint">请先登录后再修改账号资料。</span>
+          </div>
+        </section>
+
+        <main class="settingsMain">
+          <section class="basicInfo">
+            <div class="settingsCardHeader">
+              <div>
+                <h3>基本信息</h3>
+                <p>设置你的公开展示昵称和头像。</p>
+              </div>
+            </div>
+
+            <form class="settingsForm">
+              <div class="avatarEditor">
+                <div class="avatarPreviewCard">
+                  <img class="settingsAvatarPreview" src="./assets/upload/touxiang.jpg" alt="头像预览">
+                  <div class="avatarPreviewMeta">
+                    <strong>头像预览</strong>
+                    <span>选择图片后点击保存才会生效。</span>
+                  </div>
+                </div>
+                <label class="avatarUploadBox">
+                  <svg class="iconSvg iconSvg--lg" aria-hidden="true">
+                    <use href="./assets/icons/sprite.svg#icon-upload"></use>
+                  </svg>
+                  <span>选择头像图片</span>
+                  <small>建议使用方形图片，上传前会在前端压缩。</small>
+                  <input class="avatarUploadInput" type="file" accept="image/*" hidden>
+                </label>
+              </div>
+
+              <label class="settingsField">
+                <span class="fieldLabel">昵称</span>
+                <input class="settingsNicknameInput" type="text" maxlength="20" placeholder="输入新的昵称">
+              </label>
+
+              <label class="settingsField">
+                <span class="fieldLabel">用户名</span>
+                <input class="settingsUsernameInput" type="text" disabled>
+              </label>
+
+              <div class="settingsActions">
+                <button class="saveProfileButton" type="submit">
+                  <span>保存修改</span>
+                </button>
+                <button class="cancelProfileButton" type="button">取消</button>
+              </div>
+            </form>
+          </section>
+
+          <aside class="securityInfo">
+            <div class="settingsCardHeader">
+              <div>
+                <h3>账号状态</h3>
+                <p>用于确认当前登录身份和资料同步情况。</p>
+              </div>
+            </div>
+            <ul class="securityList">
+              <li>
+                <span>注册时间</span>
+                <strong class="registerTime">未登录</strong>
+              </li>
+              <li>
+                <span>登录状态</span>
+                <strong class="lastLoginTime">未登录</strong>
+              </li>
+              <li class="securityListWide">
+                <span>说明</span>
+                <strong>头像存放在 Supabase 私有桶中，前端只接收后端生成的签名访问地址。</strong>
+              </li>
+            </ul>
+          </aside>
+        </main>
+      </div>
     </div>
   </div>
 

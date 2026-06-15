@@ -3,6 +3,10 @@ import { renderAuthModal, renderAuthUser } from "./render.js";
 import { authState } from "./state.js";
 import { loginUser, registerUser } from "./api.js";
 import { saveToken, removeToken } from "../utils/userStorage.js";
+import { setButtonLoading } from "../utils/buttonLoading.js";
+import { showToast } from "../utils/toast.js";
+
+let isAuthSubmitting = false;
 
 export function bindEvents() {
   bindAuthModalEvents();
@@ -10,7 +14,6 @@ export function bindEvents() {
   bindLogoutEvents();
 }
 
-// 绑定登录退出框相关事件
 function bindAuthModalEvents() {
   const authLoginButton = document.querySelector(".banner .authUser .authLoginButton");
   const closeAuthModalButton = document.querySelector(".authModal .title .closeAuthModalButton");
@@ -21,14 +24,11 @@ function bindAuthModalEvents() {
   switchAuthModalButton.addEventListener("click", switchAuthMode);
 }
 
-// 绑定提交登录或注册表单相关事件
 function bindCommitFormEvents() {
   const commitAuthButton = document.querySelector(".authModal .actions .commitAuthButton");
-
   commitAuthButton.addEventListener("click", userLoginAndRegister);
 }
 
-// 绑定退出登录相关事件
 function bindLogoutEvents() {
   const authLogoutButton = document.querySelector(".banner .authUser .authLogoutButton");
   authLogoutButton.addEventListener("click", authLogout);
@@ -37,112 +37,139 @@ function bindLogoutEvents() {
 function authLogout(ev) {
   ev.preventDefault();
   ev.stopPropagation();
-  // 清除本地token
+
   removeToken();
   authState.token = null;
   authState.user = null;
   document.dispatchEvent(new CustomEvent("auth:logout"));
   renderAuthUser(authState);
+  showToast("已退出登录", "info");
 }
 
-// 用户登录与注册
 async function userLoginAndRegister(ev) {
   ev.preventDefault();
   ev.stopPropagation();
+
+  if (isAuthSubmitting) return;
 
   const usernameInput = document.querySelector(".authModal .usernameInput input");
   const nicknameInput = document.querySelector(".authModal .nicknameInput input");
   const passwordInput = document.querySelector(".authModal .passwordInput input");
 
-  const username = usernameInput.value;
-  const password = passwordInput.value;
-  let res = null;
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
 
   if (authState.mode === "login") {
-    try {
-      res = await loginUser({
-        username: username,
-        password: password
-      })
-      // 更新登录状态
-      authState.user = res.user;
-      authState.mode = "authenticated";
-      saveToken(res.token);
-      authState.token = res.token;
-
-      // 登录成功后,发送一个事件
-      document.dispatchEvent(new CustomEvent("auth:login", {
-        detail: {
-          user: authState.user
-        }
-      }))
-    } catch (err) {
-      alert(err.message);
-      return;
-    } finally {
-      clearInputs();
-    }
-
-    // 将登录框关闭
-    closeModalMask();
-
-    // 更新用户栏
-    renderAuthUser(authState);
-
-    res = null;
+    await submitLogin(username, password);
     return;
   }
 
   if (authState.mode === "register") {
-    const nickname = nicknameInput.value;
-
-    try {
-      res = await registerUser({
-        username: username,
-        nickname: nickname,
-        password: password
-      })
-      authState.mode = "login";
-    } catch (err) {
-      alert(err.message);
-      return;
-    } finally {
-      clearInputs();
-    }
-
-    renderAuthModal(authState);
-    return;
+    await submitRegister({
+      username,
+      password,
+      nickname: nicknameInput.value.trim()
+    });
   }
 }
 
-// 清空输入框
+async function submitLogin(username, password) {
+  isAuthSubmitting = true;
+  setAuthFormLoading(true, "登录中...");
+
+  try {
+    const res = await loginUser({ username, password });
+
+    authState.user = res.user;
+    authState.mode = "authenticated";
+    authState.token = res.token;
+    saveToken(res.token);
+
+    document.dispatchEvent(new CustomEvent("auth:login", {
+      detail: {
+        user: authState.user
+      }
+    }));
+
+    clearInputs();
+    closeModalMask();
+    renderAuthUser(authState);
+    showToast("登录成功", "success");
+  } catch (err) {
+    showToast(err.message || "登录失败", "error");
+  } finally {
+    isAuthSubmitting = false;
+    setAuthFormLoading(false);
+  }
+}
+
+async function submitRegister(userInfo) {
+  isAuthSubmitting = true;
+  setAuthFormLoading(true, "注册中...");
+
+  try {
+    await registerUser(userInfo);
+
+    authState.mode = "login";
+    clearInputs();
+    renderAuthModal(authState);
+    showToast("注册成功，请登录", "success");
+  } catch (err) {
+    showToast(err.message || "注册失败", "error");
+  } finally {
+    isAuthSubmitting = false;
+    setAuthFormLoading(false);
+  }
+}
+
+function setAuthFormLoading(loading, loadingText) {
+  const commitAuthButton = document.querySelector(".authModal .actions .commitAuthButton");
+  const switchAuthModalButton = document.querySelector(".authModal .actions .switchAuthModalButton");
+  const closeAuthModalButton = document.querySelector(".authModal .title .closeAuthModalButton");
+  const inputs = document.querySelectorAll(".authModal .content input");
+
+  setButtonLoading(commitAuthButton, loading, loadingText);
+
+  [switchAuthModalButton, closeAuthModalButton, ...inputs].forEach(item => {
+    if (!item) return;
+    item.disabled = loading;
+  });
+}
+
 function clearInputs() {
   const authModalInputs = document.querySelectorAll(".authModal .content input");
   authModalInputs.forEach(input => input.value = "");
 }
 
-// 注册登录弹出框的弹出
 function openAuthModal(ev) {
   ev.preventDefault();
   ev.stopPropagation();
+
+  if (isAuthSubmitting) return;
+
   authState.mode = "login";
   authState.errorMessage = "";
   const authModal = document.querySelector(".authModal");
   clearInputs();
+  renderAuthModal(authState);
   showModalMask(authModal);
 }
 
-// 注册登录框的收回
 function closeAuthModal(ev) {
   ev.preventDefault();
   ev.stopPropagation();
+
+  if (isAuthSubmitting) return;
+
   closeModalMask();
 }
 
-// 注册登录弹出框注册登录的切换
 function switchAuthMode(ev) {
   ev.preventDefault();
   ev.stopPropagation();
+
+  if (isAuthSubmitting) return;
+
   authState.mode = authState.mode === "login" ? "register" : "login";
   authState.errorMessage = "";
   renderAuthModal(authState);

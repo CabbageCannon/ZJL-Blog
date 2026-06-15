@@ -1,7 +1,9 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const path = require("path");
 const userModel = require("../models/userModel");
 const { JWT_SELECT } = require("../middleware/authMiddleware");
+const supabase = require("../config/supabase");
 
 // 用户注册
 async function register(req, res, next) {
@@ -33,7 +35,7 @@ async function register(req, res, next) {
     });
 
     res.status(201).json({
-      user,
+      user: await buildPublicUser(user),
       token: createToken(user)
     })
   } catch (error) {
@@ -62,12 +64,7 @@ async function login(req, res, next) {
     }
 
     res.json({
-      user: {
-        id: user.id,
-        username: user.username,
-        nickname: user.nickname,
-        createdAt: user.createdAt
-      },
+      user: await buildPublicUser(user),
       token: createToken(user)
     })
 
@@ -93,14 +90,115 @@ function createToken(user) {
   )
 }
 
-function getMe(req, res) {
-  res.json({
-    user: req.user
-  })
+async function getMe(req, res, next) {
+  try {
+    const user = await userModel.findUserById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({ message: "用户不存在" });
+    }
+
+    res.json({
+      user: await buildPublicUser(user)
+    })
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function updateMe(req, res, next) {
+  try {
+    const nickname = (req.body?.nickname || "").trim();
+
+    if (!nickname) {
+      return res.status(400).json({ message: "昵称不能为空" });
+    }
+
+    if (nickname.length > 20) {
+      return res.status(400).json({ message: "昵称不能超过 20 个字符" });
+    }
+
+    const user = await userModel.updateUserProfile(req.user.id, { nickname });
+
+    res.json({
+      user: await buildPublicUser(user),
+      token: createToken(user)
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function updateAvatar(req, res, next) {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "请选择头像图片" });
+    }
+
+    const currentUser = await userModel.findUserById(req.user.id);
+    const bucket = process.env.SUPABASE_AVATAR_BUCKET || "avatars";
+    const ext = path.extname(req.file.originalname || ".jpg") || ".jpg";
+    const imagePath = `user-${req.user.id}/${Date.now()}-${Math.random().toString(16).slice(2)}${ext}`;
+
+    const { error: uploadError } = await supabase
+      .storage
+      .from(bucket)
+      .upload(imagePath, req.file.buffer, {
+        contentType: req.file.mimetype,
+        upsert: false
+      });
+
+    if (uploadError) throw uploadError;
+
+    const user = await userModel.updateUserAvatar(req.user.id, imagePath);
+
+    if (currentUser?.imagePath) {
+      await supabase
+        .storage
+        .from(bucket)
+        .remove([currentUser.imagePath]);
+    }
+
+    res.json({
+      user: await buildPublicUser(user),
+      token: createToken(user)
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function buildPublicUser(user) {
+  const imageUrl = await createAvatarSignedUrl(user.imagePath);
+
+  return {
+    id: user.id,
+    username: user.username,
+    nickname: user.nickname,
+    createdAt: user.createdAt,
+    imagePath: user.imagePath || null,
+    imageUrl
+  };
+}
+
+async function createAvatarSignedUrl(imagePath) {
+  if (!imagePath) return null;
+
+  const bucket = process.env.SUPABASE_AVATAR_BUCKET || "avatars";
+  const { data, error } = await supabase
+    .storage
+    .from(bucket)
+    .createSignedUrl(imagePath, 60 * 60);
+
+  if (error) throw error;
+
+  return data.signedUrl;
 }
 
 module.exports = {
   register,
   login,
-  getMe
+  getMe,
+  updateMe,
+  updateAvatar
 }
