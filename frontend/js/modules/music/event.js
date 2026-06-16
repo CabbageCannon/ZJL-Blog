@@ -140,6 +140,9 @@ function editSongsModal() {
       // 根据移动方向选择数组拼接方式
       state.musicList = target.closest(".moveToFirstButton") ? tempCardArr.concat(state.musicList) : state.musicList.concat(tempCardArr);
       state.selectedMusicIds = [];
+    } else {
+      // 没有点中这些按钮,直接返回
+      return;
     }
     // 更新本地存储
     saveMusicList(state.musicList);

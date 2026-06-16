@@ -49,15 +49,17 @@ function bindUpdateAvatar() {
     if (isAvatarReloading) return;
     isAvatarReloading = true;
     // 如果加载失败了,可能是照片过期了
-    const success = await reloadAvatar();
-    // 重新渲染
-    if (success) {
-      renderAuthUser(authState);
-    } else {
-      ev.currentTarget.src = "./imgs/defaultTouxiang.png";
+    try {
+      const success = await reloadAvatar();
+      // 重新渲染
+      if (success) {
+        renderAuthUser(authState);
+      } else {
+        ev.currentTarget.src = "./imgs/defaultTouxiang.png";
+      }
+    } finally {
+      isAvatarReloading = false;
     }
-
-    isAvatarReloading = false;
   })
 }
 
