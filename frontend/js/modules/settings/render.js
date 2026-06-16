@@ -1,7 +1,7 @@
 import { settingsContent } from "./content.js";
 import { createIcon } from "../utils/createIcon.js";
 
-export const DEFAULT_AVATAR = "./assets/upload/touxiang.jpg";
+export const DEFAULT_AVATAR = "./imgs/defaultTouxiang.png";
 
 export function enhanceSettingsSection() {
   const settingsSection = document.querySelector("#settings");

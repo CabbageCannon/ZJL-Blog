@@ -119,13 +119,13 @@ function editSongsModal() {
     ev.stopPropagation();
 
     let target = ev.target;
-    if (target.classList.contains("deleteButton")) {
+    if (target.closest(".deleteButton")) {
       // 删除选中的歌曲
       state.selectedMusicIds.forEach((id, index) => {
         state.musicList = state.musicList.filter(item => item.id !== id);
       })
       state.selectedMusicIds = [];
-    } else if (target.classList.contains("moveToFirstButton") || target.classList.contains("moveToLastButton")) {
+    } else if (target.closest(".moveToFirstButton") || target.closest(".moveToLastButton")) {
       // 批量移动选中的歌曲
       // 记录选中卡片在 musicList 中的索引
       let indexArr = [],
@@ -138,7 +138,7 @@ function editSongsModal() {
       // 将选中的卡片从原列表中删除，并放入 tempCardArr 中
       indexArr.reverse().forEach(index => tempCardArr.unshift(state.musicList.splice(index, 1)[0]));
       // 根据移动方向选择数组拼接方式
-      state.musicList = target.classList.contains("moveToFirstButton") ? tempCardArr.concat(state.musicList) : state.musicList.concat(tempCardArr);
+      state.musicList = target.closest(".moveToFirstButton") ? tempCardArr.concat(state.musicList) : state.musicList.concat(tempCardArr);
       state.selectedMusicIds = [];
     }
     // 更新本地存储

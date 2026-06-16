@@ -52,6 +52,7 @@ async function createUser(userInfo) {
   }
 }
 
+// 更新用户昵称
 async function updateUserProfile(id, profileInfo) {
   const { nickname } = profileInfo;
 
@@ -66,6 +67,7 @@ async function updateUserProfile(id, profileInfo) {
   return result.rows[0];
 }
 
+// 更新用户头像
 async function updateUserAvatar(id, imagePath) {
   const result = await db.query(
     `UPDATE users

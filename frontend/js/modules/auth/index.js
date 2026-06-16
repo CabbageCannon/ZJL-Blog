@@ -17,12 +17,12 @@ async function restoreLogin() {
   if (token) {
     try {
       const res = await fetchMe(token);
-      authState.user=res.user;
-      authState.token=token;
-    }catch(err){
+      authState.user = res.user;
+      authState.token = token;
+    } catch (err) {
       removeToken();
-      authState.user=null;
-      authState.token=null;
+      authState.user = null;
+      authState.token = null;
       alert(err);
     }
   }

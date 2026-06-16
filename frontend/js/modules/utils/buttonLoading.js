@@ -1,3 +1,4 @@
+// 给按钮设置和移除加载状态
 export function setButtonLoading(button, loading, loadingText = "处理中...") {
   if (!button) return;
 

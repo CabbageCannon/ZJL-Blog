@@ -4,6 +4,7 @@ const path = require("path");
 const userModel = require("../models/userModel");
 const { JWT_SELECT } = require("../middleware/authMiddleware");
 const supabase = require("../config/supabase");
+const { attachSignedImageUrls } = require("../utils/attachSignedImageUrls");
 
 // 用户注册
 async function register(req, res, next) {
@@ -35,7 +36,7 @@ async function register(req, res, next) {
     });
 
     res.status(201).json({
-      user: await buildPublicUser(user),
+      user: (await attachSignedImageUrls([user],getAvatarBucket))[0],
       token: createToken(user)
     })
   } catch (error) {
@@ -64,7 +65,7 @@ async function login(req, res, next) {
     }
 
     res.json({
-      user: await buildPublicUser(user),
+      user: (await attachSignedImageUrls([user],getAvatarBucket()))[0],
       token: createToken(user)
     })
 
@@ -78,9 +79,7 @@ function createToken(user) {
   // jwt.sign(要生成token的用户信息，密钥，配置项)
   return jwt.sign(
     {
-      id: user.id,
-      username: user.username,
-      nickname: user.nickname
+      id: user.id
     },
     JWT_SELECT,
     {
@@ -99,13 +98,14 @@ async function getMe(req, res, next) {
     }
 
     res.json({
-      user: await buildPublicUser(user)
+      user: (await attachSignedImageUrls([user],getAvatarBucket()))[0]
     })
   } catch (error) {
     next(error);
   }
 }
 
+// 更新昵称
 async function updateMe(req, res, next) {
   try {
     const nickname = (req.body?.nickname || "").trim();
@@ -121,7 +121,7 @@ async function updateMe(req, res, next) {
     const user = await userModel.updateUserProfile(req.user.id, { nickname });
 
     res.json({
-      user: await buildPublicUser(user),
+      user: await (await attachSignedImageUrls([user],getAvatarBucket()))[0],
       token: createToken(user)
     });
   } catch (error) {
@@ -129,6 +129,7 @@ async function updateMe(req, res, next) {
   }
 }
 
+// 更新头像
 async function updateAvatar(req, res, next) {
   try {
     if (!req.file) {
@@ -136,7 +137,7 @@ async function updateAvatar(req, res, next) {
     }
 
     const currentUser = await userModel.findUserById(req.user.id);
-    const bucket = process.env.SUPABASE_AVATAR_BUCKET || "avatars";
+    const bucket = getAvatarBucket();
     const ext = path.extname(req.file.originalname || ".jpg") || ".jpg";
     const imagePath = `user-${req.user.id}/${Date.now()}-${Math.random().toString(16).slice(2)}${ext}`;
 
@@ -153,6 +154,7 @@ async function updateAvatar(req, res, next) {
     const user = await userModel.updateUserAvatar(req.user.id, imagePath);
 
     if (currentUser?.imagePath) {
+      // 删除桶中旧的照片
       await supabase
         .storage
         .from(bucket)
@@ -160,7 +162,7 @@ async function updateAvatar(req, res, next) {
     }
 
     res.json({
-      user: await buildPublicUser(user),
+      user: (await attachSignedImageUrls([user],getAvatarBucket()))[0],
       token: createToken(user)
     });
   } catch (error) {
@@ -168,31 +170,14 @@ async function updateAvatar(req, res, next) {
   }
 }
 
-async function buildPublicUser(user) {
-  const imageUrl = await createAvatarSignedUrl(user.imagePath);
+function getAvatarBucket() {
+  const bucket = process.env.SUPABASE_AVATAR_BUCKET;
 
-  return {
-    id: user.id,
-    username: user.username,
-    nickname: user.nickname,
-    createdAt: user.createdAt,
-    imagePath: user.imagePath || null,
-    imageUrl
-  };
-}
+  if (!bucket) {
+    throw new Error("SUPABASE_AVATAR_BUCKET is not configured")
+  }
 
-async function createAvatarSignedUrl(imagePath) {
-  if (!imagePath) return null;
-
-  const bucket = process.env.SUPABASE_AVATAR_BUCKET || "avatars";
-  const { data, error } = await supabase
-    .storage
-    .from(bucket)
-    .createSignedUrl(imagePath, 60 * 60);
-
-  if (error) throw error;
-
-  return data.signedUrl;
+  return bucket;
 }
 
 module.exports = {

@@ -1,70 +1,77 @@
-// 接请求,做基础校验,调用model,返回相应
-// const fs = require("fs");
 const path = require("path");
 const model = require("../models/diaryModel");
 const supabase = require("../config/supabase");
+const { attachSignedImageUrls } = require("../utils/attachSignedImageUrls");
 
-// 获取日记数据 req请求对象 res相应对象 next express中的错误传递函数
 async function getDiaries(req, res, next) {
   const userId = req.user.id;
+
   try {
     const rows = await model.listDiaries(userId);
-    const diaries = await attachSignedImageUrls(rows);
+    const diaries = await attachSignedImageUrls(rows,getDiaryBucket());
     res.json(diaries);
   } catch (err) {
     next(err);
   }
 }
 
-// 上传日记数据
+// 上传日记
 async function postDiary(req, res, next) {
   const userId = req.user.id;
+  let uploadedImagePath = null;
+  let diaryCreated = false;
+
   try {
     const body = req.body || {};
-
-    const mood = (body.mood || "🥰").trim();
-    const title = (body.title || "").trim();
-    const content = (body.content || "").trim();
+    const mood = String(body.mood || "🙂").trim();
+    const title = String(body.title || "").trim();
+    const content = String(body.content || "").trim();
     const createdAt = new Date().toString();
     let imagePath = null;
     let imageRatio = null;
-    if (req.file) {
-      // 如果有上传文件，将文件上传到SUPABASE的storage中
-      const ext = path.extname(req.file.originalname || ".jpg");
-      imagePath = `user-${userId}/${Date.now()}-${Math.random().toString(16).slice(2)}${ext}`;
 
-      const { error } = await supabase
-        .storage
-        .from(process.env.SUPABASE_STORAGE_BUCKET)
-        .upload(imagePath, req.file.buffer, {
-          contentType: req.file.mimetype,
-          upsert: false
-        })
-
-      if (error) throw error;
-
-      imageRatio = body.imageRatio;
+    if (!title && !content && !req.file) {
+      return res.status(400).json({ message: "title/content/image required" });
     }
 
-    // 400是错误状态码
-    if (!title && !content && !imagePath) return res.status(400).json({ message: "title/content/image required" });
+    if (req.file) {
+      imagePath = await uploadDiaryImage(req.file, userId);
+      uploadedImagePath = imagePath;
+      imageRatio = body.imageRatio || null;
+    }
 
     let created = await model.createDiary({
-      userId, mood, title, content, imagePath, createdAt, imageRatio
+      userId,
+      mood,
+      title,
+      content,
+      imagePath,
+      imageRatio,
+      createdAt
     });
+    diaryCreated = true;
 
-    created = (await attachSignedImageUrls([{}, created]))[1];
+    // 将存储在桶中的图片转换成可用的URL
+    created = (await attachSignedImageUrls([created],getDiaryBucket()))[0];
 
-    // 状态码201表示创建成功
     res.status(201).json(created);
   } catch (err) {
+    // 图片上传成功但日记创建失败
+    if (uploadedImagePath && !diaryCreated) {
+      await removeDiaryImageQuietly(
+        uploadedImagePath,
+        "cleanup uploaded diary image after database create failure"
+      );
+    }
+
     next(err);
   }
 }
 
-// 删除日记数据
+// 删除日记
 async function deleteDiary(req, res, next) {
   const userId = req.user.id;
+
   try {
     const id = Number(req.params.id);
 
@@ -76,49 +83,71 @@ async function deleteDiary(req, res, next) {
     const changes = await model.removeDiary(id, userId);
 
     if (changes === 0) {
-      // 删除失败直接返回404
       return res.status(404).json({
         message: "日记不存在或无权删除"
-      })
+      });
     }
 
-    if (row && row.imagePath) {
-      await supabase
-        .storage
-        .from(process.env.SUPABASE_STORAGE_BUCKET)
-        .remove([row.imagePath]);
+    // row存在就获取imagePath，不存在直接返回undefined
+    if (row?.imagePath) {
+      await removeDiaryImageQuietly(
+        row.imagePath,
+        "remove diary image after database delete"
+      );
     }
 
-    // res.status(200).json({success:true});
-    // res.json默认状态码就是200 OK
     res.json({ success: true });
   } catch (err) {
     next(err);
   }
 }
 
-// 处理后端获取的日记数据
-async function attachSignedImageUrls(rows) {
-  return Promise.all(rows.map(async row => {
-    if (!row.imagePath) {
-      return {
-        ...row,
-        imageUrl: null
-      };
-    }
+// 上传日记图片到storage中
+async function uploadDiaryImage(file, userId) {
+  const ext = path.extname(file.originalname || ".jpg") || ".jpg";
+  const imagePath = `user-${userId}/${Date.now()}-${Math.random().toString(16).slice(2)}${ext}`;
 
-    const { data, error } = await supabase
-      .storage
-      .from(process.env.SUPABASE_STORAGE_BUCKET)
-      .createSignedUrl(row.imagePath, 60 * 60)
+  const { error } = await supabase
+    .storage
+    .from(getDiaryBucket())
+    .upload(imagePath, file.buffer, {
+      contentType: file.mimetype,
+      upsert: false
+    });
 
-    if (error) throw error;
+  if (error) throw error;
 
-    return {
-      ...row,
-      imageUrl: data.signedUrl
-    }
-  }))
+  return imagePath;
+}
+
+// 删除日记图片
+async function removeDiaryImage(imagePath) {
+  const { error } = await supabase
+    .storage
+    .from(getDiaryBucket())
+    .remove([imagePath]);
+
+  if (error) throw error;
+}
+
+// 快速删除桶里的日记图片
+async function removeDiaryImageQuietly(imagePath, reason) {
+  try {
+    await removeDiaryImage(imagePath);
+  } catch (cleanupError) {
+    console.error(`Failed to ${reason}:`, cleanupError);
+  }
+}
+
+// 获取日记桶名称
+function getDiaryBucket() {
+  const bucket = process.env.SUPABASE_STORAGE_BUCKET;
+
+  if (!bucket) {
+    throw new Error("SUPABASE_STORAGE_BUCKET is not configured");
+  }
+
+  return bucket;
 }
 
 module.exports = {
