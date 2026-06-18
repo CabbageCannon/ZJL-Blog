@@ -62,6 +62,9 @@ function createMusicCard(item, state) {
   // 配置card
   card.className = "card";
   card.dataset.id = item.id;
+  card.dataset.name = item.name || "";
+  card.dataset.cover = item.cover || "";
+  card.dataset.link = item.link || "";
 
   if (state.isEditMode) {
     card.classList.add("edit-mode");
@@ -75,7 +78,11 @@ function createMusicCard(item, state) {
 
   // 配置cover
   cover.className = "cardCover";
-  cover.style.backgroundImage = `url(${item.cover})`;
+  if (item.cover) {
+    cover.style.backgroundImage = `url(${item.cover})`;
+  } else {
+    card.classList.add("no-cover");
+  }
 
   // 配置info
   info.className = "cardInfo";

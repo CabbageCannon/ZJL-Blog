@@ -32,8 +32,10 @@ export function renderStudyNotes(studyState) {
   }
 
   // 渲染笔记卡片区域
-  currentList.forEach((nodeInfo) => {
-    noteList.appendChild(createStudyNote(nodeInfo));
+  currentList.forEach((nodeInfo, index) => {
+    const noteCard = createStudyNote(nodeInfo);
+    noteCard.style.setProperty("--note-index", index);
+    noteList.appendChild(noteCard);
   })
 
 }

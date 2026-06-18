@@ -105,11 +105,7 @@ function editSongsModal() {
       // 如果成立，表明已经冒泡到a标签过了，就让他自己打开新界面
       if (target.closest(".cardLink")) return;
 
-      const link = card.querySelector(".cardLink").href;
-      // 如果链接为空或者为#,则直接返回
-      if (!link || link === "#") return;
-
-      window.open(link, "_blank", "noopener,noreferrer");
+      updatePlayerStage(card);
     }
 
   })
@@ -149,6 +145,46 @@ function editSongsModal() {
     // 重新渲染
     renderMusicList(state);
   })
+}
+
+function updatePlayerStage(card) {
+  const stage = document.querySelector("#music .musicPlayerStage");
+  if (!stage) return;
+
+  const title = stage.querySelector(".playerCopy h3");
+  const desc = stage.querySelector(".playerCopy p");
+  const label = stage.querySelector(".playerLabel");
+  const cards = document.querySelectorAll("#music .cards .card");
+
+  const songName = card.dataset.name || "未命名歌曲";
+  const cover = card.dataset.cover || "";
+  const link = card.dataset.link || "";
+
+  cards.forEach(item => item.classList.toggle("is-previewing", item === card));
+  stage.classList.toggle("has-cover", Boolean(cover));
+  stage.classList.remove("is-updating");
+  void stage.offsetWidth;
+  stage.classList.add("is-updating");
+
+  if (cover) {
+    stage.style.setProperty("--player-cover", `url("${cover}")`);
+  } else {
+    stage.style.removeProperty("--player-cover");
+  }
+
+  if (label) {
+    label.textContent = cover ? "Now Previewing" : "Cover Missing";
+  }
+
+  if (title) {
+    title.textContent = songName;
+  }
+
+  if (desc) {
+    desc.textContent = link
+      ? "这首歌已放到唱片台，点击卡片里的「去听」可以打开来源。"
+      : "这首歌还没有配置跳转地址，可以先作为收藏记录保留。";
+  }
 }
 
 function listenSectionShow() {

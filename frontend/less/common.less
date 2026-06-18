@@ -44,6 +44,17 @@
 @pageGlowPrimary: oklch(68% 0.14 255 / .16);
 @pageGlowSecondary: oklch(72% 0.18 34 / .12);
 
+// 材质层：纸张、金属、抬升
+@paperBase: oklch(98% 0.045 88);
+@paperEdge: oklch(76% 0.07 88 / .48);
+@paperLine: oklch(64% 0.05 88 / .09);
+@metalBase: oklch(86% 0.018 255);
+@metalLight: oklch(98% 0.006 255);
+@metalMid: oklch(78% 0.02 255);
+@metalDark: oklch(42% 0.035 255);
+@metalLine: oklch(100% 0 0 / .72);
+@metalShadow: oklch(20% 0.035 255 / .16);
+
 // 模块专属表面
 @lifeSurface: oklch(98% 0.018 70);
 @lifeSurfaceSoft: oklch(99% 0.012 70);
@@ -84,6 +95,15 @@
 @shadowPanel: 0 18px 40px oklch(20% 0.035 255 / .12);
 @shadowModal: 0 26px 80px oklch(16% 0.035 255 / .25);
 @shadowFocus: 0 0 0 3px @brandPrimaryRing;
+@shadowPaper:
+  0 2px 0 oklch(100% 0 0 / .72) inset,
+  0 18px 28px oklch(30% 0.04 88 / .12),
+  0 36px 70px oklch(30% 0.04 88 / .12);
+@shadowMetal:
+  inset 0 1px 0 oklch(100% 0 0 / .82),
+  inset 0 -1px 0 oklch(20% 0.035 255 / .12),
+  0 18px 34px oklch(20% 0.035 255 / .14);
+@shadowLift: 0 20px 44px oklch(20% 0.035 255 / .13);
 
 // 遮罩
 @maskBg: oklch(18% 0.035 255 / .46);

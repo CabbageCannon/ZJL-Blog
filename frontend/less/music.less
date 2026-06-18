@@ -16,11 +16,17 @@
     // 左侧导航栏
     .leftBanner {
       box-sizing: border-box;
-      .panelSurface();
+      position: sticky;
+      top: @bannerClearance;
       height: fit-content;
       width: 104px;
       padding: 14px 12px;
       border-radius: @radiusLg;
+      border: 1px solid oklch(22% 0.035 255 / .12);
+      background:
+        linear-gradient(180deg, oklch(99% 0.006 255 / .86), oklch(95% 0.018 255 / .86));
+      box-shadow: @shadowSoft;
+      backdrop-filter: blur(14px);
       font-size: 16px;
       display: flex;
       flex-direction: column;
@@ -39,19 +45,24 @@
         height: 68px;
         margin-bottom: 0;
         border-radius: @radiusMd;
+        border: 1px solid transparent;
         color: @textMuted;
+        background: oklch(100% 0 0 / .48);
         cursor: pointer;
-        transition: background .2s ease, color .2s ease, transform .2s ease;
+        transition: background .2s ease, color .2s ease, transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 
         &:hover {
           color: @primaryColor;
-          background: @brandPrimarySoft;
-          transform: translateY(-2px);
+          background: oklch(100% 0 0 / .76);
+          border-color: @brandPrimaryBorder;
+          box-shadow: 0 10px 22px oklch(20% 0.035 255 / .08);
+          transform: translateY(-2px) scale(.99);
         }
 
         &.active {
           color: @textInverse;
-          background: @brandPrimary;
+          background:
+            linear-gradient(135deg, @brandPrimary, @brandPersonal);
         }
 
         .icon {
@@ -72,69 +83,328 @@
       min-width: 0;
       .panelSurface();
       border-radius: @radiusXl;
+      position: relative;
+      overflow: hidden;
       padding: 32px 36px 38px;
+      background:
+        radial-gradient(circle at 84% 12%, oklch(66% 0.2 34 / .12), transparent 30%),
+        radial-gradient(circle at 18% 4%, oklch(56% 0.17 255 / .12), transparent 32%),
+        linear-gradient(180deg, oklch(99% 0.007 255 / .94), oklch(95% 0.016 255 / .94));
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(90deg, oklch(22% 0.035 255 / .04) 1px, transparent 1px),
+          linear-gradient(180deg, oklch(22% 0.035 255 / .035) 1px, transparent 1px);
+        background-size: 38px 38px;
+        mask-image: linear-gradient(180deg, rgb(0 0 0 / .8), transparent 78%);
+      }
+
+      > * {
+        position: relative;
+        z-index: 1;
+      }
 
       // 歌曲区域标题部分
       .musicHeader {
-        margin-bottom: 26px;
+        position: relative;
+        margin-bottom: 22px;
         padding-bottom: 18px;
         border-bottom: 1px solid @borderSoft;
 
         h2 {
           margin-bottom: 8px;
           color: @textMain;
-          font-size: 30px;
+          font-size: clamp(30px, 3.4vw, 42px);
           font-weight: 800;
         }
 
         p {
+          max-width: 54ch;
           color: @textMuted;
           font-size: 15px;
+          line-height: 1.7;
+        }
+      }
+
+      .musicPlayerStage {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 176px minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 24px;
+        min-height: 174px;
+        margin-bottom: 26px;
+        padding: 24px 28px;
+        border: 1px solid oklch(22% 0.035 255 / .12);
+        border-radius: @radiusXl;
+        background:
+          linear-gradient(135deg, oklch(19% 0.035 255 / .94), oklch(29% 0.04 255 / .9)),
+          @textMain;
+        box-shadow: 0 24px 50px oklch(16% 0.04 255 / .18);
+        color: @textInverse;
+
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 1px;
+          border-radius: inherit;
+          border: 1px solid oklch(100% 0 0 / .08);
+          pointer-events: none;
+        }
+
+        .vinylDeck {
+          position: relative;
+          width: 148px;
+          height: 148px;
+          border-radius: @radiusPill;
+          background:
+            radial-gradient(circle at center, oklch(100% 0 0 / .18) 0 14%, transparent 15%),
+            linear-gradient(135deg, oklch(100% 0 0 / .14), transparent 48%),
+            oklch(12% 0.025 255);
+          box-shadow:
+            inset 0 0 0 1px oklch(100% 0 0 / .08),
+            0 18px 34px oklch(0% 0 0 / .26);
+        }
+
+        .vinylDisc {
+          position: absolute;
+          inset: 11px;
+          border-radius: @radiusPill;
+          overflow: hidden;
+          background:
+            radial-gradient(circle, @brandPersonal 0 10px, @brandPrimary 11px 24px, transparent 25px),
+            repeating-radial-gradient(circle, oklch(100% 0 0 / .12) 0 1px, transparent 1px 7px),
+            radial-gradient(circle at 35% 28%, oklch(100% 0 0 / .22), transparent 18%),
+            oklch(13% 0.026 255);
+          animation: vinylSpin 8s linear infinite;
+
+          &::after {
+            content: "";
+            position: absolute;
+            inset: 38px;
+            border-radius: @radiusPill;
+            background:
+              radial-gradient(circle, oklch(100% 0 0 / .88) 0 5px, transparent 6px),
+              linear-gradient(135deg, @brandPersonal, @brandPrimary);
+            box-shadow:
+              inset 0 0 0 1px oklch(100% 0 0 / .28),
+              0 0 0 1px oklch(0% 0 0 / .16);
+          }
+        }
+
+        .vinylCenter {
+          position: absolute;
+          z-index: 1;
+          inset: 50%;
+          width: 10px;
+          height: 10px;
+          border-radius: @radiusPill;
+          background: oklch(100% 0 0 / .86);
+          transform: translate(-50%, -50%);
+        }
+
+        &.has-cover {
+          .vinylDisc::after {
+            background-image:
+              radial-gradient(circle, oklch(100% 0 0 / .88) 0 5px, transparent 6px),
+              var(--player-cover);
+            background-position: center;
+            background-size: auto, cover;
+          }
+        }
+
+        &.is-updating {
+          .vinylDeck {
+            animation: playerDeckPop .42s cubic-bezier(.16, 1, .3, 1) both;
+          }
+
+          .playerCopy {
+            animation: playerCopyIn .34s ease both;
+          }
+        }
+
+        .playerCopy {
+          .playerLabel {
+            display: inline-flex;
+            margin-bottom: 10px;
+            color: oklch(86% 0.08 255);
+            font-size: 13px;
+            font-weight: 800;
+          }
+
+          h3 {
+            margin-bottom: 8px;
+            color: @textInverse;
+            font-size: 26px;
+            font-weight: 800;
+          }
+
+          p {
+            max-width: 54ch;
+            color: oklch(92% 0.014 255 / .78);
+            font-size: 15px;
+            line-height: 1.75;
+          }
+        }
+
+        .equalizer {
+          display: flex;
+          align-items: end;
+          gap: 5px;
+          height: 44px;
+
+          span {
+            display: block;
+            width: 6px;
+            border-radius: @radiusPill;
+            background: linear-gradient(180deg, @brandPersonal, @brandFresh);
+            animation: equalizerPulse 1.1s ease-in-out infinite;
+
+            &:nth-child(1) {
+              height: 18px;
+              animation-delay: 0ms;
+            }
+
+            &:nth-child(2) {
+              height: 34px;
+              animation-delay: 120ms;
+            }
+
+            &:nth-child(3) {
+              height: 24px;
+              animation-delay: 240ms;
+            }
+
+            &:nth-child(4) {
+              height: 40px;
+              animation-delay: 80ms;
+            }
+
+            &:nth-child(5) {
+              height: 28px;
+              animation-delay: 180ms;
+            }
+          }
         }
       }
 
       // 核心内容栏
       .cards {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 18px;
-        align-content: flex-start;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 22px;
+        align-items: start;
         // height: 300px;
 
         .card {
           box-sizing: border-box;
           display: block;
-          overflow: hidden;
-          width: 215px;
-          height: 306px;
+          position: relative;
+          isolation: isolate;
+          overflow: visible;
+          width: 100%;
+          min-width: 0;
+          height: 316px;
           border-radius: @radiusLg;
-          background-color: @musicSurface;
+          background:
+            linear-gradient(180deg, @cardBg, @musicSurface);
           border: 1px solid @borderSoft;
           cursor: pointer;
           box-shadow: 0 8px 18px oklch(20% 0.035 255 / .06);
           transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 
+          &::before {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            top: 38px;
+            right: 12px;
+            width: 138px;
+            height: 138px;
+            border-radius: @radiusPill;
+            background:
+              radial-gradient(circle, @brandPrimary 0 11px, oklch(100% 0 0 / .88) 12px 16px, transparent 17px),
+              repeating-radial-gradient(circle, oklch(100% 0 0 / .12) 0 1px, transparent 1px 8px),
+              radial-gradient(circle at 34% 28%, oklch(100% 0 0 / .18), transparent 18%),
+              oklch(13% 0.026 255);
+            box-shadow:
+              inset 0 0 0 1px oklch(100% 0 0 / .08),
+              0 12px 20px oklch(18% 0.04 255 / .14);
+            opacity: 0;
+            transform: translateX(-18px) rotate(-18deg);
+            transition: transform .36s cubic-bezier(.16, 1, .3, 1), opacity .28s ease;
+          }
+
+          &:nth-child(4n)::before {
+            right: auto;
+            left: 12px;
+            transform: translateX(18px) rotate(18deg);
+          }
+
           &:hover {
-            transform: translateY(-5px);
-            box-shadow: @shadowCardHover;
+            z-index: 2;
+            transform: translateY(-6px) rotate(-.5deg);
+            box-shadow:
+              0 18px 32px oklch(20% 0.035 255 / .12),
+              0 2px 0 oklch(100% 0 0 / .9) inset;
             border-color: @brandPrimaryBorder;
+
+            &::before {
+              opacity: 1;
+              transform: translateX(58px) rotate(18deg);
+            }
+          }
+
+          &:nth-child(4n):hover::before {
+            transform: translateX(-58px) rotate(-18deg);
           }
 
           .cardCover {
-            height: 210px;
-            background: no-repeat;
+            position: relative;
+            z-index: 2;
+            height: 214px;
+            overflow: hidden;
+            border-radius: @radiusLg @radiusLg 0 0;
+            background:
+              linear-gradient(135deg, oklch(98% 0.012 255), oklch(91% 0.03 255));
+            background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
-            transition: transform .45s ease;
+            transition: transform .45s ease, filter .35s ease;
+
+            &::after {
+              content: "";
+              position: absolute;
+              inset: 0;
+              background:
+                linear-gradient(110deg, transparent 0 35%, oklch(100% 0 0 / .24) 45%, transparent 58%),
+                linear-gradient(180deg, transparent 48%, oklch(10% 0.02 255 / .22) 100%);
+              opacity: 0;
+              transform: translateX(-38%);
+              transition: opacity .28s ease, transform .55s ease;
+            }
           }
 
           &:hover .cardCover {
             transform: scale(1.04);
+            filter: saturate(1.08) contrast(1.04);
+
+            &::after {
+              opacity: 1;
+              transform: translateX(38%);
+            }
           }
 
           .cardInfo {
+            position: relative;
+            z-index: 2;
             display: flex;
-            height: 90px;
+            height: 100px;
             text-align: center;
             align-items: center;
             justify-content: space-between;
@@ -161,17 +431,51 @@
               border-radius: 999px;
               color: @textInverse;
               font-size: 14px;
-              background: @brandPrimary;
-              transition: background .2s ease;
+              background:
+                linear-gradient(135deg, @brandPrimary, @brandPersonal);
+              transition: transform .2s ease, filter .2s ease;
 
               &:hover {
-                background: @brandPrimaryHover;
+                filter: saturate(1.08);
+                transform: translateY(-1px);
               }
             }
           }
 
           // 卡片被编辑和选中的样式
           .cardSelectState();
+
+          &.no-cover {
+            .cardCover {
+              background:
+                radial-gradient(circle at 50% 42%, oklch(100% 0 0 / .82) 0 20px, transparent 21px),
+                radial-gradient(circle at 50% 42%, @brandPersonal 0 42px, transparent 43px),
+                repeating-radial-gradient(circle at 50% 42%, oklch(20% 0.035 255 / .09) 0 1px, transparent 1px 9px),
+                linear-gradient(135deg, oklch(97% 0.02 255), oklch(91% 0.05 36));
+
+              &::before {
+                content: "";
+                position: absolute;
+                inset: 18px;
+                border: 1px solid oklch(24% 0.04 255 / .1);
+                border-radius: @radiusMd;
+                background:
+                  linear-gradient(90deg, transparent 0 46%, oklch(24% 0.04 255 / .12) 46% 54%, transparent 54%),
+                  linear-gradient(180deg, oklch(100% 0 0 / .34), transparent 52%);
+              }
+            }
+          }
+
+          &.is-previewing {
+            border-color: @brandPrimaryBorder;
+            box-shadow:
+              0 0 0 4px @brandPrimaryRing,
+              0 16px 30px oklch(20% 0.035 255 / .1);
+
+            .cardName {
+              color: @brandPrimary;
+            }
+          }
         }
 
         .musicMessage {
@@ -181,13 +485,56 @@
           justify-content: center;
           gap: 10px;
           width: 100%;
+          min-height: 220px;
           padding: 72px 0;
+          border: 1px dashed @brandPrimaryBorder;
+          border-radius: @radiusXl;
+          background: oklch(100% 0 0 / .52);
           color: @textMuted;
           font-size: 18px;
           text-align: center;
         }
       }
     }
+  }
+}
+
+@keyframes vinylSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes equalizerPulse {
+  0%,
+  100% {
+    transform: scaleY(.62);
+  }
+
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes playerDeckPop {
+  from {
+    transform: translateY(8px) scale(.96);
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes playerCopyIn {
+  from {
+    opacity: .3;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -382,7 +729,23 @@
           }
         }
 
+        .musicPlayerStage {
+          grid-template-columns: 1fr;
+          gap: 18px;
+          padding: 22px;
+          text-align: center;
+
+          .vinylDeck {
+            justify-self: center;
+          }
+
+          .equalizer {
+            justify-content: center;
+          }
+        }
+
         .cards {
+          display: flex;
           align-items: center;
           gap: 18px;
           flex-direction: column;
@@ -392,6 +755,11 @@
             width: 100%;
             max-width: 360px;
             height: auto;
+            overflow: hidden;
+
+            &::before {
+              display: none;
+            }
 
             .cardCover {
               height: auto;
@@ -425,6 +793,29 @@
     .title {
       h2 {
         font-size: 20px;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #music {
+    .musicPlayerStage {
+      .vinylDisc,
+      .vinylDeck,
+      .playerCopy,
+      .equalizer span {
+        animation: none;
+      }
+    }
+
+    .musicWrap .musicMain .cards .card {
+      &::before {
+        animation: none;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
       }
     }
   }

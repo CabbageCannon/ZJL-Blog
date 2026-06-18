@@ -80,29 +80,32 @@
     <!-- 首页部分 -->
     <div class="section" id="home">
       <section class="homeWrap">
+        <!-- 标题部分 -->
         <section class="homeHero">
           <div class="heroCopy">
-            <p class="eyebrow">Portfolio Lab / 2026</p>
-            <h1>我把学习过程做成一个可以被追问的网站</h1>
-            <p class="subTitle">这里记录生活、音乐和学习，也展示我如何拆页面、写接口、接数据库并部署上线。</p>
+            <p class="eyebrow">ZJL Blog</p>
+            <h1>一个包含多种功能的个人博客</h1>
+            <p class="subTitle">一个从静态页面走到登录、数据库、私有图片存储和线上部署的个人博客。每个模块都能打开，也都能解释实现细节。</p>
             <div class="heroActions">
-              <button class="heroButton primary quickCard" data-target="life">查看生活模块</button>
-              <button class="heroButton secondary quickCard" data-target="study">看学习记录</button>
+              <button class="heroButton primary quickCard" data-target="life">查看生活闭环</button>
+              <button class="heroButton secondary quickCard" data-target="study">浏览学习记录</button>
             </div>
           </div>
           <aside class="heroPanel" aria-label="项目能力概览">
+            <p class="heroPanelLabel">Project Passport</p>
             <div class="heroPanelTop">
-              <img src="./imgs/defaultTouxiang.png" alt="ZJL 的头像">
               <div>
-                <span>上线中的个人项目</span>
+                <span>在线个人项目</span>
                 <strong>ZJL Blog</strong>
               </div>
             </div>
             <ul class="capabilityList">
+              <li><span>Status</span><strong>Online</strong></li>
               <li><span>Frontend</span><strong>原生 JS 模块化</strong></li>
               <li><span>Backend</span><strong>Express + JWT</strong></li>
-              <li><span>Database</span><strong>Supabase Postgres</strong></li>
-              <li><span>Storage</span><strong>Private bucket + signed URL</strong></li>
+              <li><span>Data</span><strong>Supabase Postgres</strong></li>
+              <li><span>Storage</span><strong>Private Bucket</strong></li>
+              <li><span>Deploy</span><strong>Netlify / Render</strong></li>
             </ul>
           </aside>
         </section>
@@ -110,63 +113,153 @@
         <!-- 进入各板块的快捷入口 -->
         <section class="homeQuickLinks">
           <div class="sectionTitle">
-            <h2>功能板块</h2>
-            <p>每个入口都对应一个可以展开讲实现细节的练习点。</p>
+            <h2>项目入口</h2>
+            <p>每个入口都不只是页面展示，而是一个可以展开讲实现细节的功能闭环。</p>
           </div>
           <div class="quickGrid">
-            <article class="quickCard quickCardLife" data-target="life">
-              <h3>
-                <svg class="iconSvg iconSvg--md" aria-hidden="true">
-                  <use href="./assets/icons/sprite.svg#icon-life"></use>
-                </svg>
-                <span>生活</span>
-              </h3>
-              <p>登录后展示个人日记，图片进入私有存储，后端临时签发访问地址。</p>
-              <span class="quickMeta">Auth / Storage / Waterfall</span>
-            </article>
-            <article class="quickCard" data-target="music">
-              <h3>
-                <svg class="iconSvg iconSvg--md" aria-hidden="true">
-                  <use href="./assets/icons/sprite.svg#icon-music"></use>
-                </svg>
-                <span>音乐</span>
-              </h3>
-              <p>本地歌单收藏，支持上传、编辑、批量删除和卡片排序。</p>
-              <span class="quickMeta">State / LocalStorage</span>
-            </article>
-            <article class="quickCard" data-target="study">
-              <h3>
-                <svg class="iconSvg iconSvg--md" aria-hidden="true">
-                  <use href="./assets/icons/sprite.svg#icon-study"></use>
-                </svg>
-                <span>学习</span>
-              </h3>
-              <p>按分类筛选学习笔记，把阶段目标和技术复盘放在同一个视图里。</p>
-              <span class="quickMeta">Render / Filter</span>
-            </article>
+            <div class="quickCardWrap">
+              <article class="quickCard quickCardLife" data-target="life">
+                <h3>
+                  <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                    <use href="./assets/icons/sprite.svg#icon-life"></use>
+                  </svg>
+                  <span>生活</span>
+                </h3>
+                <p>登录后展示个人日记，图片进入私有存储，数据库只保存文件路径，后端按需签发访问地址。</p>
+                <span class="quickMeta">Auth / Storage / Signed URL / Waterfall</span>
+              </article>
+            </div>
+            <div class="quickCardWrap">
+              <article class="quickCard quickCardStudy" data-target="study">
+                <h3>
+                  <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                    <use href="./assets/icons/sprite.svg#icon-study"></use>
+                  </svg>
+                  <span>学习</span>
+                </h3>
+                <p>按分类组织学习记录，把阶段目标、笔记和技术复盘放在同一个视图里。</p>
+                <span class="quickMeta">JSON / Render / Filter</span>
+              </article>
+            </div>
+            <div class="quickCardWrap">
+              <article class="quickCard quickCardMusic" data-target="music">
+                <h3>
+                  <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                    <use href="./assets/icons/sprite.svg#icon-music"></use>
+                  </svg>
+                  <span>音乐</span>
+                </h3>
+                <p>从本地状态管理开始，练习卡片新增、编辑、批量删除和排序。</p>
+                <span class="quickMeta">State / LocalStorage / Interaction</span>
+              </article>
+            </div>
           </div>
         </section>
 
         <!-- 自我介绍 -->
         <section class="homeAbout">
-          <div>
-            <h2>关于这个站点</h2>
-            <p>它不是套模板的博客，而是一份可打开的学习档案。页面里的登录、日记、图片存储、模块化渲染和部署流程，都可以继续拆开说明。</p>
+          <div class="homeAboutCopy">
+            <h2>项目介绍</h2>
+            <p>这个站点不是只完成页面展示，而是把用户登录、数据隔离、图片上传、接口联调和部署流程串成了一个完整闭环。面试时我可以从任意模块开始，讲清楚它的状态管理、接口设计和线上运行方式。</p>
           </div>
           <ul class="proofList">
-            <li><strong>Netlify</strong><span>前端静态部署</span></li>
-            <li><strong>Render</strong><span>Express 后端托管</span></li>
-            <li><strong>Supabase</strong><span>数据库和私有文件存储</span></li>
+            <li>
+              <a class="proofLink" href="https://app.netlify.com/" target="_blank" rel="noopener noreferrer">
+                <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-netlify"></use>
+                </svg>
+                <div>
+                  <strong>Netlify</strong>
+                  <span>托管前端静态资源</span>
+                </div>
+                <svg class="externalIcon iconSvg iconSvg--sm" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-external-link"></use>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a class="proofLink" href="https://render.com/" target="_blank" rel="noopener noreferrer">
+                <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-render"></use>
+                </svg>
+                <div>
+                  <strong>Render</strong>
+                  <span>运行 Express API 服务</span>
+                </div>
+                <svg class="externalIcon iconSvg iconSvg--sm" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-external-link"></use>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a class="proofLink" href="https://supabase.com/" target="_blank" rel="noopener noreferrer">
+                <svg class="iconSvg iconSvg--md" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-supabase"></use>
+                </svg>
+                <div>
+                  <strong>Supabase</strong>
+                  <span>保存用户、日记和私有图片路径</span>
+                </div>
+                <svg class="externalIcon iconSvg iconSvg--sm" aria-hidden="true">
+                  <use href="./assets/icons/sprite.svg#icon-external-link"></use>
+                </svg>
+              </a>
+            </li>
           </ul>
         </section>
 
+        <!-- 近期迭代 -->
         <section class="homeUpdates">
           <h2>近期迭代</h2>
-          <ul>
-            <li><span>01</span> 已完成前后端分离部署，线上注册、登录和用户日记闭环可用。</li>
-            <li><span>02</span> 图片上传正在迁移到 Supabase 私有桶，数据库只保存文件路径。</li>
-            <li><span>03</span> 下一步会继续补充交互反馈、空状态和移动端细节。</li>
-          </ul>
+          <p class="updatesLead">把最近几次关键改动收成一条工程日志，方便回看每一步是怎么把项目推到线上可用的。</p>
+          <div class="updateTimeline" aria-label="项目迭代时间线">
+            <ol>
+              <li>
+                <span class="updatePin" aria-hidden="true">
+                  <span class="pinHead"></span>
+                  <span class="pinNeck"></span>
+                  <span class="pinBase"></span>
+                  <span class="pinNeedle"></span>
+                </span>
+                <time datetime="2026-05-28">05.28</time>
+                <strong>前端静态部署完成</strong>
+                <p>Netlify 生产地址上线，首页和模块入口可以直接访问。</p>
+              </li>
+              <li>
+                <span class="updatePin" aria-hidden="true">
+                  <span class="pinHead"></span>
+                  <span class="pinNeck"></span>
+                  <span class="pinBase"></span>
+                  <span class="pinNeedle"></span>
+                </span>
+                <time datetime="2026-06-04">06.04</time>
+                <strong>后端 API 和数据库上线</strong>
+                <p>Render API 接入 Supabase Postgres，注册登录跑通线上链路。</p>
+              </li>
+              <li>
+                <span class="updatePin" aria-hidden="true">
+                  <span class="pinHead"></span>
+                  <span class="pinNeck"></span>
+                  <span class="pinBase"></span>
+                  <span class="pinNeedle"></span>
+                </span>
+                <time datetime="2026-06-10">06.10</time>
+                <strong>私有图片存储</strong>
+                <p>日记图和头像迁移到 Supabase Storage，通过 signed URL 访问。</p>
+              </li>
+              <li>
+                <span class="updatePin" aria-hidden="true">
+                  <span class="pinHead"></span>
+                  <span class="pinNeck"></span>
+                  <span class="pinBase"></span>
+                  <span class="pinNeedle"></span>
+                </span>
+                <time datetime="2026-06-16">06.16</time>
+                <strong>体验和工程细节打磨</strong>
+                <p>补充图片压缩、Toast 反馈、模块懒加载和首页视觉整理。</p>
+              </li>
+            </ol>
+          </div>
         </section>
       </section>
     </div>
@@ -241,6 +334,26 @@
             <p>记录最近喜欢的歌曲,也练习前端中的数据渲染、交互与持久化</p>
           </div>
 
+          <section class="musicPlayerStage" aria-label="当前唱片台">
+            <div class="vinylDeck" aria-hidden="true">
+              <div class="vinylDisc">
+                <span class="vinylCenter"></span>
+              </div>
+            </div>
+            <div class="playerCopy">
+              <span class="playerLabel">Private Record Shelf</span>
+              <h3>当前唱片台</h3>
+              <p>先把这里作为视觉预览区，点击下方卡片仍然可以通过「去听」跳转到歌曲来源。</p>
+            </div>
+            <div class="equalizer" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </section>
+
           <!-- 歌曲卡片部分 -->
           <div class="cards">
             <!-- <article class="card edit-mode selected" data-id="">
@@ -264,9 +377,6 @@
           <p class="eyebrow">STUDY NOTES</p>
           <h2>我的学习记录</h2>
           <p>整理前端学习过程中的知识点、练习项目和阶段目标。</p>
-        </section>
-
-        <aside class="studyAside">
           <!-- 学习计划 -->
           <div class="studyPlan">
             <h3>近期学习计划</h3>
@@ -276,7 +386,14 @@
               <li>整理音乐模块中的数据渲染、编辑模式和本地存储逻辑。</li>
             </ul>
           </div>
+          <div class="studyStatusCard" aria-label="学习状态">
+            <span>Current Focus</span>
+            <strong>工程化补强</strong>
+            <small>模块懒加载 / 图片优化 / 部署复盘</small>
+          </div>
+        </section>
 
+        <aside class="studyAside">
           <!-- 学习卡片 -->
           <section class="studyCards">
             <article class="studyCard active" data-category="all" role="button" tabindex="0">
