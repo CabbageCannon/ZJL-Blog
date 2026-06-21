@@ -1,109 +1,164 @@
 # ZJL Blog
 
-一个用于练习前端三件套和基础后端能力的个人博客项目。
+ZJL Blog 是一个用于练习前端基础、后端接口和完整业务闭环的个人博客项目。项目从静态页面出发，逐步接入登录注册、用户资料、生活日记、图片上传、私有对象存储、数据库和线上部署。
 
-项目目前以原生 `HTML`、`CSS / Less` 和 `JavaScript` 为主，配合 `Express`、`SQLite` 完成部分生活日记数据存储。主要目标是通过真实页面练习布局、模块化、DOM 操作、事件处理、数据渲染、本地存储、接口请求和文件上传。
-
-## 项目简介
-
-这是我的个人博客练习项目，页面包含首页、生活、音乐、学习等模块。
-
-目前音乐模块用于练习本地 JSON 渲染、编辑模式和 `localStorage` 持久化；生活模块用于练习后端接口、图片上传和 SQLite 数据存储；学习模块用于沉淀学习笔记，并通过 `json/study.json` 渲染笔记列表和分类筛选。
-
-这个项目不会一开始就追求“大而全”，更像是一个持续迭代的前端练习场：边写边学，边改边沉淀。
+项目当前前端使用原生 `HTML5`、`Less`、`JavaScript ES Modules`，后端使用 `Express`，认证使用 `JWT + bcryptjs`，结构化数据存储在 `Postgres`，图片文件存储在 `Supabase Storage` 私有桶中，并通过后端生成签名 URL 返回给前端展示。
 
 ## 在线预览
 
-https://zjl-blog.netlify.app
+- 前端页面：<https://zjl-blog.netlify.app>
+- 后端接口：`https://zjl-blog-api.onrender.com`
+
+## 项目定位
+
+这个项目主要用于个人学习和面试展示，不是完整的生产级博客系统。它更像一个持续迭代的练习项目：
+
+- 通过原生 JavaScript 练习 DOM、事件、模块拆分、状态管理和数据渲染。
+- 通过 Express 练习 REST API、路由、中间件、错误处理和文件上传。
+- 通过 JWT、Postgres、Supabase Storage 练习登录鉴权、数据隔离和私有图片访问。
+- 通过 Netlify 和 Render 练习前后端分离部署。
 
 ## 技术栈
 
+### 前端
+
 - `HTML5`
-- `CSS3`
 - `Less`
+- `CSS3`
 - `JavaScript ES Modules`
-- `localStorage`
 - `fetch`
+- `localStorage`
+- `FormData`
+
+### 后端
+
+- `Node.js`
 - `Express`
-- `SQLite`
-- `Multer`
-
-项目依赖中目前包含：
-
-- `jquery`
-- `swiper`
-- `express`
-- `sqlite3`
-- `multer`
 - `cors`
-- `live-server`
+- `jsonwebtoken`
+- `bcryptjs`
+- `multer`
+- `pg`
+- `@supabase/supabase-js`
+
+### 存储与部署
+
+- `Postgres`：保存用户、日记、图片路径等结构化数据。
+- `Supabase Storage`：保存头像和日记图片，使用私有桶。
+- `Netlify`：托管前端静态资源。
+- `Render`：运行 Express API 服务。
 
 ## 已实现功能
 
-- 顶部导航切换不同页面模块
-- 首页快捷入口跳转到对应模块
-- 音乐收藏卡片渲染
-- 从 `json/music.json` 读取默认音乐数据
-- 新增音乐收藏
-- 编辑模式下选择音乐卡片
-- 删除选中的音乐卡片
-- 将选中的音乐卡片移动到最前或最后
-- 使用 `localStorage` 保存本地修改
-- 生活日记从后端接口读取
-- 发布生活日记并上传图片
-- 编辑模式下选择生活日记卡片
-- 删除选中的生活日记
-- 学习笔记从 `json/study.json` 读取并渲染
-- 学习笔记按分类筛选
-- 使用模块化 JavaScript 拆分首页、导航、音乐、生活、学习等逻辑
+### 首页
+
+- 项目介绍和能力展示。
+- 快捷入口跳转到生活、音乐、学习等模块。
+- 基于 hash 的模块切换。
+
+### 用户认证
+
+- 用户注册。
+- 用户登录。
+- JWT 登录态保存。
+- 获取当前用户信息。
+- 退出登录。
+- 更新昵称。
+- 上传头像。
+- 头像使用 Supabase 私有桶保存，并通过 signed URL 展示。
+
+### 生活日记
+
+- 登录后读取当前用户自己的日记。
+- 发布日记，支持标题、内容、心情和图片。
+- 前端压缩图片并计算图片比例。
+- 后端接收 `multipart/form-data`，上传图片到 Supabase Storage。
+- 数据库只保存图片路径，接口返回前生成 signed URL。
+- 编辑模式下选择日记卡片。
+- 删除选中的日记。
+- 删除日记时同步清理 Storage 中对应图片。
+
+### 音乐收藏
+
+- 从本地 JSON 读取默认音乐数据。
+- 新增音乐收藏。
+- 编辑模式下选择音乐卡片。
+- 删除选中的音乐卡片。
+- 将选中的音乐卡片移动到最前或最后。
+- 使用 `localStorage` 保存本地修改。
+- 点击卡片更新唱片台预览。
+
+### 学习笔记
+
+- 从 `frontend/json/study.json` 读取学习笔记。
+- 渲染学习笔记列表。
+- 按分类筛选笔记。
+
+### 前端结构优化
+
+- 使用 `header`、`nav`、`main`、`section`、`button`、`form`、`label` 等标签整理静态页面语义。
+- 导航使用 `data-page`，首页快捷入口使用 `data-target`。
+- 表单提交逻辑逐步从按钮 `click` 调整为监听 `submit` 事件。
 
 ## 项目结构
 
 ```text
 ZJL-Blog/
-├─ index.html              # 页面入口
-├─ package.json            # 项目依赖配置
-├─ README.md               # 项目说明
-├─ css/                    # 编译后的样式文件
-│  ├─ reset.css
-│  └─ index.css
-├─ less/                   # Less 源文件
-│  ├─ common.less
-│  ├─ home.less
-│  ├─ index.less
-│  ├─ life.less
-│  ├─ layout.less
-│  ├─ model.less
-│  ├─ music.less
-│  └─ study.less
-├─ js/                     # JavaScript 源码
-│  ├─ main.js
-│  └─ modules/
-│     ├─ home/
-│     ├─ life/
-│     ├─ music/
-│     ├─ nav/
-│     ├─ study/
-│     └─ utils/
-├─ json/
-│  ├─ music.json           # 默认音乐数据
-│  └─ study.json           # 默认学习笔记数据
-├─ backend/                # 生活日记后端服务
-│  └─ src/
-│     ├─ app.js
-│     ├─ server.js
-│     ├─ config/
-│     ├─ controllers/
-│     ├─ middleware/
-│     ├─ models/
-│     └─ routes/
-├─ assets/                 # 上传或用户相关资源
-└─ imgs/                   # 图片资源
+├─ README.md
+├─ package.json
+├─ docs/
+│  ├─ api.md                 # 接口与数据文档
+│  └─ icons.md               # 图标系统说明
+├─ frontend/
+│  ├─ index.html
+│  ├─ assets/
+│  │  └─ icons/
+│  │     └─ sprite.svg
+│  ├─ css/
+│  │  ├─ reset.css
+│  │  └─ index.css
+│  ├─ imgs/
+│  │  └─ defaultTouxiang.png
+│  ├─ json/
+│  │  ├─ music.json
+│  │  └─ study.json
+│  ├─ js/
+│  │  ├─ main.js
+│  │  ├─ config/
+│  │  └─ modules/
+│  │     ├─ auth/
+│  │     ├─ home/
+│  │     ├─ life/
+│  │     ├─ music/
+│  │     ├─ nav/
+│  │     ├─ router/
+│  │     ├─ settings/
+│  │     ├─ study/
+│  │     └─ utils/
+│  └─ less/
+│     ├─ common.less
+│     ├─ icons.less
+│     ├─ layout.less
+│     ├─ auth.less
+│     ├─ home.less
+│     ├─ life.less
+│     ├─ music.less
+│     ├─ settings.less
+│     ├─ study.less
+│     └─ index.less
+└─ backend/
+   └─ src/
+      ├─ app.js
+      ├─ server.js
+      ├─ config/
+      ├─ controllers/
+      ├─ middleware/
+      ├─ models/
+      ├─ routes/
+      └─ utils/
 ```
 
 ## 本地运行
-
-由于项目使用了 `type="module"` 和 `fetch` 读取本地 JSON，建议通过本地服务器运行，不建议直接双击打开 `index.html`。
 
 安装依赖：
 
@@ -117,30 +172,64 @@ npm install
 npm run dev:web
 ```
 
-启动生活日记后端接口：
+启动后端接口：
 
 ```bash
 npm run dev:api
 ```
 
+前端本地地址：
+
+```text
+http://localhost:5500
+```
+
+后端本地地址：
+
+```text
+http://localhost:3001
+```
+
+## 环境变量
+
+后端运行前需要配置环境变量。常见变量包括：
+
+```text
+DATABASE_URL=postgres connection string
+JWT_SELECT=jwt secret
+SUPABASE_URL=supabase project url
+SUPABASE_SERVICE_ROLE_KEY=supabase service role key
+SUPABASE_STORAGE_BUCKET=diary image bucket
+SUPABASE_AVATAR_BUCKET=avatar image bucket
+NODE_ENV=development | production
+```
+
 说明：
 
-- 首页、音乐、学习模块只需要前端服务器即可运行。
-- 生活模块的日记读取、发布、图片上传和删除依赖后端服务。
-- 修改 Less 后，需要把 `less/index.less` 编译到 `css/index.css`。
+- `DATABASE_URL` 用于连接 Postgres。
+- `JWT_SELECT` 用于签发和验证 JWT。
+- `SUPABASE_STORAGE_BUCKET` 用于生活日记图片。
+- `SUPABASE_AVATAR_BUCKET` 用于用户头像。
+- Supabase bucket 当前按私有桶设计，前端通过后端生成的 signed URL 访问图片。
+
+## 接口文档
+
+接口路径、请求字段、响应格式和本地 JSON 数据格式见：
+
+- [docs/api.md](docs/api.md)
+
+## 开发说明
+
+- 前端使用 `type="module"` 和 `fetch`，建议通过本地服务器访问，不建议直接双击打开 HTML。
+- 修改 Less 后，需要重新编译 `frontend/less/index.less` 到 `frontend/css/index.css`。
+- 生活日记、账号资料、头像上传等功能依赖后端服务和登录态。
+- 音乐模块主要依赖本地 JSON 和 `localStorage`，不依赖后端接口。
 
 ## 后续计划
 
-- 继续优化学习模块的布局、分类筛选和笔记展示
-- 优化移动端适配
-- 补充博客文章列表和文章详情页
-- 增加更多交互效果
-- 优化音乐模块的表单校验和编辑体验
-- 整理 Less 编译脚本
-- 继续沉淀前端学习笔记
-
-## 项目定位
-
-这个项目主要用于个人学习和练习，不是完整的生产级博客系统。它会随着我对前端基础、工程化和交互设计理解的提升不断更新。
-
-慢慢写，慢慢改，慢慢把它变成一个真正属于自己的博客。
+- 整理 Less 编译脚本，减少手动编译成本。
+- 完善表单校验和错误提示。
+- 补充接口测试和关键前端逻辑测试。
+- 完善移动端布局。
+- 增加博客文章列表和文章详情页。
+- 根据项目复杂度评估是否迁移到 Vue 或 React。
