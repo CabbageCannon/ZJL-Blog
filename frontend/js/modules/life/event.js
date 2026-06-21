@@ -84,13 +84,14 @@ function bindCardClickEvents() {
 
 function commitLifeDiary() {
   const addLifeModal = document.querySelector(".addLifeModal");
-  const commitLifeButton = document.querySelector(".addLifeModal .commitLifeButton");
+  const diaryForm = document.querySelector("#addDiaryForm");
+  const commitLifeButton=document.querySelector(".addLifeModal .addDiaryForm")
   const titleInput = addLifeModal.querySelector(".lifeTitleInput");
   const contentInput = addLifeModal.querySelector(".lifeContentInput");
   const imageInput = addLifeModal.querySelector(".lifeImageInput");
   let isSubmitting = false;
 
-  commitLifeButton.addEventListener("click", async ev => {
+  diaryForm.addEventListener("submit", async ev => {
     ev.preventDefault();
     ev.stopPropagation();
 

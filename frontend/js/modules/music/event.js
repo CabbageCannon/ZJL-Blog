@@ -16,7 +16,7 @@ function addSongsModal() {
   const addButton = document.querySelector(".addNewSongs");
   const modal = document.querySelector(".addMusicModal");
   const closeButton = document.querySelector(".closeButton");
-  const commitButton = modal.querySelector(".commitButton");
+  const addMusicForm = modal.querySelector(".addMusicForm");
   const inputs = modal.querySelectorAll("input");
 
   // 打开弹窗
@@ -30,7 +30,9 @@ function addSongsModal() {
   })
 
   // 上传表单内容
-  commitButton.addEventListener('click', () => {
+  addMusicForm.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
     // 校验表单信息
     const name = inputs[0].value.trim();
     const cover = inputs[1].value.trim();

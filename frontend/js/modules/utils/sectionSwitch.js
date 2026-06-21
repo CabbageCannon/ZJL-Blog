@@ -1,8 +1,8 @@
 import { loadSectionModule } from "./sectionLoader.js";
 import { showToast } from "./toast.js";
 
-const sections = Array.from(document.querySelectorAll(".indexContent .section"));
-const navLinks = Array.from(document.querySelectorAll(".banner .nav a"));
+const sections = Array.from(document.querySelectorAll(".indexContent section[id]"));
+const navLinks = Array.from(document.querySelectorAll(".banner .site-nav button"));
 // 刚进入网页时，展示的是首页
 let lastSectionId = "home";
 // 展示指定板块
@@ -14,7 +14,7 @@ export async function showSection(nextSectionId) {
   sections.forEach(section => section.style.display = section.id === nextSectionId ? "block" : "none");
 
   // 更新导航栏中具体按钮的状态
-  navLinks.forEach(link => link.classList.toggle("is-active", link.getAttribute("name") === nextSectionId));
+  navLinks.forEach(link => link.classList.toggle("is-active", link.dataset.page === nextSectionId));
 
   targetSection.classList.add("is-loading");
 

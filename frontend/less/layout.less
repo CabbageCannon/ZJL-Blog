@@ -45,7 +45,7 @@ body {
   }
 
   // 导航栏中核心区域
-  .nav {
+  .site-nav {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -60,7 +60,8 @@ body {
       border-radius: @radiusPill;
       background: @surfaceSoft;
 
-      a {
+      button {
+        .reset-button();
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -142,7 +143,7 @@ body {
   display: flex;
   overflow: hidden;
 
-  .section {
+  > section[id] {
     display: none;
     height: 100%;
     width: 100%;
@@ -190,7 +191,7 @@ body {
       }
     }
 
-    .nav {
+    .site-nav {
       order: 3;
       width: 100%;
       // 横向超出后有滚动轴
@@ -206,7 +207,7 @@ body {
         gap: 6px;
       }
 
-      a {
+      button {
         height: 36px;
         padding: 0 11px;
         font-size: 14px;

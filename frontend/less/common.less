@@ -95,12 +95,10 @@
 @shadowPanel: 0 18px 40px oklch(20% 0.035 255 / .12);
 @shadowModal: 0 26px 80px oklch(16% 0.035 255 / .25);
 @shadowFocus: 0 0 0 3px @brandPrimaryRing;
-@shadowPaper:
-  0 2px 0 oklch(100% 0 0 / .72) inset,
+@shadowPaper: 0 2px 0 oklch(100% 0 0 / .72) inset,
   0 18px 28px oklch(30% 0.04 88 / .12),
   0 36px 70px oklch(30% 0.04 88 / .12);
-@shadowMetal:
-  inset 0 1px 0 oklch(100% 0 0 / .82),
+@shadowMetal: inset 0 1px 0 oklch(100% 0 0 / .82),
   inset 0 -1px 0 oklch(20% 0.035 255 / .12),
   0 18px 34px oklch(20% 0.035 255 / .14);
 @shadowLift: 0 20px 44px oklch(20% 0.035 255 / .13);
@@ -151,7 +149,21 @@
   }
 }
 
+// 重置按钮默认样式
+.reset-button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -163,8 +175,8 @@
 }
 
 // 加载动画
-@keyframes buttonSpin{
-  to{
+@keyframes buttonSpin {
+  to {
     transform: rotate(360deg);
   }
 }

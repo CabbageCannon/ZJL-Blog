@@ -29,8 +29,8 @@ function bindAuthModalEvents() {
 
 // 绑定提交的登录注册表单事件
 function bindCommitFormEvents() {
-  const commitAuthButton = document.querySelector(".authModal .actions .commitAuthButton");
-  commitAuthButton.addEventListener("click", userLoginAndRegister);
+  const authForm = document.querySelector(".authModal .auth-form");
+  authForm.addEventListener("submit", userLoginAndRegister);
 }
 
 // 绑定退出登录事件
