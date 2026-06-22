@@ -30,6 +30,16 @@ app.use(cors({
     return callback(new Error("Not allowed by CORS"));
   }
 }));
+
+app.get("/health", (req, res) => {
+  res.json({ ok: true });
+});
+
+app.use((req, res, next) => {
+  console.log(req.method, req.url);
+  next();
+});
+
 // 后端会自动json.parse()
 app.use(express.json());
 
